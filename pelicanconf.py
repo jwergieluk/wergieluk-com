@@ -3,9 +3,13 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Julian Wergieluk'
-SITENAME = 'Julian Wergieluk'
+SITENAME = 'wergieluk.com'
 
 PATH = 'content'
+THEME = 'theme'
+#PLUGIN_PATHS = ['/home/julian/clones/pelican-plugins',]
+#PLUGINS = ['i18n_subsites', ]
+#JINJA_ENVIRONMENT = {'extensions': 'jinja2.ext.i18n'}
 
 TIMEZONE = 'Europe/Berlin'
 DEFAULT_LANG = 'en'
