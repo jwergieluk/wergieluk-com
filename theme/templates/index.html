@@ -1,13 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
-<section id="content">
+
+<div class="container theme-showcase" role="main">
 {% block content_title %}
-<h2>All articles</h2>
+      <div class="jumbotron">
+        <h1>Julian Wergieluk</h1>
+        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by building on or modifying it.</p>
+      </div>
 {% endblock %}
 
-<ol id="post-list">
 {% for article in articles_page.object_list %}
-        <li><article class="hentry">
+<article class="hentry">
+  <div class="page-header">
+    <h1>{{ article.title }}</h1>
+  </div>
+        
+  {{ article.summary }}
+
+  <!--
                 <header> <h2 class="entry-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h2> </header>
                 <footer class="post-info">
                     <time class="published" datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }} </time>
@@ -16,13 +26,14 @@
                         <a class="url fn" href="{{ SITEURL }}/{{ author.url }}">{{ author }}</a>
                     {% endfor %}
                     </address>
-                </footer><!-- /.post-info -->
-                <div class="entry-content"> {{ article.summary }} </div><!-- /.entry-content -->
-        </article></li>
+                </footer>
+  -->
+  <p><a href="{{ SITEURL }}/{{ article.url }}">Read whole thing</a></p>
+</article>
 {% endfor %}
-</ol><!-- /#posts-list -->
+
 {% if articles_page.has_other_pages() %}
     {% include 'pagination.html' %}
 {% endif %}
-</section><!-- /#content -->
+</div><!-- /#content -->
 {% endblock content %}

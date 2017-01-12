@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Julian Wergieluk'
-SITENAME = 'wergieluk.com'
+SITENAME = 'Julian Wergieluk'
 
 PATH = 'content'
 THEME = 'theme'
