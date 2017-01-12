@@ -1,7 +1,9 @@
 Title: Using spaced repetition
+Slug: spaced-repetition
 Date: 2016-12-24
 Category: Blog
 Author: Julian Wergieluk
+Tags: learning, mathematics, programming
 
 
 I would like to share my experiences using spaced repetition
@@ -93,9 +95,12 @@ comming up with personal, bizzare and maybe event stupid sounding associations.
   make our cards less effective. 
 
 
-## Links 
+## References 
 
-
+* [Spaced repetition](https://www.gwern.net/Spaced%20repetition), gwern.net, 2016. A very exhaustive 
+discussion of the manifold aspects of SR with many refereces to papers and blogs.
+* [How I use Anki to learn mathematics](http://lesswrong.com/r/discussion/lw/o8e/how_i_use_anki_to_learn_mathematics/), 
+Lesswrong. 
 
 
 
