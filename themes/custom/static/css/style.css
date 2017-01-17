@@ -1,0 +1,38 @@
+body {
+    font-size: 3vmin;
+    font-family: 'Vollkorn', serif;
+}
+
+@media (min-width: 970px) {
+  .container-content {
+    width: 768px;
+  }
+}
+
+h1 > a:focus, a:hover {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.page-header {
+    margin: 20px 0 20px;
+}
+
+.post-vignette {
+    padding-bottom: 1em;
+}
+
+.about-box {
+    text-align: center;
+    padding-top: 1em;
+}
+
+// colors
+// PalmBlack  #0C1615;
+// BushGray  #2F433B;
+// SunShadow #D3D9D1;
+// ThinGrey   #474143;
+// CreamWhite #DEDDE4;
+// GreenMaybe #BBB4A1;
+// MachaLatte  #E4D32F;
+

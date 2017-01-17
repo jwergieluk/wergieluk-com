@@ -6,7 +6,7 @@ AUTHOR = 'Julian Wergieluk'
 SITENAME = 'Julian Wergieluk'
 
 PATH = 'content'
-THEME = 'theme'
+THEME = 'themes/custom'
 #PLUGIN_PATHS = ['/home/julian/clones/pelican-plugins',]
 #PLUGINS = ['i18n_subsites', ]
 #JINJA_ENVIRONMENT = {'extensions': 'jinja2.ext.i18n'}

@@ -3,7 +3,7 @@ Author: Julian Wergieluk
 Date: 2016-12-27
 Category: Blog
 Tags: quant-finance, python
-
+Summary: An analysis and Python implementation of classical CDS pricing methods
 
 The CDS contracts are standardized by ISDA. Some details: 
 
