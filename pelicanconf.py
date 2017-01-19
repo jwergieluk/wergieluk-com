@@ -7,8 +7,8 @@ SITENAME = 'Julian Wergieluk'
 
 PATH = 'content'
 THEME = 'themes/custom'
-#PLUGIN_PATHS = ['/home/julian/clones/pelican-plugins',]
-#PLUGINS = ['i18n_subsites', ]
+PLUGIN_PATHS = ['/home/julian/clones/pelican-plugins',]
+#PLUGINS = ['render_math', ]
 #JINJA_ENVIRONMENT = {'extensions': 'jinja2.ext.i18n'}
 
 TIMEZONE = 'Europe/Berlin'
@@ -39,10 +39,9 @@ DEFAULT_PAGINATION = False
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-STATIC_PATHS = [
-    'static/robots.txt',
-    ]
+STATIC_PATHS = ['images', 'extra/robots.txt', 'extra/favicon.ico']
 EXTRA_PATH_METADATA = {
-    'static/robots.txt': {'path': 'robots.txt'},
-    }
+    'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
 

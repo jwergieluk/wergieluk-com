@@ -1,6 +1,7 @@
 body {
-    font-size: 3vmin;
+    font-size: 2.8vmin;
     font-family: 'Vollkorn', serif;
+    color: #0C1615;
 }
 
 @media (min-width: 970px) {
@@ -9,8 +10,8 @@ body {
   }
 }
 
-h1 > a:focus, a:hover {
-    color: #337ab7;
+.page-title a:focus, .page-title a:hover, .page-title a {
+    color: #2F433B;
     text-decoration: none;
 }
 
@@ -20,6 +21,11 @@ h1 > a:focus, a:hover {
 
 .post-vignette {
     padding-bottom: 1em;
+}
+
+.post-vignette a:hover, .post-vignette a:focus, .post-vignette a {
+//    color: #2F433B;
+    text-decoration: none;
 }
 
 .about-box {
