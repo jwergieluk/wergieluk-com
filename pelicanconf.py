@@ -10,6 +10,7 @@ THEME = 'themes/custom'
 PLUGIN_PATHS = ['/home/julian/clones/pelican-plugins',]
 #PLUGINS = ['render_math', ]
 #JINJA_ENVIRONMENT = {'extensions': 'jinja2.ext.i18n'}
+TYPOGRIFY = True
 
 TIMEZONE = 'Europe/Berlin'
 DEFAULT_LANG = 'en'

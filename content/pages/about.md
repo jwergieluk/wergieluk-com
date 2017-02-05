@@ -1,4 +1,4 @@
-Title: About
+Title: About me and this website
 Date: 2017-01-17
 Modified: 2017-01-17
 Authors: Julian Wergieluk
