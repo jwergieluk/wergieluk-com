@@ -8,6 +8,8 @@ Summary: simple market data system design
 
 This is a kind of a functional requirements spec and developer documentation.
 
+* Explain the NoSQL names: collection, document
+
 ## References
 
 * http://jmoiron.net/blog/thoughts-on-timeseries-databases/
@@ -66,7 +68,8 @@ the instruments with "tickers". A reference document has the following form:
         "_id" : <...>,
         "source": "...",
         "ticker": "...",
-        "valid_until": <time>,
+        "valid_from": <utc_time>,
+        "valid_until": <utc_time>,
         "props": <path_key_1>,
         "series": <path_key_2>,
         "scenarios": <path_key_3>    
@@ -79,7 +82,7 @@ the instruments with "tickers". A reference document has the following form:
     {
         "_id" : <...>,
         "k" : <key>,
-        "r" : <time>,
+        "r" : <utc_time>,
         "v" : <value object>
     }
 
@@ -88,8 +91,8 @@ the instruments with "tickers". A reference document has the following form:
     {
         "_id" : <...>,
         "k" : <key>,
-        "r" : <time>,
-        "t" : <time>,
+        "r" : <utc_time>,
+        "t" : <utc_time>,
         "v" : <value object>
     }
 
@@ -98,8 +101,8 @@ the instruments with "tickers". A reference document has the following form:
     {
         "_id" : <...>,
         "k" : <key>,
-        "r" : <time>,
-        "t" : <time>,
+        "r" : <utc_time>,
+        "t" : <utc_time>,
         "s" : <scenario_id>,
         "v" : <value object>
     }
