@@ -1,8 +1,11 @@
-
-
+Title: Tiling Window Managers
+Author: Julian Wergieluk
+Date: 2016-12-27
+Slug: tiling-window-managers
+Category: Blog
+Status: draft
 
 Simple window managers
-
 
 Switching to a tiling window manager is like realizing that you have been
 sitting on a spike ball for all those years. The key idea is to move the window
@@ -23,7 +26,7 @@ Some ofter encountered myths about tiling window managers:
 
 TWMs have not only low memory footprint but, more importantly, have low congnitive load requirements. 
 
-
+![A typical i3 desktop]({filename}/img/i3-empty-desktop.png)
 
 Standard key combinations of i3 I use:
 

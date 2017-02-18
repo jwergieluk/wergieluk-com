@@ -5,6 +5,7 @@ Category: Blog
 Author: Julian Wergieluk
 Tags: quant-finance, market-data
 Summary: simple market data system design
+Status: draft
 
 This is a kind of a functional requirements spec and developer documentation.
 
@@ -28,26 +29,29 @@ Most of the objects observed on financial markets have some set of labels, which
 traditionally called "ticker". 
 
 
-
-  {
-    "_id" : <...>,
+```json
+{
     "tickers": [
-      [ "source_1", "ticker_1" ],
-      [ "source_2", "ticker_2" ]
+        [ "source_1", "ticker_1" ],
+        [ "source_2", "ticker_2" ]
     ],
     "properties": {
-      "property_name_1": <value1>,
-      "property_name_2": <value2>,
-      "category": "category_name"
+        "property_name_1": <value1>,
+        "property_name_2": <value2>,
+        "category": "category_name"
     },
     "series": {
-      "series_name": [
-        [ "time_stamp_1", <observation_1> ],
-        [ "time_stamp_2", <observation_2> ]
-      ]
+        "series_name_1": [
+            [ "time_stamp_1", <observation_1> ],
+            [ "time_stamp_2", <observation_2> ]
+        ],
+        "series_name_2": [
+            [ "time_stamp_1", <observation_1> ],
+            [ "time_stamp_2", <observation_2> ]
+        ]
     }
-  }
-
+}
+```
 
 ## Representation in the database
 

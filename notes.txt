@@ -1,0 +1,11 @@
+
+Build:
+pelican content
+
+Serve:
+cd output
+python -m pelican.server
+
+Get:
+localhost:8000
+
