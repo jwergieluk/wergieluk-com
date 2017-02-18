@@ -61,7 +61,7 @@ changes we need the following collections:
 * 'spaces' holds the history of the scenario set, i.e. object that have both
   time and space dimension. (3-dimensional)
 
-The "refs" collection contains the pointers to the stored objects allows to label
+The "refs" collection contains pointers to the stored objects allows to label
 the instruments with "tickers". A reference document has the following form:
 
     {
@@ -72,7 +72,6 @@ the instruments with "tickers". A reference document has the following form:
         "valid_until": <utc_time>,
         "props": <path_key_1>,
         "series": <path_key_2>,
-        "scenarios": <path_key_3>    
     }
 
 "r" is the revision time. "t" is the observation or "market" time. Both are fields holding UTC date and time.
@@ -96,24 +95,11 @@ the instruments with "tickers". A reference document has the following form:
         "v" : <value object>
     }
 
-#### Scenarios collection
-
-    {
-        "_id" : <...>,
-        "k" : <key>,
-        "r" : <utc_time>,
-        "t" : <utc_time>,
-        "s" : <scenario_id>,
-        "v" : <value object>
-    }
-
-
-
 ## Command-line interface
 
 The library provides a simple command-line interface. 
 
 
-
+## Insert and query performance
 
 
