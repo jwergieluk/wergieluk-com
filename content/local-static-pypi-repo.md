@@ -6,61 +6,68 @@ Author: Julian Wergieluk
 Tags: python
 Status: published
 
-Suppose we want to have a private python PyPI repository shared among our
-development machines for the packages that we are developing. There is a whole
-slew of solutions to that problem available on the Internet. Most of them
-propose a quite complicated setup typically involving a web server. There
-are also companies offering package hosting. 
+Suppose we want to have a private Python PyPI repository shared among the
+development machines for the packages that our projects depend on. There is a
+whole slew of solutions to that problem available on the Internet. Most of them
+propose a quite complicated setup, typically involving a web server. There are
+also companies offering package hosting. 
 
-A Python package is just a file, so a simple package repository 
+Why is this such a hassle? After all, a Python package is just a file, so a
+simple package repository should be a directory because this is the canonical
+way for making files accessible on a UNIX system. 
+
+In this article, I will show how to accomplish that.
+
+## The method
 
 One of my packages, `signaldb`, employs the usual `setup.py` script generating
 `signaldb-x.y.z.whl` package file. Instead of using a Makefile for calling the
-build script and deploying the wheel, I wrote the following 3 lines-long bash
-equivalent generating and copying the wheel to the "repository" located
-at `$local_pypi`. `$local_pypi` is conveniently defined in my `.profile` and
-points to `~/packages`.
+build script and deploying the wheel (a kind of Python package), I wrote the
+following 3 lines-long bash equivalent generating and copying the wheel to the
+"repository" located at `$local_pypi`. The `$local_pypi` environmental variable
+is conveniently defined in my `.profile` and points to `~/packages` directory.
 
-````
+```
 #!/bin/bash
 
 set -e; set -u
 
 python setup.py bdist_wheel
 cp dist/*.whl ${local_pypi}
-````
+```
 
-The easiest way to install `signaldb` package with `pip` is to specify the wheel file
+The easiest way to install `signaldb` package with pip is to specify the wheel file
 explicitly:
 
     pip install ${local_pypi}/signaldb-0.0.1.whl
 
-It is also possible to install the package just by saying
+It is also possible to install the package just by typing
 
     pip install signaldb
 
-For that, we first need to inform `pip` where to look for the package: An additional
+For that, we first need to inform pip where to look for the package. An additional
 repository supplementing `pypi.python.org` can be specified with
     
     pip install --extra-index-url "file://${local_pypi}/"
 
-or by exporting an env variable
+or, by exporting an environmental variable associated with that option:
 
     export PIP_EXTRA_INDEX_URL="file://${local_pypi}/"
 
-This alone won't work though. The PyPI repository needs to obey the [PEP
+This alone won't work, though. The PyPI repository needs to obey the [PEP
 503](https://www.python.org/dev/peps/pep-0503/): Each package must reside in
 its own subdirectory named after the package, and repo root must contain an
-`index.html` with links to the package files. 
+`index.html`file with links to the package files. 
 
-Luckly, there is a Python tool called
-[pip2pi](https://github.com/wolever/pip2pi) that can convert our bunch of
-wheels into a property stuctured repository with index files. `pip2pi` exposes
-a command-line utility `dir2pi` generating a proper PyPI repository in the
-subdirectory `simple` of a directory specified in the argument:
+Luckily, there is a Python tool called
+[pip2pi](https://github.com/wolever/pip2pi) that can convert a directory
+containing a bunch of wheel files into a properly structured PyPI repository. `pip2pi`
+exposes the command-line utility `dir2pi`  generating a proper PyPI repository in
+the subdirectory `simple` of a directory specified in the argument:
 
     dir2pi -n ${local_pypi}
 
+(the `-n` option normalizes the package names to conform with PEP 503)
 In our case we get 
 
 ```
@@ -72,11 +79,13 @@ packages/simple/signaldb/index.html
 
 ```
 
+The above wheel files are just symlinks to the wheels from the source directory.
 Finally, we need to update `.profile` or `.bashrc`:
 
     export PIP_EXTRA_INDEX_URL="file://${local_pypi}/simple/"
 
-which allows for
+
+
 ```
 $ pip install signaldb
 Collecting signaldb
@@ -88,7 +97,7 @@ Successfully installed signaldb-0.0.2 [...]
 
 The outlined method shows that a simple private PyPI repository does not
 require a server component. Such a repository can handle multiple package
-versions and can easily be synchronized amongn multiple machines using tools
+versions and can easily be synchronized among multiple machines using tools
 like `syncthing` or similar.
 
 ## References
@@ -96,6 +105,4 @@ like `syncthing` or similar.
 * [pip2pi](https://github.com/wolever/pip2pi).
 * [PEP 503](https://www.python.org/dev/peps/pep-0503/) -- Simple Repository API.
 
-
-
-<!-- vim: spelllang=en_us:spell: -->
+<!-- vim: set spelllang=en_us spell: -->
