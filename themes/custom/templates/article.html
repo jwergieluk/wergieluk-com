@@ -19,16 +19,6 @@
                    title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
             </h1>
         </div>
-        <small>
-            <time class="published" datetime="{{ article.date.isoformat() }}">
-            Published on {{ article.locale_date }}.
-            </time>
-            {% if article.modified %}
-            <time class="modified" datetime="{{ article.modified.isoformat() }}">
-                Last modified {{ article.locale_modified }}.
-            </time>
-            {% endif %}
-        </small>
     </div>
 
     <div class="entry-content">

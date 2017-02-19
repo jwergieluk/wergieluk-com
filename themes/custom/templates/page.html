@@ -2,15 +2,17 @@
 {% block title %}{{ page.title }}{%endblock%}
 {% block content %}
     <div class="page-header">
+        <div class="page-title">
         <h1><a href="{{ SITEURL }}/{{ page.url }}" rel="bookmark"
                title="Permalink to {{ page.title }}">{{ page.title }}</a></h1>
+        </div>
     </div>
 
     {{ page.content }}
 
 	{% if page.modified %}
-		<p>
+		<small>
 		Last updated: {{ page.locale_modified }}
-		</p>
+		</small>
 	{% endif %}
 {% endblock %}
