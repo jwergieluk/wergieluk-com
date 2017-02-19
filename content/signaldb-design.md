@@ -107,3 +107,4 @@ The library provides a simple command-line interface.
 ## Insert and query performance
 
 
+<!-- vim: set syntax=markdown: set spelllang=en: set spell: -->

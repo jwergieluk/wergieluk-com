@@ -5,6 +5,7 @@ Category: Blog
 Author: Julian Wergieluk
 Tags: learning, mathematics, programming
 Summary: My thoughts on spaced repetition and it's uses for learning math
+Status: draft
 
 
 I would like to share my experiences using spaced repetition

@@ -1,6 +1,7 @@
 Title: Local and static Python PyPI repository
 Slug: local-static-pypi-repo
 Date: 2017-02-18
+Modified: 2017-02-19
 Category: Blog
 Author: Julian Wergieluk
 Tags: python
@@ -105,4 +106,4 @@ like `syncthing` or similar.
 * [pip2pi](https://github.com/wolever/pip2pi).
 * [PEP 503](https://www.python.org/dev/peps/pep-0503/) -- Simple Repository API.
 
-<!-- vim: set spelllang=en_us spell: -->
+<!-- vim: set syntax=markdown: set spelllang=en: set spell: -->

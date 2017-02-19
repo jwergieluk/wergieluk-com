@@ -1,9 +1,10 @@
-Title: About me and this website
+Title: About
+Slug: about
 Date: 2017-01-17
-Modified: 2017-01-17
+Modified: 2017-02-19
 Authors: Julian Wergieluk
 
-## Contact details
+### Contact details
 
 * email: <julian@wergieluk.com>
 * GPG public key: [0xDBCF703C](0xDBCF703C.asc) (fingerprint: FEB4 4E0D 0AA2 BCFD B9B6  0881 FD39 274C DBCF 703C)
