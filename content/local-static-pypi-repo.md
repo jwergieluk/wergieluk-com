@@ -13,20 +13,22 @@ whole slew of solutions to that problem available on the Internet. Most of them
 propose a quite complicated setup, typically involving a web server. There are
 also companies offering package hosting. 
 
-Why is this such a hassle? After all, a Python package is just a file, so a
-simple package repository should be a directory because this is the canonical
-way for making files accessible on a UNIX system. 
+Does it have to be so complicated? After all, a Python package is just a file,
+so a simple package repository should be a directory because this is the
+canonical way of making files accessible on a UNIX system. 
 
-In this article, I will show how to accomplish that.
+In this article, I will show how to configure pip to use a directory as an
+additional source of packages.
 
 ## The method
 
-One of my packages, `signaldb`, employs the usual `setup.py` script generating
-`signaldb-x.y.z.whl` package file. Instead of using a Makefile for calling the
-build script and deploying the wheel (a kind of Python package), I wrote the
-following 3 lines-long bash equivalent generating and copying the wheel to the
-"repository" located at `$local_pypi`. The `$local_pypi` environmental variable
-is conveniently defined in my `.profile` and points to `~/packages` directory.
+One of my Python packages, `signaldb`, employs the usual `setup.py` script to
+generate `signaldb-x.y.z.whl` package files. Instead of using a Makefile to
+call the build script and deploy the wheel (a kind of Python package), I wrote
+the following 3 lines-long bash equivalent generating and copying the wheel to
+a "repository" located at `$local_pypi`. The `$local_pypi` environmental
+variable is conveniently defined in my `.profile` and points to `~/packages`
+directory.
 
 ```
 #!/bin/bash
@@ -51,20 +53,20 @@ repository supplementing `pypi.python.org` can be specified with
     
     pip install --extra-index-url "file://${local_pypi}/"
 
-or, by exporting an environmental variable associated with that option:
+or, by exporting an environmental variable associated with that pip option:
 
     export PIP_EXTRA_INDEX_URL="file://${local_pypi}/"
 
-This alone won't work, though. The PyPI repository needs to obey the [PEP
+This alone won't work, though. The PyPI repository needs to obey [PEP
 503](https://www.python.org/dev/peps/pep-0503/): Each package must reside in
-its own subdirectory named after the package, and repo root must contain an
-`index.html`file with links to the package files. 
+its own subdirectory named after the package, and the root directory of the
+repository must contain an `index.html` file with links to the package files. 
 
 Luckily, there is a Python tool called
 [pip2pi](https://github.com/wolever/pip2pi) that can convert a directory
-containing a bunch of wheel files into a properly structured PyPI repository. `pip2pi`
-exposes the command-line utility `dir2pi`  generating a proper PyPI repository in
-the subdirectory `simple` of a directory specified in the argument:
+containing a bunch of wheel files into a properly structured PyPI repository.
+`pip2pi` exposes the command-line utility `dir2pi` generating a PyPI repository
+in the subdirectory `simple` of a directory specified in the argument:
 
     dir2pi -n ${local_pypi}
 
@@ -81,11 +83,11 @@ packages/simple/signaldb/index.html
 ```
 
 The above wheel files are just symlinks to the wheels from the source directory.
-Finally, we need to update `.profile` or `.bashrc`:
+Finally, we need to update `.profile` or `.bashrc`
 
     export PIP_EXTRA_INDEX_URL="file://${local_pypi}/simple/"
 
-
+and invoke pip in a familiar way:
 
 ```
 $ pip install signaldb
