@@ -40,9 +40,10 @@ DEFAULT_PAGINATION = False
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
-STATIC_PATHS = ['img', 'pdf', 'extra/robots.txt', 'extra/favicon.ico']
+STATIC_PATHS = ['img', 'pdf', 'extra/robots.txt', 'extra/favicon.ico', 'extra/0xDBCF703C.asc']
 EXTRA_PATH_METADATA = {
     'extra/robots.txt': {'path': 'robots.txt'},
+    'extra/0xDBCF703C.asc': {'path': '0xDBCF703C.asc'},
     'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 
