@@ -6,7 +6,7 @@ AUTHOR = 'Julian Wergieluk'
 SITENAME = 'Julian Wergieluk'
 
 PATH = 'content'
-THEME = 'themes/custom'
+THEME = '.'
 PLUGIN_PATHS = ['/home/julian/clones/pelican-plugins',]
 #PLUGINS = ['render_math', ]
 #JINJA_ENVIRONMENT = {'extensions': 'jinja2.ext.i18n'}
