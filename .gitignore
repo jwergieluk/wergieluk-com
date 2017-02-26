@@ -2,3 +2,5 @@ venv
 __pycache__
 output
 upload.sh
+static/bower_components
+.idea/workspace.xml
