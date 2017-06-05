@@ -1,0 +1,21 @@
+{
+  "name": "wergieluk.com",
+  "authors": [
+    "Julian Wergieluk <julian@wergieluk.com>"
+  ],
+  "description": "Julian Wergieluks homepage",
+  "main": "",
+  "license": "MIT",
+  "homepage": "www.wergieluk.com",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
