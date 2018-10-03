@@ -1,0 +1,15 @@
+[submodule "themes/basics"]
+	path = themes/basics
+	url = https://github.com/arjunkrishnababu96/basics
+[submodule "themes/engimo"]
+	path = themes/engimo
+	url = https://github.com/achary/engimo.git
+[submodule "themes/ananke"]
+	path = themes/ananke
+	url = https://github.com/budparr/gohugo-theme-ananke.git
+[submodule "themes/onetwothree"]
+	path = themes/onetwothree
+	url = https://github.com/schollz/onetwothree.git
+[submodule "themes/minimo"]
+	path = themes/minimo
+	url = https://github.com/MunifTanjim/minimo
