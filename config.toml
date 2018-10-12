@@ -7,9 +7,9 @@ copyright = ""
 theme = "minimo"
 
 disqusShortname = ""
-googleAnalytics = ""
+googleAnalytics = "UA-26503219-1"
 
-Paginate = 5
+Paginate = 15
 preserveTaxonomyNames = true
 
 enableRobotsTXT = true # generate robots.txt
@@ -51,7 +51,7 @@ accentColor = "#ffcd00"
 hideMainMenu = false
 
 [params.sidebar]
-enable = true
+enable = false
 
 [params.widgets]
 homepage = ["recent_posts"]
@@ -71,12 +71,12 @@ page = "" # Twitter page username
 titleSeparator = "•"
 
 [params.social]
-#codepen = "MunifTanjim"
+#codepen = ""
 email = "julian@wergieluk.com"
-#facebook = "MunifTanjim"
+#facebook = ""
 github = "jwergieluk"
 gitlab = "wergieluk"
-#instagram = "MunifTanjim"
+#instagram = ""
 linkedin = "julian.wergieluk"
 twitter = "wergieluk"
 #telegram = "MunifTanjim"
@@ -93,11 +93,12 @@ scriptSrc = "" # "https://isso.example.com/js/embed.min.js"
 dataAttrs = "" # "data-isso='https://isso.example.com' data-isso-require-author='true'"
 
 [params.comments.staticman]
-enable = true
+enable = false
 apiEndpoint = "https://api.staticman.net/v2/entry"
 maxDepth = 2
 
 [params.comments.staticman.github]
+enable = false
 username = "MunifTanjim"
 repository = "minimo"
 branch = "master"
@@ -129,10 +130,10 @@ tag = "tags"
 page = "/:slug/"
 
 [[menu.main]]
-name = "Repo"
+name = "Home"
 weight = -10
-identifier = "repository"
-url = "https://github.com/MunifTanjim/minimo"
+identifier = "home"
+url = "https://www.wergieluk.com"
 
 [blackfriday]
 hrefTargetBlank = true

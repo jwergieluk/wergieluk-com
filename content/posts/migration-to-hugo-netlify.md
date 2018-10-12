@@ -1,7 +1,6 @@
 ---
-title: Notes on migrating this blog to Hugo and Netlify
+title: Notes on migrating this blog to Netlify and Hugo
 date: 2018-10-03 16:33:56 +0000
-
 ---
 Written mainly for my own record.
 
