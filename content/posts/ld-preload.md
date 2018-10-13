@@ -2,6 +2,8 @@
 title: "Loading custom shared libraries in Linux"
 date: 2017-06-05
 draft: false
+tags:
+    - linux
 ---
 
 This post shows how to enforce loading custom shared libraries for a given

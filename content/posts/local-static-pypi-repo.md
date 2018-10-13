@@ -2,6 +2,8 @@
 title: "Local and static Python PyPI repository"
 date: 2017-02-18
 draft: false
+tags:
+    - python
 ---
 
 Suppose we want to have a private Python PyPI repository shared among the
