@@ -1,6 +1,7 @@
 ---
 title: Notes on migrating this blog to Netlify and Hugo
 date: 2018-10-03 16:33:56 +0000
+lastmod: 2018-10-20
 ---
 
 Written mainly for my own record.
@@ -43,6 +44,10 @@ the offering:
 * Hugo documentation is hard to understand and sometimes quite confusing. There
   is a very nice Hugo tutorial by Mike Dane available on YouTube:
   (https://www.youtube.com/watch?v=qtIqKaDlqXo&list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3)
+* In Hugo, setting `markup: "mmark"` and `katex: true` in the front matter of a
+  document activates the rendering of LaTeX formulas.
+  [https://mmark.nl/](Mmark) is an alternative markdown parser with a better
+  support of inline math than the standard "blackfriday" parser.
 
 ## Links
 
