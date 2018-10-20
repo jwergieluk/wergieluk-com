@@ -46,7 +46,7 @@ the offering:
   (https://www.youtube.com/watch?v=qtIqKaDlqXo&list=PLLAZ4kZ9dFpOnyRlyS-liKL5ReHDcj4G3)
 * In Hugo, setting `markup: "mmark"` and `katex: true` in the front matter of a
   document activates the rendering of LaTeX formulas.
-  [https://mmark.nl/](Mmark) is an alternative markdown parser with a better
+  [Mmark](https://mmark.nl/) is an alternative markdown parser with a better
   support of inline math than the standard "blackfriday" parser.
 
 ## Links
