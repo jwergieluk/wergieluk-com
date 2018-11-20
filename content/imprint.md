@@ -18,8 +18,9 @@ Deutschland
 
 ## Kontakt: ##
 
-Telefon: +49 151 200 69 867  
 E-Mail: <julian@wergieluk.com>  
+Twitter: @wergieluk
+LinkedIn: https://linkedin.com/in/julian.wergieluk
 
 ###  Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:
 
