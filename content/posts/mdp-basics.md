@@ -81,10 +81,37 @@ function
 
 $$ p(s', r | s, a) = \mathbb P[ S_t = s', R_t = r | S_{t-1} = s, A_{t-1} = a ].$$
 
+In the non-finite case, we can characterize the dynamics using a similar function
+
+$$ p(s', r | s, a) = \mathbb P[ S_t \in s', R_t \in r | S_{t-1} = s, A_{t-1} = a ]$$
+
+with measurable sets $$s'\in \Sigma$$ and $$r\in \mathcal B(\mathbb R)$$. 
 
 
 
 
+
+### Notes
+
+The action-value function for the policy $$\pi$$ is defined as
+
+$$q_\pi(s, a) = \mathbb E [G_t | S_t = s, A_t = a].$$
+
+
+We can use the state-value function to define a partial ordering on the set 
+of policies, i.e. we say $$\pi\leq\pi'$$ iff $$v_\pi(s)\leq v_{\pi'}(s)$$ for
+all $$s\in\mathcal S$$. Also, we call a policy $$\pi_*$$ with the state-value
+function $$v_*$$ an optimal policy iff $$v_\pi \leq v_*$$ for any policy $$\pi$$. 
+The function $$v_*$$ is called the optimal state value function, and is given 
+by 
+
+$$v_*(s) = \max_\pi v_\pi (s), s\in\mathcal S.$$
+
+Similarly we define the optimal action-value function $$q_*$$ by
+
+$$q_*(s,a) = \max_\pi q_\pi(s,a), s\in\mathcal S, a\in\mathcal A.$$
+
+* Bellmans optimality equations of v* and q*.
 
 # Supplementary literature
 
