@@ -1,5 +1,5 @@
 ---
-title: "Temporal-Difference learning example taxi-v2 environment"
+title: "Temporal-Difference learning and the taxi-v2 environment"
 date: 2019-02-16T18:10:01+01:00
 draft: true
 markup: "mmark"
@@ -8,7 +8,12 @@ tags:
     - reinforcement-learning
 ---
 
-The description of the taxi environment can be found here: 
+*Summary.* This documents my attempt at solving the taxi-v2 environment. To
+benchmark the TD learning algorithms, I calculate the theoretical expected
+episode reward for an optimal policy, generate an optimal policy, and 
+
+
+The description of the taxi-v2 environment can be found here: 
 
 https://raw.githubusercontent.com/openai/gym/master/gym/envs/toy_text/taxi.py
 
@@ -30,7 +35,7 @@ G, Y, B, and Taxi), and 4 possible destinations:
     |Y| : |B: |
     +---------+
 
-The state observations are encoded as Discrete(500) using the encode() method: 
+The state observations are encoded as Discrete(500) using the following encode() method: 
 
     def encode(self, taxi_row, taxi_col, pass_loc, dest_idx):
         # (5) 5, 5, 4
@@ -43,58 +48,94 @@ The state observations are encoded as Discrete(500) using the encode() method:
         i += dest_idx
         return i
 
-I use a slightly modified version of the render() function to record the
-episodes for this blog article. The destination is marked as red, the passenger
-location with magenta, and a yellow taxi turns gray when it picks up the
-passenger.
+Each action results in an reward of -1, except in the following two cases:
+1. The "dropoff" action that ends the episode is rewarded with 20. (Not with -1 + 20 
+as stated in the source code documentation)
+2. Bogus "pickup" and "dropoff" actions get a reward of -10.
+
+The initial state is chosen at random (uniformly) such that the passenger is 
+not in the taxi, and pickup and dropoff positions are not equal.
+
+Given this description, we can show that the expected end reward is *8.46333...*: 
+In each episode, the
+pickup and dropoff actions give us -1 + 20 reward points. To calculate the
+expected travel path length, we can go over all possible initial states and
+calculate shortest travel path for each. I've done this using the NetworkX[^1] 
+package containing numerous graph algorithms.
+
+    def expected_end_reward(self):
+        expectation = -1.0 + 20.0
+        path_lengths = 0.0
+        path_no = 0.0
+        for r0, c0, pickup_index, dropoff_index in itertools.product(
+                range(5), range(5), range(4), range(4)):
+            if pickup_index == dropoff_index:
+                continue
+            path_lengths += networkx.shortest_path_length(self.graph, (r0, c0), self.locs[pickup_index])
+            path_lengths += networkx.shortest_path_length(self.graph, self.locs[pickup_index], self.locs[dropoff_index])
+            path_no += 1.0
+        expectation -= path_lengths/path_no
+        return expectation
+
+#### Score 
+
+The leaderboard page in the gym wiki[^2] uses a running end reward average calculated
+over 100 episodes which is a strange and unstable metric, since it is impacted significantly
+by the randomness of the initial states. It makes much more sense to calculate 
+the average reward over a large number of episodes (e.g. 25000) and compare that 
+average with the theoretical expected reward calculated above. 
+
+Also, we can look at the learned policy itself, and, for each state s determine 
+whether the proposed action is optimal or not. 
+
+#### Temporal-Difference learning
 
 This task might look very straightforward at first, given the above interpretation and
 our knowledge about taxis, but in fact the interaction with the environment from an agents 
 perspective can appear quite puzzling. Here is an small part of a trajectory generated
 by a random agent:
 
-| action | reward | next_state |
-|--------|--------|------------|
-| 2      | -1     | 393        |
-| 5      | -10    | 393        |
-| 2      | -1     | 393        |
-| 3      | -1     | 373        |
-| 4      | -10    | 373        |
-| 2      | -1     | 393        |
+    action, reward, next_state
+    2, -1, 393
+    5, -10, 393
+    2, -1, 393
+    3, -1, 373
+    4, -10, 373
+    2, -1, 393
+
+The class ´´Agent1`` implements standard temporal-difference methods sarsa, sarsa, and 
+expected sarsa. 
+
+Observations:
+
+* Random initialization of the Q table seem to work better than using zero-initialization. 
+My guess is that random Q table yields a "noisy" initial policy that encourages 
+exploratory behavior.
+
+#### Visualization
+
+I use a slightly modified version of the render() function to record the
+episodes for this blog article. The destination is marked as red, the passenger
+location with magenta, and a yellow taxi turns gray when it picks up the
+passenger.
 
 
-
-{{< highlight py >}}
-def sarsa(self, state, action, reward, next_state):
-    """ Sarsa on-policy Q-table update rule """
-    next_action = self.select_action(next_state)
-    self.Q[state, action] = self.Q[state, action]*(1.0 - self.alpha) + self.alpha*(
-            reward + self.gamma*self.Q[next_state, next_action])
-
-def sarsamax(self, state, action, reward, next_state):
-    """ Sarsamax aka Q-learning off-policy Q-table update rule """
-    next_action = numpy.argmax(self.Q[next_state, :])
-    self.Q[state, action] = self.Q[state, action]*(1.0 - self.alpha) + self.alpha*(
-            reward + self.gamma*self.Q[next_state, next_action])
-
-def expected_sarsa(self, state, action, reward, next_state):
-    """ Expected Sarsa on-policy Q-table update rule """
-    next_action = numpy.argmax(self.Q[next_state, :])
-    policy_vector_for_next_state = numpy.repeat(self.epsilon()/self.dim_a, self.dim_a)
-    policy_vector_for_next_state[next_action] += 1.0 - self.epsilon()
-    self.Q[state, action] = self.Q[state, action] * (1.0 - self.alpha) + self.alpha * (
-            reward + self.gamma * numpy.dot(policy_vector_for_next_state, self.Q[next_state, :]))
-{{< / highlight >}}
-
+#### Implementation
 
 https://gitlab.com/jwergieluk/rl/blob/master/rl01.py
 
 
-# Similar attempts
+# Similar write-ups and references
 
-* https://cihansoylu.github.io/openai-taxi-v2-environment-q-learning.html (best average 9.42)
-* https://blog.goodaudience.com/attempting-open-ais-taxi-v2-using-the-sarsa-max-algorithm-70a4de8c8c9c(best average above 9)
+* https://cihansoylu.github.io/openai-taxi-v2-environment-q-learning.html
+* https://blog.goodaudience.com/attempting-open-ais-taxi-v2-using-the-sarsa-max-algorithm-70a4de8c8c9c
+* https://www.kaggle.com/angps95/intro-to-reinforcement-learning-with-openai-gym
+
+* The original paper describing the taxi environment: https://arxiv.org/abs/cs/9905014
+
+[^1]: https://networkx.github.io/documentation/stable/index.html
+[^2]: https://github.com/openai/gym/wiki/Leaderboard#taxi-v2
 
 
-https://www.kaggle.com/angps95/intro-to-reinforcement-learning-with-openai-gym
+
 
