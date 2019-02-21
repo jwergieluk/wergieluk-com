@@ -2,7 +2,7 @@
 title: "Temporal-Difference learning and the taxi-v2 environment"
 date: 2019-02-21
 lastmod: 2019-02-21
-draft: true
+draft: false
 markup: "mmark"
 tags:
     - machine-learning
