@@ -49,8 +49,8 @@ consisting of integers 0..499, using the formula
     ((taxi_row*5 + taxi_col)*5 + passenger_location)*4 + destination.
 
 Each action results in a reward of -1, except in the following two cases:
-1. The "dropoff" action that ends the episode is rewarded with 20. (Not with -1
-   + 20 as stated in the source code documentation)
+1. The "dropoff" action that ends the episode is rewarded with 20. 
+    (Not with -1 + 20, as stated in the source code documentation)
 2. The misuse of "pickup" and "dropoff" actions is rewarded with -10.
 
 The initial state is chosen at random (uniformly) such that the passenger is
@@ -163,7 +163,7 @@ GitHub:
 
 https://gitlab.com/jwergieluk/rl/blob/master/rl01.py
 
-# Similar write-ups and references
+#### Similar write-ups and references
 
 * https://cihansoylu.github.io/openai-taxi-v2-environment-q-learning.html
 * https://blog.goodaudience.com/attempting-open-ais-taxi-v2-using-the-sarsa-max-algorithm-70a4de8c8c9c
