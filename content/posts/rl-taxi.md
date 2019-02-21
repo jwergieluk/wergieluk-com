@@ -1,6 +1,7 @@
 ---
 title: "Temporal-Difference learning and the taxi-v2 environment"
-date: 2019-02-16T18:10:01+01:00
+date: 2019-02-16
+lastmod: 2019-02-20
 draft: true
 markup: "mmark"
 tags:
@@ -10,8 +11,9 @@ tags:
 
 *Summary.* This documents my attempt at solving the taxi-v2 environment. To
 benchmark the TD learning algorithms, I calculate the theoretical expected
-episode reward for an optimal policy, generate an optimal policy, and 
-
+episode reward for an optimal policy, generate an optimal policy, and show 
+that there are an non-optimal policies that always generate optimal 
+trajectories.
 
 The description of the taxi-v2 environment can be found here: 
 
@@ -103,14 +105,45 @@ by a random agent:
     4, -10, 373
     2, -1, 393
 
-The class ´´Agent1`` implements standard temporal-difference methods sarsa, sarsa, and 
+The class `Agent1` implements standard temporal-difference methods sarsa, sarsamax, and 
 expected sarsa. 
 
 Observations:
 
-* Random initialization of the Q table seem to work better than using zero-initialization. 
-My guess is that random Q table yields a "noisy" initial policy that encourages 
-exploratory behavior.
+* Random initialization of the Q table seem to work better than using zero
+or constant initialization. My guess is that random Q table yields a "noisy" 
+initial policy that encourages exploratory behavior.
+
+I ended up using expected sarsa with parameter values `alpha=0.05`, 
+`gamma=0.9` (which has almost no noticable impact), and `epsilon=0.1` over the 
+first 11000 episodes and `epsilon=0.0`
+for the rest of the total number of 20000 episodes. 
+The expected return of the policy estimated using this method matches the theoretical
+optimal expected value of ~8.4 in most cases. Somehow surprisingly, the estimated
+policy is not optimal and prescribes non-optimal actions for 8 states. It turns out that
+this actually doesn't matter, because the states of the non-optimal state-action
+pairs are never attained: 
+
+    state 436: 4 1 T R  action 0: south
+    state 437: 4 1 T G  action 0: south
+    state 438: 4 1 T Y  action 0: south
+    state 439: 4 1 T B  action 0: south
+    state 456: 4 2 T R  action 5: dropoff
+    state 457: 4 2 T G  action 2: east
+    state 458: 4 2 T Y  action 0: south
+    state 459: 4 2 T B  action 3: west
+    state 498: 4 4 T Y  action 2: east
+
+    +---------+
+    |R: | : :G|
+    | : : : : |
+    | : : : : |
+    | | : | : |
+    |Y| : |B: |
+    +---------+
+
+In the above listing, the states are expanded to 4-tuples ("row", "column", "passenger
+location", "dropoff location").
 
 #### Visualization
 
@@ -130,7 +163,6 @@ https://gitlab.com/jwergieluk/rl/blob/master/rl01.py
 * https://cihansoylu.github.io/openai-taxi-v2-environment-q-learning.html
 * https://blog.goodaudience.com/attempting-open-ais-taxi-v2-using-the-sarsa-max-algorithm-70a4de8c8c9c
 * https://www.kaggle.com/angps95/intro-to-reinforcement-learning-with-openai-gym
-
 * The original paper describing the taxi environment: https://arxiv.org/abs/cs/9905014
 
 [^1]: https://networkx.github.io/documentation/stable/index.html
