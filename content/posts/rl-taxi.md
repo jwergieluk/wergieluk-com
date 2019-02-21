@@ -151,9 +151,12 @@ allowed initial states is not the whole state space.
 
 I use a slightly modified version of the render() function to record the
 episodes for this blog article. The destination is marked as red, the passenger
-location with magenta, and a yellow taxi turns gray when it picks up the
+location with magenta, and a yellow taxi turns white when it picks up the
 passenger.
 
+{{< figure src="/rl-taxi/rl-taxi-random.gif" title="Random agent" >}}
+
+{{< figure src="/rl-taxi/rl-taxi-trained.gif" title="Trained agent" >}}
 
 #### Implementation
 
