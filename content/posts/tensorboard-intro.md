@@ -98,4 +98,4 @@ and ease of use geared towards model development and rapid prototyping.
 
 Interested? Read the docs: https://tensorboardx.readthedocs.io/en/latest/tutorial.html
 
-[^2] Visdom: https://github.com/facebookresearch/visdom
+[^1]: https://github.com/facebookresearch/visdom
