@@ -3,20 +3,20 @@ title: "TensorboardX is not only about tensorflow or machine learning"
 date: 2019-03-03
 draft: false
 markup: "mmark"
+tags:
+    - machine-learning
 ---
 
-TensorboardX is a tool for monitoring "jobs" 
-that produce numerical data as they run. Originally developed 
-to visualize training progress of deep learning models in PyTorch, it
-builds on top of Tensorboard which is a part of Tensorflow. 
-Nevertheless, TensorboardX stands for "Tensorboard for X" 
-where X could be any type of long-running number-crunching job we 
-want to monitor. 
+TensorboardX is a tool for monitoring "jobs" that produce numerical data as
+they run. Originally developed to visualize training progress of deep learning
+models in PyTorch, it builds on top of Tensorboard which is a part of
+Tensorflow. Nevertheless, TensorboardX stands for "Tensorboard for X" where X
+could be any type of long-running number-crunching job we want to monitor. 
 
 #### TensorboardX 101
 
-The following script creates a new run directory and saves some samples of a scalar 
-random variable.
+The following script creates a new run directory and saves some samples of a
+scalar random variable.
 
     import tensorboardX
     import random
@@ -40,9 +40,9 @@ The web dashboard updates every 30 seconds and looks really slick:
 
 #### Histograms
 
-Another feature that caught my attention is the `add_histogram` method
-that expects a numpy vector and produces a stacked histogram plot (also called
-a waterfall plot).
+Another feature that caught my attention is the `add_histogram` method that
+expects a numpy vector and produces a stacked histogram plot (also called a
+waterfall plot).
 
     import tensorboardX
     import random
@@ -80,16 +80,16 @@ Finally, it is equally easy to push an arbitrary matplotlib figure:
         time.sleep(1)
         plt.close()
 
-The figures produced by our code are converted to images and presented on the 
+The figures produced by our code are converted to images and presented on the
 board:
 
 {{< figure src="/tensorboard/figure.png" >}}
 
 #### Closing remarks
 
-There is a similar tool from Facebook Research called Visidom[^1]. 
-My impression is that Visdom is more heavy-weight because the produced dashboard
-is served directly from the Python application, but offers interactivity via 
+There is a similar tool from Facebook Research called Visidom[^1]. My
+impression is that Visdom is more heavy-weight because the produced dashboard
+is served directly from the Python application, but offers interactivity via
 callbacks and more flexibility through the plot.ly backend.
 
 Clearly, there are more powerful general-purpose tools for creating 
@@ -99,3 +99,4 @@ and ease of use geared towards model development and rapid prototyping.
 Interested? Read the docs: https://tensorboardx.readthedocs.io/en/latest/tutorial.html
 
 [^1]: https://github.com/facebookresearch/visdom
+
