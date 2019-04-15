@@ -10,9 +10,10 @@ tags:
     - machine-learning
 ---
 
+Requirements: https://review.udacity.com/#!/rubrics/1890/view
 
-# Abstract 
-This short note provides a concise description of the model architecture and
+
+*Summary*. This short note provides a concise description of the model architecture and
 learning algorithms of the agent developed in this project. We also report learning
 performance of the agent and provide a list of possible future model improvements.
 
@@ -43,6 +44,16 @@ environment after completing less than $1000$ episodes.
 # Ideas for future work
 
 
+# Links
+
+Blog posts on policy gradient algorithms.
+
+* https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html
+* https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/
+
+# Literature
+
+* https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf
 
 
 
