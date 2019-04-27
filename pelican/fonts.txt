@@ -1,7 +1,0 @@
-font-family: 'Merriweather', serif;
-font-family: 'Bitter', serif;
-font-family: 'Vollkorn', serif;
-font-family: 'Josefin Slab', serif;
-font-family: 'Source Serif Pro', serif;
-font-family: 'Goudy Bookletter 1911', serif;
-
