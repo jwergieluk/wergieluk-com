@@ -10,6 +10,11 @@ tags:
     - machine-learning
 ---
 
+REINFORCE algorithm.
+Noise reduction by averaging over trajectories.
+Reward normalization.
+
+
 Requirements: https://review.udacity.com/#!/rubrics/1890/view
 
 
