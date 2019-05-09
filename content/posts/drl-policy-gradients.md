@@ -1,5 +1,5 @@
 ---
-title: "The Reacher enviroment solved using policy gradients"
+title: "The Reacher environment solved using policy gradients (draft)"
 date: 2019-04-15
 lastmod: 2019-04-15
 draft: true
@@ -9,6 +9,10 @@ tags:
     - reinforcement-learning
     - machine-learning
 ---
+
+$$
+\newcommand\actionSpace{\mathbb A}
+$$
 
 REINFORCE algorithm.
 Noise reduction by averaging over trajectories.
@@ -31,7 +35,7 @@ the algorithm proposed in \cite{mnih2015humanlevel}.
 
 The agent is trained over a given number of episodes labeled with $$n = 1,\cdots, 1800$$.
 Each episode is divided into turns $$t = 1,\cdots, 300$$.
-The state space $\mathcal S$ of the environment is continuous and given by
+The state space $$\mathcal S$$ of the environment is continuous and given by
 $$\mathcal S = \mathbb R^{33}$$, whereas the action space $$\mathcal A = \left\{
 0,1,2,3 \right\}$$ is discrete and independent of the current environment state
 (i.e.\ all four actions are available irrespective of the current state). The state-action value
@@ -44,7 +48,7 @@ $$Q_{\theta}$$ takes values in a finite-dimensional vector space $$\mathbb R^{p}
 # Training analysis
 
 Despite its simplicity, the agent described in this report is able to solve the
-environment after completing less than $1000$ episodes.
+environment after completing less than $$1000$$ episodes.
 
 # Ideas for future work
 
@@ -55,6 +59,7 @@ Blog posts on policy gradient algorithms.
 
 * https://lilianweng.github.io/lil-log/2018/04/08/policy-gradient-algorithms.html
 * https://danieltakeshi.github.io/2017/03/28/going-deeper-into-reinforcement-learning-fundamentals-of-policy-gradients/
+* https://medium.com/@jonathan_hui/rl-proximal-policy-optimization-ppo-explained-77f014ec3f12
 
 # Literature
 
