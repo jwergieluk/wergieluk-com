@@ -164,7 +164,7 @@ The Python module containing the agent, as well as functions and classes used
 to derive the auxiliary results cited in this blog post, is available on
 GitHub:
 
-https://gitlab.com/jwergieluk/rl/blob/master/rl01.py
+https://gist.github.com/jwergieluk/ff7b0a878a8a3ce5b9a9020f62e0d5edA
 
 #### Similar write-ups and references
 
