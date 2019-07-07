@@ -15,9 +15,10 @@ draft: false
 
 https://www.japan.travel/en/spot/353/
 
-KOJ distance: 2:20  http://www.hyperdia.com/cgi/en/search.html?dep_node=KAGOSHIMA-CHUO&arv_node=MIYAZAKI&via_node01=&via_node02=&via_node03=&year=2019&month=08&day=12&hour=05&minute=00&search_type=0&search_way=&transtime=undefined&sort=0&max_route=5&faretype=0&ship=off&lmlimit=null&search_target=route&facility=reserved&sum_target=7
+KOJ distance: 2:20  [train timetable](http://www.hyperdia.com/cgi/en/search.html?dep_node=KAGOSHIMA-CHUO&arv_node=MIYAZAKI&via_node01=&via_node02=&via_node03=&year=2019&month=08&day=12&hour=05&minute=00&search_type=0&search_way=&transtime=undefined&sort=0&max_route=5&faretype=0&ship=off&lmlimit=null&search_target=route&facility=reserved&sum_target=7)
 
 Things to see:
+
 * Aoshima -- the cat island
 * Heidawai Park
 * Takacho
@@ -27,10 +28,9 @@ Things to see:
 
 * Drone videos http://kagoshima-trip.jp/be-en/1/
 * Sightseeing Spots: https://matcha-jp.com/en/3981
-
 * Nagame no Hama -- a 4km long narrow beach -- https://goo.gl/maps/HBPXP7noEAeQDVxXA
 * Cliff and Unusual Rock Cruise -- http://www.koshikijima.net/cruise/kanoko.html
-
+* Sebi Kannon Mitaki (Waterfall and temple):
 * Ferry plan :
     * https://www.koshikisho.co.jp/application/files/7515/5286/7673/2019.3.pdf
     * https://www.koshikisho.co.jp/timetable
@@ -39,10 +39,11 @@ Things to see:
 
 * Futamigura Beach
 * Oronoshima
-
 * Daisetsuzan National Park https://www.japan.travel/en/spot/650/
 
 ## Oita
+
+## Amami
 
 
 # Temples 
@@ -50,7 +51,6 @@ Things to see:
 * https://shunkoin.com
 * https://medium.com/@ellenlouisefreeman/zen-meditation-retreats-japan-1dbdc7eeca4f
 * https://terahaku.jp/
-
 * https://www.japan.travel/en/guide/august/
 * https://www.nomadicmatt.com/travel-guides/japan-travel-tips/
 
