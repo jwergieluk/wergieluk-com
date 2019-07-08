@@ -6,6 +6,7 @@ draft: false
 
 * Kagoshima Trip -- some nice drone movies: http://kagoshima-trip.jp
 * Hyperdia -- Train timetables -- http://www.hyperdia.com/
+* Japan Rail Pass: https://www.der-japan-rail-pass.de/pass-regional/kyushu/all-kyushu-area-pass/bestellung
 
 # Destinations
 
@@ -23,6 +24,7 @@ Things to see:
 * Heidawai Park
 * Takacho
 * Awato Imano Shrine
+* Udo Shrine: https://goo.gl/maps/VUkzN9XLUoMRdCTFA
 
 ## Koshikijima
 
@@ -34,6 +36,13 @@ Things to see:
 * Ferry plan :
     * https://www.koshikisho.co.jp/application/files/7515/5286/7673/2019.3.pdf
     * https://www.koshikisho.co.jp/timetable
+* How to get there: https://veryjapanese.jp/kyushu/koshiki-islands/
+
+## Ibusuki
+
+* Google maps link: https://goo.gl/maps/ssG5jeDENj8xQdjq5
+* Unagiike (lake)
+* Ikedaike (lake)
 
 ## Fukuoka
 
@@ -45,6 +54,8 @@ Things to see:
 
 ## Amami
 
+* Tokunoshima (an island)
+* Okinoerabujima (an island with some limestone caverns): https://matcha-jp.com/en/3865
 
 # Temples 
 
