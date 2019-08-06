@@ -49,6 +49,8 @@ Things to see:
 * Futamigura Beach
 * Oronoshima
 * Daisetsuzan National Park https://www.japan.travel/en/spot/650/
+* Itoshima (beach): https://jw-webmagazine.com/little-known-heavenly-beach-in-japan-9c5848e6f05e/
+* Fukuoka beach guide: https://www.fukuoka-now.com/en/fukuoka-beach-guide/
 
 ## Oita
 
@@ -64,4 +66,11 @@ Things to see:
 * https://terahaku.jp/
 * https://www.japan.travel/en/guide/august/
 * https://www.nomadicmatt.com/travel-guides/japan-travel-tips/
+
+# Beaches
+
+* Iki (50 min with a ferry from Fukuoka): https://www.ana.co.jp/en/jp/tastesofjapan/kyushu/0019.html
+* Beaches in Kyushu: http://www.japan-tour.jp/en/leisure-information/18139
+
+
 
