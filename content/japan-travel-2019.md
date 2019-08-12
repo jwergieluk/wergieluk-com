@@ -10,6 +10,14 @@ draft: false
 
 # Destinations
 
+## Saga
+
+* Yutoku Inari-jinja Shrine. Saga Station, take the JR Kamome to Hizen-Kashima Station (20min), then bus Yutoku Inari-jinja (10min). https://www.japan.travel/en/spot/755/
+
+### Karatsu
+
+* Karatsu castle
+
 ## Nagasaki
 
 ## Miyazaki
@@ -24,7 +32,30 @@ Things to see:
 * Heidawai Park
 * Takacho
 * Awato Imano Shrine
-* Udo Shrine: https://goo.gl/maps/VUkzN9XLUoMRdCTFA
+
+### Sekinoo Falls
+
+Somewhere between Kagoshima and Miyazaki. https://goo.gl/maps/aVTZmjQzswtPjRYK7
+* https://www.japan.travel/en/spot/497/
+* Nearest train station: Takarabe.
+
+### Nichinan
+
+* https://www.japan.travel/en/destinations/kyushu/miyazaki/nichinan/
+* Official city guide: https://www.kankou-nichinan.jp/english
+* Obi -- Kyoto of Kyushu (town)
+    * Obi Town is an old castle town that used to be home to some of Japan's most powerful figures when Miyazaki was a big player in Japan.
+* Udo-jingu Shrine (鵜戸神宮) Shrine: https://goo.gl/maps/VUkzN9XLUoMRdCTFA
+* Amano Iwato-jinja Shrine
+
+### Hyuga
+
+http://www.hyuga.or.jp/sightseeing?hl=en
+
+* Umagase. Nippo Quasi National Park (日豊海岸国定公園). https://goo.gl/maps/D9pEyAvBTQ4ca6NcA
+* Kanegahama beach 金ヶ浜海水浴場 : https://www.japan.travel/en/spot/622/ 
+* Omi Shrine (大御神社)
+* Okuragahama Beach
 
 ## Koshikijima
 
@@ -37,6 +68,8 @@ Things to see:
     * https://www.koshikisho.co.jp/application/files/7515/5286/7673/2019.3.pdf
     * https://www.koshikisho.co.jp/timetable
 * How to get there: https://veryjapanese.jp/kyushu/koshiki-islands/
+* Bus: http://koshikijima.net/bus/bus-kami.html
+* Electric bike rental: https://koshiki-tours.co.jp/959/
 
 ## Ibusuki
 
@@ -46,6 +79,7 @@ Things to see:
 
 ## Fukuoka
 
+* Nanzoin Temple: Jumbo-Jet sized reclining Buddha statue. 21-min train ride from Fukuoka. https://www.japan.travel/en/spot/2167/
 * Futamigura Beach
 * Oronoshima
 * Daisetsuzan National Park https://www.japan.travel/en/spot/650/
