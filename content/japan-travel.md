@@ -1,5 +1,5 @@
 ---
-title: "Japan travel plan 2019"
+title: "Japan travel notes"
 date: 2019-07-07
 draft: false
 ---
