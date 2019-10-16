@@ -6,6 +6,13 @@ katex: true
 markup: "mmark"
 ---
 
+
+# ASHRAE - Great Energy Prediction III
+
+* Article cited in the problem description: https://www.mdpi.com/2504-4990/1/3/56
+* https://www.kaggle.com/c/ashrae-energy-prediction/discussion/112958#latest-650382
+
+
 # IEEE-CIS Fraud Detection
 ## Winning solution
 

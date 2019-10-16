@@ -9,6 +9,7 @@ markup: "mmark"
 # Python software packages
 
 * statsmodels
+* https://github.com/TDAmeritrade/stumpy
 
 https://www.quandl.com/data/LBMA/GOLD-Gold-Price-London-Fixing
 
