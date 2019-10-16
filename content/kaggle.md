@@ -4,13 +4,9 @@ date: 2019-10-08
 draft: true
 katex: true
 markup: "mmark"
-tags:
-    - machine-learning
 ---
 
-
 # IEEE-CIS Fraud Detection
-
 ## Winning solution
 
 * Winning solution (Score 0.945884) write-up by Chris Deote
@@ -31,5 +27,4 @@ tags:
 # Similar competitions and their writeups
 
 * https://www.kaggle.com/c/ieee-fraud-detection/discussion/99987 (Link collection)
-
 
