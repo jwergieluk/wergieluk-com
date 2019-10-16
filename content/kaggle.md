@@ -1,5 +1,5 @@
 ---
-title: "IEEE-CIS Fraud Detection"
+title: "Kaggle competition notes"
 date: 2019-10-08
 draft: true
 katex: true
@@ -9,7 +9,7 @@ tags:
 ---
 
 
-# Solution write-ups
+# IEEE-CIS Fraud Detection
 
 ## Winning solution
 
