@@ -1,5 +1,5 @@
 ---
-title: "Impressum"
+title: "Imprint"
 date: 2016-12-26
 menu: main
 ---
@@ -18,7 +18,7 @@ Deutschland
 
 ## Kontakt: ##
 
-E-Mail: <julian@wergieluk.com>  
+E-Mail: <julian@wergieluk.com>
 Twitter: @wergieluk
 LinkedIn: https://linkedin.com/in/julian.wergieluk
 

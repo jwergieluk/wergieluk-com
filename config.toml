@@ -98,20 +98,20 @@ enable = false
 apiEndpoint = "https://api.staticman.net/v2/entry"
 maxDepth = 2
 
-[params.comments.staticman.github]
-enable = false
-username = "MunifTanjim"
-repository = "minimo"
-branch = "master"
+#[params.comments.staticman.github]
+#enable = false
+#username = "MunifTanjim"
+#repository = "minimo"
+#branch = "master"
 
 # Utterances: https://utteranc.es
-[params.comments.utterances]
-enable = false
-issueTerm = "pathname" # pathname / url / title
+#[params.comments.utterances]
+#enable = false
+#issueTerm = "pathname" # pathname / url / title
 
-[params.comments.utterances.github]
-username = "MunifTanjim"
-repository = "minimo"
+#[params.comments.utterances.github]
+#username = "MunifTanjim"
+#repository = "minimo"
 
 [params.search]
 client = "" # algolia / fuse / lunr
