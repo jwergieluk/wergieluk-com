@@ -6,19 +6,19 @@ draft: true
 markup: "mmark"
 ---
 
-Recently I've spent some time coding a dashboard for my algo trading system, and I am quite happy with the result: 
+Recently I've spent some time coding a dashboard for my algo trading system and I am quite happy with the result: 
 
-{{< figure src="/periscope/periscope-dashboard-0.gif" title="Dashboard" >}}
+{{< figure src="/periscope/periscope-dashboard-0.gif" >}}
 
-What's a bit unusual about this project is the use of pygame, a Python game development package, instead of a web-based dashboard library (like Dash or Bokeh) or a GUI framework. 
+What's a bit unusual about this project is the use of pygame (https://www.pygame.org), a Python game development package, instead of a web-based dashboard library (like Dash or Bokeh) or a GUI framework. 
 
-Pygame is effectively a wrapper around SDL library. It is super-simple and easy learn and fun to and work with. It doesn't offer any standard GUI elements like buttons and windows, but it is surprisingly easy to write those from scratch. 
+Pygame is a wrapper around the SDL library (http://www.libsdl.org/). It is super-simple and easy learn and fun to work with. It doesn't offer any standard GUI elements like buttons or windows, but it is surprisingly easy to write those from scratch.
 
-In this post I go over some basics of pygame for non-interactive use (no user interaction) and show how to use that small subset of pygame features for develop a (static) dashboard to display some text and plots. (By static dashboard I mean that positions of all GUI elements are defined in the code and e.g. those windows on the dashboard snapshot above cannot be moved at run-time.)
+In this post I go over some basics of pygame for non-interactive use (no user interaction) and show how to use that small subset of pygame features to develop a (static) dashboard displaying some text and plots. By static dashboard I mean that positions of all GUI elements are defined in the code and e.g. those windows on the dashboard snapshot above cannot be moved at run-time.
 
 # A quick pygame tutorial
 
-Initialize pygame and get the screen surface. 
+Initialize pygame and get the screen surface:
 
     import pygame
     pygame.init()
@@ -27,20 +27,22 @@ Initialize pygame and get the screen surface.
 
 {{< figure src="/periscope/pygame-0.png" >}}
 
-A surface is a bitmap and it's a fundamental concept in pygame. Essentially, a pygame app defines multiple surfaces, modifies their content (pixels) and copies one surface onto another. This resembles playing with multiple post-it notes of different sizes. A screen surface is linked to the pygame window at run-time. We can update that window using the `pygame.display.flip()` method. For example, let's fill the screen surface with a color and update.
+A surface is a bitmap and it's a fundamental concept in pygame. Essentially, a pygame app defines multiple surfaces, modifies their content (pixels) and copies one surface onto another. This resembles playing with multiple stiky notes of different sizes. A screen surface is linked to the pygame window at run-time. We can update that window using the `pygame.display.flip()` method. For example, let's fill the screen surface with a color and update.
 
     color_fg, color_bg = pygame.Color(0xfff31bff), pygame.Color(0x1e2320ff)
     screen_surface.fill(color_bg)
-    pygame.display.flip()
+    pygame.display.flip()  
+    # changing the bg color visible
 
 {{< figure src="/periscope/pygame-1.png" >}}
 
-Creating a surface: 
+Create a surface: 
 
-    another_surface = pygame.Surface((20, 20))
+    width, height = 20, 20
+    another_surface = pygame.Surface((width, height))
     another_surface.fill(color_fg)
 
-A surface has width and height:
+Every surface has a width and a height:
 
     w, h = another_surface.get_width(), another_surface.get_height()
 
@@ -51,7 +53,7 @@ Blitting (copying) one surface onto another:
 
 {{< figure src="/periscope/pygame-2.png" >}}
 
-Fonts: 
+Text and fonts: 
 
     font_name, font_size = 'inconsolata', 32
     font = pygame.font.SysFont(font_name, font_size)
@@ -71,6 +73,8 @@ That's all we need to know about pygame to write a simple dashboard.
 
 # Widgets
 
+I created a simple Python module which I called `periscope` (link to github) which contains two widgets, TextField and LinePlot, and widget container classes `HStack` and `VStack`. All of those widgets inherit from the `Widget` class that exposes the `w` (width) and `h` attributes, and the `surface` property. Also, the widgets implement both the observer and observable pattern and update their surfaces lazyli.  
+
 ## TextField
 
     text_field_0 = TextField(250, 'Text field with width 250')
@@ -85,9 +89,13 @@ That's all we need to know about pygame to write a simple dashboard.
 
 {{< figure src="/periscope/line-plot-0.png" >}}
 
+LinePlot smoothly updates the y-axis limits on updates:
+
 {{< figure src="/periscope/periscope-lineplot-0.gif" >}}
 
-## HStack and VStack
+## Container widgets
+
+Define three text fields and put them into a horizontal stack and a vertical stack container. Note that updating the content of the second text field propagates to both stacks.
 
     text_field_1 = TextField(90, 'TextField1')
     text_field_2 = TextField(90, 'TextField2')
@@ -96,14 +104,16 @@ That's all we need to know about pygame to write a simple dashboard.
     v_stack = VStack([text_field_1, text_field_2, text_field_3])
     text_field_2.set_content('Field2')
 
+### HStack
 
 {{< figure src="/periscope/h-stack-0.png" >}}
+
+### VStack
+
 {{< figure src="/periscope/v-stack-0.png" >}}
 
+# Links
 
-# References
-
-* https://realpython.com/pygame-a-primer/
+* A nice python tutorial: https://realpython.com/pygame-a-primer/
 * pygame docs are pretty good too: https://www.pygame.org/docs/ref/surface.html
-
-* https://github.com/kitao/pyxel
+* Pyxel is like pygame with even simpler interface (but has more limitations): https://github.com/kitao/pyxel
