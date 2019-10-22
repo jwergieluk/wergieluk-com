@@ -103,4 +103,7 @@ That's all we need to know about pygame to write a simple dashboard.
 
 # References
 
-https://github.com/kitao/pyxel
+* https://realpython.com/pygame-a-primer/
+* pygame docs are pretty good too: https://www.pygame.org/docs/ref/surface.html
+
+* https://github.com/kitao/pyxel
