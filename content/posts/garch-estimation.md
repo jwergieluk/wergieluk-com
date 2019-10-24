@@ -1,5 +1,5 @@
 ---
-title: "GARCH calibration from scratch"
+title: "GARCH parameter estimation from scratch"
 date: 2019-10-23
 draft: true
 katex: true
@@ -72,7 +72,7 @@ $$
 
 For $$t\gt 0$$ this leads to $$X_t = \gamma_0 Z_t + \gamma_1 X_{t-1} Z_t$$.
 
-GARCH process definitions found in textbooks set $$f_i = g_i = h_i = B^i_t$$ and $$\mu\equiv 0$$.
+GARCH process definitions found in textbooks set $$f_i = h_i = B^i_t$$, $$g_i(\Xpred{t}) = B_t(X^2)$$ and $$\mu\equiv 0$$.
 
 GARCH(1, 1) process is quite popular, so let's state it's dynamics explicitly:
 
@@ -93,7 +93,7 @@ $$
 
 where $$\theta = (\phi_i, \gamma_i, \lambda_i)$$, and $$\eta_Z$$ is the density of $$Z$$.
 
-TODO: Derivation of the conditional likelihood decomposition.
+TODO: Derivation of the conditional likelihood product decomposition.
 
 
 
