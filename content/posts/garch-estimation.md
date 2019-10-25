@@ -6,22 +6,11 @@ katex: true
 markup: "mmark"
 ---
 
-# Plan
-
 Intended audience: me.
-
-* Process dynamics definitions. Maximum likelihood estimator derivation.
-* Calibration code using pandas and numpy.
-* Simulation.
-
-Models:
-* ARCH(1,1), GARCH(1,1)
-* ARCH(p,q), GARCH(p,q)
 
 Noises:
 * Normal
 * (Optional) Student-t
-* (Optional) Rademacher
 
 # Introduction
 
@@ -103,6 +92,16 @@ TODO: Derivation of the conditional likelihood product decomposition.
 
 
 
+* Noises: Gaussian, Student-t
+
+# Summary
+
+Pros:
+* Flexible parametrization.
+* Simulation and parameter estimation is easy.
+
+Cons:
+* Transition densities over many steps not known explicitly, nor there is a cheap method to approximate them. In fact, the only available method to obtain these densities is Monte-Carlo simulation of the process and density estimation.
 
 
 # Links
