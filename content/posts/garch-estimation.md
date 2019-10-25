@@ -22,7 +22,7 @@ Let $$\left( \Omega, \mathcal A, \mathcal F, P \right)$$ be a stochastic basis w
 * For a vector $$Y = (Y_0, Y_1, \ldots, Y_{n-1})$$, set $$Y_{-1} = Y_{n-1}$$, $$Y_{-2} = Y_{n-2}$$, and so on.
 * To get the first $$t$$ elements of a sequence $$X$$ we use the notation $$\Xpred{t} = (X_0,\ldots,X_{t-1}).$$
 
-Let's define an autoregressive process as follows:
+Let's define a discrete stochastic volatility model as follows:
 
 $$
 \begin{aligned}
@@ -59,24 +59,38 @@ _GARCH(1, 1)_ process is quite popular, so let's state it's dynamics explicitly:
 $$
 \begin{aligned}
 X_t &= \sigma_t Z_t \\
-\sigma_t^2 &= \gamma_0 + \gamma_1 B_t(X) + \lambda_1 B_t(\sigma^2). 
+\sigma_t^2 &= \gamma_0 + \gamma_1 B_t(X^2) + \lambda_1 B_t(\sigma^2). 
 \end{aligned}
 $$
 
 In an _ARCH_ process, the volatility has the simplified form with $$\lambda_i = 0$$ for all $$i$$, and $$\mu \equiv 0$$.
 
-An _ARCH(1)_ process is additionally satisfies $$\gamma_i = 0$$ for all $$i \geq 2$$: 
+$$
+\begin{aligned}
+X_t &= \sigma_t Z_t \\
+\sigma_t^2 &= \gamma_0 + \sum_{i=1}^q \gamma_i B^i_t(X^2). 
+\end{aligned}
+$$
+
+An _ARCH(1)_ process additionally satisfies $$\gamma_i = 0$$ for all $$i \geq 2$$: 
     
 $$
 \begin{aligned}
 X_t &= \sigma_t Z_t \\
-\sigma_t^2 &= \gamma_0 + \gamma_1 B_t(X). 
+\sigma_t^2 &= \gamma_0 + \gamma_1 B_t(X^2). 
 \end{aligned}
 $$
 
-For $$t\gt 0$$ this yields $$X_t = \gamma_0 Z_t + \gamma_1 X_{t-1} Z_t$$.
-
 ## Simulation
+
+Discrete stochastic volatility models are typically used to model the log-returns of an observed time-series. Therefore in order to simulate a path of the original time-series we need to simulate log-returns and calculate 
+$$Y = Y_0 \prod_{s=0}^t \exp(X_s).$$
+
+A sample path of a GARCH(1,1) process with $$(\gamma_0, \gamma_1, \lambda_1) = (0.001, 0.2, 0.25).$$
+
+{{< figure src="/garch/garch_1_1-simulation.png" >}}
+
+Note that the $$\sigma$$ process cannot go below the level of $$\sqrt{\gamma_0 (1 + \lambda_1)} \approx 0.0353$$
 
 ## Maximum-likelihood estimation
 
