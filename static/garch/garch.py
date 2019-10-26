@@ -1,46 +1,104 @@
-from typing import Union
-
+import numbers
+from typing import Union, Sequence
 import numpy as np
 import pandas as pd
 import scipy.optimize
+import scipy.stats
+import matplotlib.pyplot as plt
+plt.style.use('ggplot')
 
 
-def loglik(X: np.ndarray):
-    X = X.reshape((-1, 1))
-    X = np.hstack([X, np.roll(X, 1)])
-    X[0, 1] = 0.0
-
-    return 0.0
-
-
-def mle(X: np.ndarray):
-    #def error_fuc(theta):
-    #    return -loglik(t, x, theta[0], theta[1], theta[2])
-
-    #start = np.array(start)
-    #result = scipy.optimize.minimize(error_fuc, start, method='L-BFGS-B',
-    #                                 bounds=[(1e-6, None), (None, None), (1e-8, None)],
-    #                                 options={'maxiter': 500, 'disp': False})
-    return 0.0
-
-
-def path(x0: Union[float, np.ndarray], t: int, params=None):
-    """ Simulate log-returns and return cumprod """
-    if isinstance(x0, float):
-        x0 = np.array([x0, ])
-    x0 = x0.reshape((1, -1))
-    n = x0.size
-    X = np.random.randn(t, n)
+def loglik(ret: np.ndarray, params: Sequence):
+    """ Calculate the (weighted) likelihood of a process path """
+    ret = ret.reshape((-1, 1))
     gamma_0, gamma_1, lambda_1 = params
+    sigma_squared = np.repeat(gamma_0, len(ret)).reshape(ret.shape)
+    sigma_squared[0, 0] = gamma_0
+
+    def vola_ret_features(x_view: np.ndarray) -> np.ndarray:
+        return np.square(x_view[-1, :])
+
+    def vola_sigma_features(sigma_view: np.ndarray) -> np.ndarray:
+        return sigma_view[-1, :]
+
+    for s in range(1, len(ret)):
+        sigma_squared[s, :] = gamma_0 + \
+                              np.dot(gamma_1, vola_ret_features(ret[0:s, :])) + \
+                              np.dot(lambda_1, vola_sigma_features(sigma_squared[0:s, :]))
+
+    return np.sum(scipy.stats.norm.logpdf(ret[1:, 0], loc=0.0, scale=np.sqrt(sigma_squared[1:, 0])))
+
+
+def mle(ret: np.ndarray, start_params: Sequence):
+    """Maximum-likelihood estimator"""
+
+    def error_fuc(theta):
+        return -loglik(ret, theta)
+
+    start_params = np.array(start_params)
+    result = scipy.optimize.minimize(error_fuc, start_params, method='L-BFGS-B',
+                                     bounds=[(1e-8, None), (1e-8, None), (1e-8, None)],
+                                     options={'maxiter': 50, 'disp': True})
+    return result
+
+
+def path(x0: Union[numbers.Real, np.ndarray], t: int, params: Sequence):
+    """ Simulate log-returns and return process paths """
+    assert len(params) == 3
+    if isinstance(x0, float):
+        x0 = np.array([x0, ], dtype=np.float64)
+
+    def vola_ret_features(x_view: np.ndarray) -> np.ndarray:
+        return np.square(x_view[-1, :])
+
+    def vola_sigma_features(sigma_view: np.ndarray) -> np.ndarray:
+        return sigma_view[-1, :]
+
+    x0 = x0.reshape((1, -1)).astype(np.float64)
+    n = x0.size
+    ret = np.random.randn(t, n)
+    gamma_0, gamma_1, lambda_1 = params
+    gamma_0 = np.repeat(gamma_0, n).reshape((1, n))
     sigma_squared = np.zeros((t, n))
-    sigma_squared[0, :] = gamma_0 * (1.0 + lambda_1)
-    X[0, :] = 0.0
+    sigma_squared[0, :] = gamma_0
+    ret[0, :] = 0.0
 
     for s in range(1, t):
-        sigma_squared[s, :] = gamma_0 + gamma_1 * np.square(X[s-1, :]) + lambda_1 * sigma_squared[s-1, :]
-        X[s, :] = X[s, :] * np.sqrt(sigma_squared[s, :])
+        sigma_squared[s, :] = gamma_0 + \
+                              np.dot(gamma_1, vola_ret_features(ret[0:s, :])) + \
+                              np.dot(lambda_1, vola_sigma_features(sigma_squared[0:s, :]))
+        ret[s, :] = ret[s, :] * np.sqrt(sigma_squared[s, :])
 
-    return np.cumprod(np.exp(X), axis=0)*x0, np.sqrt(sigma_squared)
+    return np.cumprod(np.exp(ret), axis=0)*x0, np.sqrt(sigma_squared)
+
+
+def plot_path():
+    X, sigma = path(5.0, 500, [0.001, 0.2, 0.25])
+    fig, ax = plt.subplots(2, 1, figsize=(9, 6))
+    ax[0].grid(True)
+    ax[0].plot(X, color='b', alpha=0.7)
+    ax[0].set_ylabel('Y')
+    ax[1].grid(True)
+    ax[1].plot(sigma, color='r', alpha=0.7)
+    ax[1].set_ylabel('sigma')
+    fig.tight_layout()
+    fig.savefig('garch_1_1-simulation.png')
+    plt.close('all')
+
+
+def plot_hist():
+    params = [0.001, 0.2, 0.25]
+    x, sigma = path(5.0, 500, params)
+    print(x)
+
+
+def test_mle():
+    params = [0.001, 0.2, 0.25]
+    x, sigma = path(5.0, 5000, params)
+    ret = np.log(x[1:, :]) - np.log(x[:-1, :])
+
+    result = mle(ret, [0.01, 0.01, 0.01])
+    print(result)
 
 
 def gold_and_platinum():
@@ -57,6 +115,7 @@ def gold_and_platinum():
 
 
 if __name__ == '__main__':
-    X, sigma = path(np.repeat(5.0, 3), 5, [0.001, 0.2, 0.25])
-    print(X)
+    test_mle()
+
+
 
