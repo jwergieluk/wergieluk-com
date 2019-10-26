@@ -86,7 +86,7 @@ $$
 Discrete stochastic volatility models are typically used to model the log-returns of an observed time-series. Therefore in order to simulate a path of the original time-series we need to simulate log-returns and calculate 
 $$Y = Y_0 \prod_{s=0}^t \exp(X_s).$$
 
-A sample path of a GARCH(1,1) process with $$(\gamma_0, \gamma_1, \lambda_1) = (0.001, 0.2, 0.25).$$
+A sample path of a GARCH(1,1) process driven by Gaussian noise with parameters $$(\gamma_0, \gamma_1, \lambda_1) = (0.001, 0.2, 0.25).$$
 
 {{< figure src="/garch/garch_1_1-simulation.png" >}}
 
