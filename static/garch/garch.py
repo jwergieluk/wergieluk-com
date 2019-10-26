@@ -38,15 +38,14 @@ def mle(ret: np.ndarray, start_params: Sequence):
     start_params = np.array(start_params)
     result = scipy.optimize.minimize(error_fuc, start_params, method='L-BFGS-B',
                                      bounds=[(1e-8, None), (1e-8, None), (1e-8, None)],
-                                     options={'maxiter': 50, 'disp': True})
+                                     options={'maxiter': 50, 'disp': False})
     return result
 
 
-def path(x0: Union[numbers.Real, np.ndarray], t: int, params: Sequence):
+def path(no_paths: int, t: int, params: Sequence):
     """ Simulate log-returns and return process paths """
+    assert no_paths > 0 and t > 0
     assert len(params) == 3
-    if isinstance(x0, float):
-        x0 = np.array([x0, ], dtype=np.float64)
 
     def vola_ret_features(x_view: np.ndarray) -> np.ndarray:
         return np.square(x_view[-1, :])
@@ -54,12 +53,10 @@ def path(x0: Union[numbers.Real, np.ndarray], t: int, params: Sequence):
     def vola_sigma_features(sigma_view: np.ndarray) -> np.ndarray:
         return sigma_view[-1, :]
 
-    x0 = x0.reshape((1, -1)).astype(np.float64)
-    n = x0.size
-    ret = np.random.randn(t, n)
+    ret = np.random.randn(t, no_paths)
     gamma_0, gamma_1, lambda_1 = params
-    gamma_0 = np.repeat(gamma_0, n).reshape((1, n))
-    sigma_squared = np.zeros((t, n))
+    gamma_0 = np.repeat(gamma_0, no_paths).reshape((1, no_paths))
+    sigma_squared = np.zeros((t, no_paths))
     sigma_squared[0, :] = gamma_0
     ret[0, :] = 0.0
 
@@ -69,14 +66,39 @@ def path(x0: Union[numbers.Real, np.ndarray], t: int, params: Sequence):
                               np.dot(lambda_1, vola_sigma_features(sigma_squared[0:s, :]))
         ret[s, :] = ret[s, :] * np.sqrt(sigma_squared[s, :])
 
-    return np.cumprod(np.exp(ret), axis=0)*x0, np.sqrt(sigma_squared)
+    return ret, np.sqrt(sigma_squared)
+
+
+def noise_from_path(ret: np.ndarray, params: Sequence) -> np.ndarray:
+    ret = ret.reshape((-1, 1))
+    gamma_0, gamma_1, lambda_1 = params
+    sigma_squared = np.repeat(gamma_0, len(ret)).reshape(ret.shape)
+    sigma_squared[0, 0] = gamma_0
+    noise = np.zeros(ret.shape)
+
+    def vola_ret_features(x_view: np.ndarray) -> np.ndarray:
+        return np.square(x_view[-1, :])
+
+    def vola_sigma_features(sigma_view: np.ndarray) -> np.ndarray:
+        return sigma_view[-1, :]
+
+    noise[0, :] = ret[0, :] / np.sqrt(sigma_squared[0, :])
+    for s in range(1, len(ret)):
+        sigma_squared[s, :] = gamma_0 + \
+                              np.dot(gamma_1, vola_ret_features(ret[0:s, :])) + \
+                              np.dot(lambda_1, vola_sigma_features(sigma_squared[0:s, :]))
+        noise[s, :] = ret[s, :] / np.sqrt(sigma_squared[s, :])
+    return noise
 
 
 def plot_path():
-    X, sigma = path(5.0, 500, [0.001, 0.2, 0.25])
+    n = 500
+    ret, sigma = path(1, n, [0.001, 0.2, 0.25])
+    x = np.cumprod(np.exp(ret), axis=0) * np.repeat(5.0, n).reshape((1, -1))
+
     fig, ax = plt.subplots(2, 1, figsize=(9, 6))
     ax[0].grid(True)
-    ax[0].plot(X, color='b', alpha=0.7)
+    ax[0].plot(x, color='b', alpha=0.7)
     ax[0].set_ylabel('Y')
     ax[1].grid(True)
     ax[1].plot(sigma, color='r', alpha=0.7)
@@ -88,17 +110,27 @@ def plot_path():
 
 def plot_hist():
     params = [0.001, 0.2, 0.25]
-    x, sigma = path(5.0, 500, params)
+    x, sigma = path(5, 500, params)
     print(x)
 
 
 def test_mle():
     params = [0.001, 0.2, 0.25]
-    x, sigma = path(5.0, 5000, params)
-    ret = np.log(x[1:, :]) - np.log(x[:-1, :])
+    ret, sigma = path(1, 5000, params)
 
     result = mle(ret, [0.01, 0.01, 0.01])
     print(result)
+
+    noise = noise_from_path(ret, params)
+
+    df = pd.DataFrame(noise)
+    print(df.describe())
+
+    fig, ax = plt.subplots(1, 1, figsize=(9, 1))
+    ax.grid(True)
+    ax.plot(noise, color='b', alpha=0.5)
+    fig.savefig('noise.png')
+    plt.close('all')
 
 
 def gold_and_platinum():

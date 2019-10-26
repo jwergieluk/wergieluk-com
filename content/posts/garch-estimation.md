@@ -90,7 +90,7 @@ A sample path of a GARCH(1,1) process with $$(\gamma_0, \gamma_1, \lambda_1) = (
 
 {{< figure src="/garch/garch_1_1-simulation.png" >}}
 
-Note that the $$\sigma$$ process cannot go below the level of $$\sqrt{\gamma_0 (1 + \lambda_1)} \approx 0.0353$$
+Note that the $$\sigma$$ process for $$t>0$$ cannot go below the level of $$\sqrt{\gamma_0 (1 + \lambda_1)} \approx 0.0353$$
 
 ## Maximum-likelihood estimation
 
