@@ -37,7 +37,7 @@ def mle(ret: np.ndarray, start_params: Sequence):
 
     start_params = np.array(start_params)
     result = scipy.optimize.minimize(error_fuc, start_params, method='L-BFGS-B',
-                                     bounds=[(1e-8, None), (1e-8, None), (1e-8, None)],
+                                     bounds=[(1e-8, 1.0), (1e-8, 1.0), (1e-8, 1.0)],
                                      options={'maxiter': 250, 'disp': False})
     return result
 
@@ -103,29 +103,52 @@ def plot_hist():
     n, t = 5000, 100
     ret, sigma = path(n, t, params)
     x = np.cumprod(np.exp(ret), axis=0) * np.repeat(5.0, n).reshape((1, -1))
-
-    fig, ax = plt.subplots(1, 1, figsize=(9, 6))
-    plt.hist(x[25, :], bins=150, density=True, color='b', alpha=0.7)
-    fig.tight_layout()
-    fig.savefig('garch-histogram.png')
-    plt.close('all')
     print(np.mean(x[25, :]), np.std(x[25, :]))
+    save_hist(x[25, :], 'garch-histogram.png')
+
+
+def save_hist(a: np.ndarray, file_name: str, title=None):
+    fig, ax = plt.subplots(1, 1, figsize=(9, 6))
+    plt.hist(a, bins=100, density=True, color='b', alpha=0.7)
+    if title is not None:
+        plt.title(title)
+    fig.tight_layout()
+    fig.savefig(file_name)
+    plt.close('all')
 
 
 def test_mle_moments():
     """ Test MLE and show that the moments are recovered quite accurately """
 
-    t = 5000
+    t = 10000
     params = [0.001, 0.2, 0.25]
-    ret, sigma = path(1, t, params)
-    result = mle(ret, [0.01, 0.01, 0.01])
-    print(result)
 
-    estimated_params = result.x
-    n, t = 5000, 100
-    ret_sim, _ = path(n, t, estimated_params)
-    x = np.cumprod(np.exp(ret_sim), axis=0) * np.repeat(5.0, n).reshape((1, -1))
-    print(np.mean(x[25, :]), np.std(x[25, :]))
+    estimated_params = []
+    means, stdevs = [], []
+
+    for _ in range(2500):
+        ret, sigma = path(1, t, params)
+        result = mle(ret, [0.01, 0.01, 0.01])
+
+        estimated_params.append(result.x)
+        n, t = 5000, 100
+        ret_sim, _ = path(n, t, estimated_params[-1])
+        x = np.cumprod(np.exp(ret_sim), axis=0) * np.repeat(5.0, n).reshape((1, -1))
+        means.append(np.mean(x[25, :]))
+        stdevs.append(np.std(x[25, :]))
+        print(np.mean(x[25, :]), np.std(x[25, :]), result.x[0], result.x[1], result.x[2])
+
+    estimated_params = np.vstack(estimated_params)
+    means = np.array(means)
+    stdevs = np.array(stdevs)
+
+    save_hist(means, 'hist-mean.png', 'Mean')
+    save_hist(stdevs, 'hist-stdev.png', 'Stdev')
+    save_hist(estimated_params[:, 0], 'hist-gamma0.png', 'gamma0')
+    save_hist(estimated_params[:, 1], 'hist-gamma1.png', 'gamma1')
+    save_hist(estimated_params[:, 2], 'hist-lambda1.png', 'lambda1')
+
+    np.savez_compressed('mc-test-data.npz', means=means, stdevs=stdevs, estimated_params=estimated_params)
 
 
 def test_extract_noise():
