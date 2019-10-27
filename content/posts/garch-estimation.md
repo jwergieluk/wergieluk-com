@@ -6,11 +6,7 @@ katex: true
 markup: "mmark"
 ---
 
-Intended audience: me.
 
-Noises:
-* Normal
-* (Optional) Student-t
 
 # Introduction
 
@@ -34,11 +30,11 @@ $$
 
 Ingredients: 
 
-* $$Z$$ is a noise process adapted to $$\mathcal F$$, such that $$Z_t$$ have all expectation zero, a unit variance, and density $$\eta_Z.$$
+* $$Z$$ is a noise process adapted to $$\mathcal F$$, such that $$Z_t$$ are i.i.d. copies of a random variable with density $$\eta_Z.$$
 * $$\phi_i$$ are real numbers and, to avoid trouble, $$\gamma_i, \lambda_i \geq 0$$, and $$g_i, h_i$$ are non-negative valued.
 * $$f_i, g_i, h_i$$ are deterministic functions of the process path.
 * The process $$\mu$$ is often called the drift, whereas $$\sigma$$ is called the volatility of $$X$$. Because $$\sigma$$ is a stochastic process, the autoregressive process as defined above belongs to a large family of stochastic volatility models.
-* In case of an i.i.d. sequence $$Z$$, we have $$\mathbb E [X_t | \mathcal F_{t-1}] = \mu_t$$ and $$\operatorname{Var} [X_t | \mathcal F_{t-1}] = \sigma^2_t.$$ 
+* In case of an i.i.d. sequence $$Z$$ (such that mean and variance of $$Z_t$$ exist), we have $$\mathbb E [X_t | \mathcal F_{t-1}] = \mu_t$$ and $$\operatorname{Var} [X_t | \mathcal F_{t-1}] = \sigma^2_t.$$
 
 The backward shift operator $$B^j$$, for $$j\geq 0$$, produces a delayed version of an argument process, i.e. $$B^j (X)_t = X_{t-j}$$, if $$t-j \geq 0$$, and $$B^j (X)_t = 0$$, if $$t-j \lt 0$$. For example
 
@@ -94,7 +90,7 @@ Note that the $$\sigma$$ process for $$t>0$$ cannot go below the level of $$\sqr
 
 ## Maximum-likelihood estimation
 
-If the $$Z$$ noise is a sequence of i.i.d. random variables then the log-likelihood function of the process path is given by
+Log-likelihood function of the process path is given by
 
 $$
 \ln L(\theta; X) = \sum_{s=1}^t \ln \eta_Z \left( \frac{X_t - \mu_t(\theta)}{\sigma_t(\theta)} \right) - \ln \sigma_t(\theta),
@@ -104,9 +100,21 @@ where $$\theta = (\phi_i, \gamma_i, \lambda_i)$$, and $$\eta_Z$$ is the density 
 
 TODO: Derivation of the conditional likelihood product decomposition.
 
+#### Monte-Carlo simulation
+
+* 2500 repeated simulations and estimations. 
+* Used GARCH(1,1) with parameters (0.001, 0.2, 0.25) and Gaussian noise.
+* Search ranges for parameters in the optimization procedure restricted to [1e-8, 1].
 
 
-* Noises: Gaussian, Student-t
+{{< figure src="/garch/hist-params.png" >}}
+
+{{< figure src="/garch/hist-mean-stdev.png" >}}
+
+# Code
+
+* python implementation is here: `garch.py`.
+* Important functions: `path()`, `mle()`, and `noise_from_path()`.
 
 # Summary
 
@@ -117,16 +125,15 @@ Pros:
 Cons:
 * Transition densities over many steps not known explicitly, nor there is a cheap method to approximate them. In fact, the only available method to obtain these densities is Monte-Carlo simulation of the process and density estimation.
 
+# Notes
 
-# Links
+* Driving noise doesn't have to be normalized to mean 0 and variance 1 as long as we consistently use i.i.d. copies of the same random variable. 
+* The optimization process (scipy) spawns multiple python processes and seems to run stuff in parallel. Kind of surprising. Maybe worth investigating. 
+* Stupid idea: Cauchy driving noise.
+* Can we easily calculate the gradient of the likelihood function?
+* Idea: Tensorflow implementation with automatic differentiation.
+
+# References and Links
 
 * https://katex.org/docs/supported.html
-* Quantitative Risk Management. Embrechts, Frei, McNeal, 2015.
-* Hill, J. B. (2015). Robust estimation and inference for heavy tailed GARCH. Bernoulli, 21(3), 1629–1669. Retrieved from http://projecteuclid.org/euclid.bj/1432732032
-* Bauwens, L. (2006). Multivariate GARCH models: a survey. Retrieved from http://onlinelibrary.wiley.com/doi/10.1002/jae.842/pdf
-* Silvennoinen, A., & Teräsvirta, T. (2009). Multivariate GARCH models. Handbook of Financial Time Series. Retrieved from http://link.springer.com/chapter/10.1007/978-3-540-71297-8_9
-* Aït-Sahalia, Y., & Kimmel, R. (2007). Maximum likelihood estimation of stochastic volatility models. Journal of Financial Economics, 83(2), 413–452. https://doi.org/10.1016/j.jfineco.2005.10.006
-
-
-
-
+* McNeil, Alexander J., Rüdiger Frey, and Paul Embrechts. Quantitative risk management. Princeton university press, 2015.
