@@ -117,7 +117,7 @@ def save_hist(a: np.ndarray, file_name: str, title=None):
     plt.close('all')
 
 
-def test_mle_moments():
+def test_mle_moments1():
     """ Test MLE and show that the moments are recovered quite accurately """
 
     t = 10000
@@ -142,13 +142,46 @@ def test_mle_moments():
     means = np.array(means)
     stdevs = np.array(stdevs)
 
+    np.savez_compressed('mc-test-data.npz', means=means, stdevs=stdevs, estimated_params=estimated_params)
+
+
+def test_mle_moments2():
+    data = np.load('mc-test-data.npz')
+    means, stdevs, estimated_params = data['means'], data['stdevs'], data['estimated_params']
+
+    fig, ax = plt.subplots(1, 2, figsize=(9, 3))
+    ax[0].grid(True)
+    ax[0].hist(means, bins=100, density=True, color='b', alpha=0.7)
+    ax[0].set_title('mean')
+    ax[1].grid(True)
+    ax[1].hist(stdevs, bins=100, density=True, color='b', alpha=0.7)
+    ax[1].set_title('stdev')
+    fig.tight_layout()
+    fig.savefig('hist-mean-stdev.png')
+    plt.close('all')
+
+    fig, ax = plt.subplots(1, 3, figsize=(9, 3))
+    ax[0].grid(True)
+    ax[0].set_title('gamma0')
+    ax[0].hist(estimated_params[:, 0], bins=50, density=True, color='b', alpha=0.7)
+
+    ax[1].grid(True)
+    ax[1].set_title('gamma1')
+    ax[1].hist(estimated_params[:, 1], bins=50, density=True, color='b', alpha=0.7)
+
+    ax[2].grid(True)
+    ax[2].set_title('lambda1')
+    ax[2].hist(estimated_params[:, 2], bins=50, density=True, color='b', alpha=0.7)
+
+    fig.tight_layout()
+    fig.savefig('hist-params.png')
+    plt.close('all')
+
     save_hist(means, 'hist-mean.png', 'Mean')
     save_hist(stdevs, 'hist-stdev.png', 'Stdev')
     save_hist(estimated_params[:, 0], 'hist-gamma0.png', 'gamma0')
     save_hist(estimated_params[:, 1], 'hist-gamma1.png', 'gamma1')
     save_hist(estimated_params[:, 2], 'hist-lambda1.png', 'lambda1')
-
-    np.savez_compressed('mc-test-data.npz', means=means, stdevs=stdevs, estimated_params=estimated_params)
 
 
 def test_extract_noise():
@@ -175,8 +208,8 @@ def gold_and_platinum():
 
 if __name__ == '__main__':
     plt.style.use('ggplot')
-    plot_hist()
-    test_mle_moments()
+    # plot_hist()
+    test_mle_moments2()
 
 
 

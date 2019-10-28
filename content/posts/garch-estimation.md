@@ -105,7 +105,7 @@ TODO: Derivation of the conditional likelihood product decomposition.
 * 2500 repeated simulations and estimations. 
 * Used GARCH(1,1) with parameters (0.001, 0.2, 0.25) and Gaussian noise.
 * Search ranges for parameters in the optimization procedure restricted to [1e-8, 1].
-
+* True mean and stdev: 5.097523805755682 1.0836763241846787
 
 {{< figure src="/garch/hist-params.png" >}}
 
@@ -132,6 +132,7 @@ Cons:
 * Stupid idea: Cauchy driving noise.
 * Can we easily calculate the gradient of the likelihood function?
 * Idea: Tensorflow implementation with automatic differentiation.
+* Stability: Make sure we cannot get crazy parameter values out of mle estimation.
 
 # References and Links
 
