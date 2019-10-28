@@ -6,7 +6,9 @@ katex: true
 markup: "mmark"
 ---
 
+Question: How to make it fun to read?
 
+In this post we are going to introduce a class of discrete stochastic volatility models and go over some special case including GARCH and ARCH models. We show some process simulation and parameter estimation results. The Python code used for these experiments is referenced at the end of the post. 
 
 # Introduction
 
@@ -15,7 +17,7 @@ $$\global\def\Xpred#1{(X_s)_{s\lt #1}}$$
 Let $$\left( \Omega, \mathcal A, \mathcal F, P \right)$$ be a stochastic basis with a complete $$\sigma$$-algebra $$\mathcal A$$ of measurable subsets of $$\Omega$$, a probability measure $$P$$, and a filtration $$\mathcal F = (\mathcal F_t)_{t=0, 1, \ldots}.$$ 
 
 * Non-negative integers $$0, 1, \ldots $$ are used to index time instants.
-* For a vector $$Y = (Y_0, Y_1, \ldots, Y_{n-1})$$, set $$Y_{-1} = Y_{n-1}$$, $$Y_{-2} = Y_{n-2}$$, and so on.
+* For a vector $$Y = (Y_0, Y_1, \ldots, Y_{n-1})$$, we borrow from Python the convention $$Y_{-1} = Y_{n-1}$$, $$Y_{-2} = Y_{n-2}$$, and so on.
 * To get the first $$t$$ elements of a sequence $$X$$ we use the notation $$\Xpred{t} = (X_0,\ldots,X_{t-1}).$$
 
 Let's define a discrete stochastic volatility model as follows:
@@ -79,10 +81,10 @@ $$
 
 ## Simulation
 
-Discrete stochastic volatility models are typically used to model the log-returns of an observed time-series. Therefore in order to simulate a path of the original time-series we need to simulate log-returns and calculate 
+Discrete stochastic volatility models are typically used to model the log-returns of an observed time-series. Therefore in order to simulate a path of the original time-series we need to simulate it's log-returns and calculate 
 $$Y = Y_0 \prod_{s=0}^t \exp(X_s).$$
 
-A sample path of a GARCH(1,1) process driven by Gaussian noise with parameters $$(\gamma_0, \gamma_1, \lambda_1) = (0.001, 0.2, 0.25).$$
+A sample path of a GARCH(1,1) process driven by Gaussian noise with parameters $$(\gamma_0, \gamma_1, \lambda_1) = (0.001, 0.2, 0.25)$$:
 
 {{< figure src="/garch/garch_1_1-simulation.png" >}}
 
