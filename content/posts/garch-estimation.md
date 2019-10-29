@@ -6,21 +6,23 @@ katex: true
 markup: "mmark"
 ---
 
-Question: How to make it fun to read?
-
-In this post we are going to introduce a class of discrete stochastic volatility models and go over some special case including GARCH and ARCH models. We show some process simulation and parameter estimation results. The Python code used for these experiments is referenced at the end of the post. 
+In this post I introduce a class of discrete stochastic volatility models using a nice notation and go over some special cases including GARCH and ARCH models. I show how to simulate these processes and how parameter estimation performs. The Python code used for these experiments is referenced at the end of the post. 
 
 # Introduction
+
+I would like to progress on a firm mathematical ground -- if just for the sake a good feeling. If you are not that familiar with the probability theory, do you self a favor and just read over the mathematical details, or maybe skip right ahead to the "special cases" section and pick the details from the "Setup" section only of they seem relevant to you.
+
+#### Setup
 
 $$\global\def\Xpred#1{(X_s)_{s\lt #1}}$$
 
 Let $$\left( \Omega, \mathcal A, \mathcal F, P \right)$$ be a stochastic basis with a complete $$\sigma$$-algebra $$\mathcal A$$ of measurable subsets of $$\Omega$$, a probability measure $$P$$, and a filtration $$\mathcal F = (\mathcal F_t)_{t=0, 1, \ldots}.$$ 
 
-* Non-negative integers $$0, 1, \ldots $$ are used to index time instants.
+* The time instance are indexed using non-negative integers $$0, 1, \ldots$$.
+* To get the first $$t$$ elements of a sequence $$X = (X_0, X_1, \ldots)$$ we use the notation $$\Xpred{t} = (X_0,\ldots,X_{t-1}).$$
 * For a vector $$Y = (Y_0, Y_1, \ldots, Y_{n-1})$$, we borrow from Python the convention $$Y_{-1} = Y_{n-1}$$, $$Y_{-2} = Y_{n-2}$$, and so on.
-* To get the first $$t$$ elements of a sequence $$X$$ we use the notation $$\Xpred{t} = (X_0,\ldots,X_{t-1}).$$
 
-Let's define a discrete stochastic volatility model as follows:
+Let's define a _discrete stochastic volatility_ model as follows:
 
 $$
 \begin{aligned}
@@ -33,7 +35,7 @@ $$
 Ingredients: 
 
 * $$Z$$ is a noise process adapted to $$\mathcal F$$, such that $$Z_t$$ are i.i.d. copies of a random variable with density $$\eta_Z.$$
-* $$\phi_i$$ are real numbers and, to avoid trouble, $$\gamma_i, \lambda_i \geq 0$$, and $$g_i, h_i$$ are non-negative valued.
+* $$\phi_i$$ are real numbers and, to avoid trouble, I assume that $$\gamma_i, \lambda_i \geq 0$$ and that $$g_i, h_i$$ are non-negative valued.
 * $$f_i, g_i, h_i$$ are deterministic functions of the process path.
 * The process $$\mu$$ is often called the drift, whereas $$\sigma$$ is called the volatility of $$X$$. Because $$\sigma$$ is a stochastic process, the autoregressive process as defined above belongs to a large family of stochastic volatility models.
 * In case of an i.i.d. sequence $$Z$$ (such that mean and variance of $$Z_t$$ exist), we have $$\mathbb E [X_t | \mathcal F_{t-1}] = \mu_t$$ and $$\operatorname{Var} [X_t | \mathcal F_{t-1}] = \sigma^2_t.$$
@@ -92,15 +94,17 @@ Note that the $$\sigma$$ process for $$t>0$$ cannot go below the level of $$\sqr
 
 ## Maximum-likelihood estimation
 
-Log-likelihood function of the process path is given by
+Log-likelihood function of the process path $$x$$ is given by
 
 $$
-\ln L(\theta; X) = \sum_{s=1}^t \ln \eta_Z \left( \frac{X_t - \mu_t(\theta)}{\sigma_t(\theta)} \right) - \ln \sigma_t(\theta),
+\ln L(\theta; x) = \sum_{s=1}^t \ln \eta_Z \left( \frac{x_t - \mu_t(\theta)}{\sigma_t(\theta)} \right) - \ln \sigma_t(\theta),
 $$
 
-where $$\theta = (\phi_i, \gamma_i, \lambda_i)$$, and $$\eta_Z$$ is the density of $$Z$$.
+where $$\theta = (\phi_i, \gamma_i, \lambda_i)$$, and $$\eta_Z$$ is the density of $$Z$$. Minimizing the above log-likelihood function yields the maximum-likelihood estimate $$\hat\theta$$ for $$\theta$$:
 
-TODO: Derivation of the conditional likelihood product decomposition.
+$$
+\hat\theta \operatorname{argmin}_{\theta} \ln L(\theta; x).
+$$
 
 #### Monte-Carlo simulation
 
