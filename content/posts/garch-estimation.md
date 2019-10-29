@@ -94,7 +94,7 @@ Note that the $$\sigma$$ process for $$t>0$$ cannot go below the level of $$\sqr
 
 ## Maximum-likelihood estimation
 
-Log-likelihood function of the process path $$x$$ is given by
+Maximum-likelihood (ML) paramters estimation is the method of choice for all the discussed models since the transition density, i.e. the density of $$X_t$$ given the information $$\mathcal F_{t-1}$$ is known explicitly. Log-likelihood function of the process path $$x$$ is thus given by
 
 $$
 \ln L(\theta; x) = \sum_{s=1}^t \ln \eta_Z \left( \frac{x_t - \mu_t(\theta)}{\sigma_t(\theta)} \right) - \ln \sigma_t(\theta),
@@ -103,7 +103,7 @@ $$
 where $$\theta = (\phi_i, \gamma_i, \lambda_i)$$, and $$\eta_Z$$ is the density of $$Z$$. Minimizing the above log-likelihood function yields the maximum-likelihood estimate $$\hat\theta$$ for $$\theta$$:
 
 $$
-\hat\theta \operatorname{argmin}_{\theta} \ln L(\theta; x).
+\hat\theta = \operatorname{argmin}_{\theta} \ln L(\theta; x).
 $$
 
 #### Monte-Carlo simulation
@@ -111,7 +111,7 @@ $$
 * 2500 repeated simulations and estimations. 
 * Used GARCH(1,1) with parameters (0.001, 0.2, 0.25) and Gaussian noise.
 * Search ranges for parameters in the optimization procedure restricted to [1e-8, 1].
-* True mean and stdev: 5.097523805755682 1.0836763241846787
+* True mean and stdev: 5.098 1.084
 
 {{< figure src="/garch/hist-params.png" >}}
 
@@ -140,7 +140,18 @@ Cons:
 * Idea: Tensorflow implementation with automatic differentiation.
 * Stability: Make sure we cannot get crazy parameter values out of mle estimation.
 
+# Crazy idea: Using the Cauchy noise
+
+The driving noise $$Z$$ doesn't have to be normalized to mean 0 and variance 1 as long as we consistently use i.i.d. copies of the same random variable. In fact, we just need to make sure that the distribution of that prototypical random variable admits a density. If this is the case, both, process simulation and ML estimation work as described. 
+
+{{< figure src="/garch/garch-cauchy-simulation-0.0001-0.001-0.01.png" >}}
+
+{{< figure src="/garch/cauchy-hist-100.png" >}}
+{{< figure src="/garch/cauchy-hist-1000.png" >}}
+{{< figure src="/garch/cauchy-hist-10000.png" >}}
+
 # References and Links
 
 * https://katex.org/docs/supported.html
+* https://en.wikipedia.org/wiki/Cauchy_distribution
 * McNeil, Alexander J., Rüdiger Frey, and Paul Embrechts. Quantitative risk management. Princeton university press, 2015.
