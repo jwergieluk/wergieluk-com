@@ -110,19 +110,59 @@ $$
 
 #### Monte-Carlo simulation
 
-* 2500 repeated simulations and estimations. 
-* Used GARCH(1,1) with parameters (0.001, 0.2, 0.25) and Gaussian noise.
-* Search ranges for parameters in the optimization procedure restricted to [1e-8, 1].
-* True mean and stdev: 5.098 1.084
+In order to test the ML parameter estimation procedure, I perform the following Monte-Carlo experiment.
+
+* Simulate 2500 independent GARCH(1,1) process paths of length 5000 with parameters (0.001, 0.2, 0.25) and the Gaussian driving noise.
+* Feed each of these paths to the ML estimator and get the estimated parameters $$(\hat\theta_i)_{i=1,\ldots, 2500}$$.  
+    * The search ranges for parameters in this optimization procedure are restricted to [1e-8, 1].
+* Compare original $$\theta$$ with the estimated $$\hat\theta_i$$.
+* Simulate GARCH(1,1) with parameter vectors $$\hat\theta_i$$, calculate means and variances, and compare these to the "true" mean and stdev (5.098 and 1.084, respectively).
+
+As expected, the estimated parameter vector $$\hat\theta$$ is very inaccurate and often doesn't even come close to the true vector $$\theta$$. In particular, the estimated $$\gamma_1$$ and $$\lambda_1$$ are often set to zero.
 
 {{< figure src="/garch/hist-params.png" >}}
 
+On the other hand, the means and variances coming from the estimated $$\hat\theta$$ are much more accurate. This is a good thing, because we usually care more about recovering the characteristics of the unknown data generating process and not so much about the true parameter values of the model. 
+
 {{< figure src="/garch/hist-mean-stdev.png" >}}
 
-# Code
+# Crazy idea: The Cauchy driving noise
 
-* python implementation is here: `garch.py`.
-* Important functions: `path()`, `mle()`, and `noise_from_path()`.
+The noise process $$Z$$ doesn't have to be normalized to mean 0 and variance 1. In fact, we just need to make sure that the distribution of the random variable $$Z_t$$ admits a density. If this is the case, both, process simulation and ML estimation work as described.
+
+So how about replacing the Gaussian noise with a noise sampled from the Cauchy distribution? In many probability theory books, the Cauchy distribution is used a counterexample, because it has many "pathological" properties. For example, it has no mean and, consequently, no variance. ("No mean" means that the integral used to define the first moment diverges, i.e. has no finite value.)
+
+This is the theory which I learned few years ago. What I didn't know is how crazy samples from a Cauchy distribution look like. Just take a look at a sample path of the GARCH(1,1) process with the parameter vector $$(\gamma_0, \gamma_1, \lambda_1) = (0.0001, 0.001, 0.01)$$:
+
+{{< figure src="/garch/garch-cauchy-simulation-0.0001-0.001-0.01.png" >}}
+
+If we play around with the path generating function long enough, we may even generate a floating point overflow exception. The histogram function I mentioned before fails because of that. To see what is going on under the hood, let's generate some histograms using samples from the Cauchy distribution: 
+
+{{< figure src="/garch/cauchy-hist-100.png" >}}
+{{< figure src="/garch/cauchy-hist-1000.png" >}}
+{{< figure src="/garch/cauchy-hist-10000.png" >}}
+
+The Cauchy distribution has the quantile function
+
+$$
+Q(p) = \tan (\pi (p-0.5)).
+$$
+
+Evaluating $$Q(1-p)$$ for $$p=0.01, 0.001, 0.0001$$ gives
+
+    Q(0.99) ~= 31.82
+    Q(0.999) ~= 318.31
+    Q(0.9999) ~= 3183.10
+
+This means that, for example, with probability of 0.0001 the sampled values are greater than 3183.10. For comparison, let's calculate the corresponding quantiles of the standard normal distribution:
+
+    > from scipy.stats import norm
+    > print(norm.ppf(0.99))
+    2.32
+    > print(norm.ppf(0.999))
+    3.09
+    > print(norm.ppf(0.9999))
+    3.71
 
 # Summary
 
@@ -133,27 +173,8 @@ Pros:
 Cons:
 * Transition densities over many steps not known explicitly, nor there is a cheap method to approximate them. In fact, the only available method to obtain these densities is Monte-Carlo simulation of the process and density estimation.
 
-# Notes
-
-* Driving noise doesn't have to be normalized to mean 0 and variance 1 as long as we consistently use i.i.d. copies of the same random variable. 
-* The optimization process (scipy) spawns multiple python processes and seems to run stuff in parallel. Kind of surprising. Maybe worth investigating. 
-* Stupid idea: Cauchy driving noise.
-* Can we easily calculate the gradient of the likelihood function?
-* Idea: Tensorflow implementation with automatic differentiation.
-* Stability: Make sure we cannot get crazy parameter values out of mle estimation.
-
-# Crazy idea: Using the Cauchy noise
-
-The driving noise $$Z$$ doesn't have to be normalized to mean 0 and variance 1 as long as we consistently use i.i.d. copies of the same random variable. In fact, we just need to make sure that the distribution of that prototypical random variable admits a density. If this is the case, both, process simulation and ML estimation work as described. 
-
-{{< figure src="/garch/garch-cauchy-simulation-0.0001-0.001-0.01.png" >}}
-
-{{< figure src="/garch/cauchy-hist-100.png" >}}
-{{< figure src="/garch/cauchy-hist-1000.png" >}}
-{{< figure src="/garch/cauchy-hist-10000.png" >}}
-
 # References and Links
 
-* https://katex.org/docs/supported.html
+* The python module used to generate the plots shown in this post is here: [garch.py](./garch/garch.py).
 * https://en.wikipedia.org/wiki/Cauchy_distribution
-* McNeil, Alexander J., Rüdiger Frey, and Paul Embrechts. Quantitative risk management. Princeton university press, 2015.
+* McNeil, Alexander J., Rüdiger Frey, and Paul Embrechts. Quantitative risk management. Princeton university press, 2015. (This book contains one short chapter summarizing classical univariate time-series models.)

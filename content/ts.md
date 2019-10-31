@@ -13,6 +13,10 @@ markup: "mmark"
 
 https://www.quandl.com/data/LBMA/GOLD-Gold-Price-London-Fixing
 
+# Ideas 
+
+* GARCH estimation: The optimization process (scipy) spawns multiple python processes and seems to run stuff in parallel. Kind of surprising. Maybe worth investigating. 
+
 # Definitions
 
 * Strong and weak stationarity.
