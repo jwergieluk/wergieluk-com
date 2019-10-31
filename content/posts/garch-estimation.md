@@ -36,9 +36,13 @@ Ingredients:
 
 * $$Z$$ is a noise process adapted to $$\mathcal F$$, such that $$Z_t$$ are i.i.d. copies of a random variable with density $$\eta_Z.$$
 * $$\phi_i$$ are real numbers and, to avoid trouble, I assume that $$\gamma_i, \lambda_i \geq 0$$ and that $$g_i, h_i$$ are non-negative valued.
-* $$f_i, g_i, h_i$$ are deterministic functions of the process path.
-* The process $$\mu$$ is often called the drift, whereas $$\sigma$$ is called the volatility of $$X$$. Because $$\sigma$$ is a stochastic process, the autoregressive process as defined above belongs to a large family of stochastic volatility models.
-* In case of an i.i.d. sequence $$Z$$ (such that mean and variance of $$Z_t$$ exist), we have $$\mathbb E [X_t | \mathcal F_{t-1}] = \mu_t$$ and $$\operatorname{Var} [X_t | \mathcal F_{t-1}] = \sigma^2_t.$$
+* $$f_i, g_i$$, and $$h_i$$ are deterministic functions of the process.
+* The process $$\mu$$ is often called the _drift_, whereas $$\sigma$$ is called the _volatility_ of $$X$$. Because $$\sigma$$ is a stochastic process, the process $$X$$ as defined above belongs to a large family of stochastic volatility models.
+* For a noise process $$Z$$ such that mean and variance of every $$Z_t$$ exist, we have $$\mathbb E [X_t | \mathcal F_{t-1}] = \mu_t$$ and $$\operatorname{Var} [X_t | \mathcal F_{t-1}] = \sigma^2_t.$$
+
+## Special cases
+
+To formulate the specializations of the general DSV model the following notation comes in handy. 
 
 The backward shift operator $$B^j$$, for $$j\geq 0$$, produces a delayed version of an argument process, i.e. $$B^j (X)_t = X_{t-j}$$, if $$t-j \geq 0$$, and $$B^j (X)_t = 0$$, if $$t-j \lt 0$$. For example
 
@@ -47,8 +51,6 @@ B^1(X) = B(X) = (0, X_1, X_2, \ldots).
 $$
 
 For convenience we set $$B^1 = B$$ and $$B^j_t (X) = B^j(X)_t = X_{t-j}.$$
-
-## Special cases
 
 For all the special cases in the list below, we assume that the functions $$f_i, g_i$$, and $$h_i$$ pick a single element from the history of the argument process, i.e. $$f_i = h_i = B^i_t$$, and $$g_i(\Xpred{t}) = B^j_t(X^2).$$
 
