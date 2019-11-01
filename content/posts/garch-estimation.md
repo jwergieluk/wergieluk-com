@@ -110,7 +110,7 @@ $$
 
 In order to test the ML parameter estimation procedure, I perform the following Monte-Carlo experiment.
 
-* Simulate 2500 independent GARCH(1,1) process paths of length 5000 with parameters (0.001, 0.2, 0.25). I used the Gaussian noise, i.e. $$Z_t \tilde\mathcal N(0,1).$$
+* Simulate 2500 independent GARCH(1,1) process paths of length 5000 with parameters (0.001, 0.2, 0.25). I used the Gaussian noise, i.e. $$Z_t \sim\mathcal N(0,1).$$
 * Feed each of these paths to the ML estimator and get the estimated parameter vectors $$(\hat\theta_i)_{i=1,\ldots, 2500}$$.  
     * The search ranges for parameters in this optimization procedure are restricted to [1e-8, 1].
 * Compare original $$\theta$$ with the estimated $$\hat\theta_i$$.
