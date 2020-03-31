@@ -4,7 +4,7 @@ title = "Julian Wergieluk"
 
 copyright = ""
 
-theme = "minimo"
+theme = "engimo"
 
 disqusShortname = ""
 googleAnalytics = "UA-26503219-1"
@@ -44,6 +44,7 @@ dateFormat = "2006, Jan 02"
 listDateFormat = "2006, Jan 02"
 archiveDateFormat = "Jan 02"
 hideEntryNavigation = ["page"] # boolean / array of sections
+hideEntryMeta = ["page"] # boolean / array of sections
 showReadingTime = true
 showLastmod = true
 taxonomyCloudShuffle = true
