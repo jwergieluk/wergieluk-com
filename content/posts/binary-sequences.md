@@ -147,6 +147,20 @@ zero of the above expectations can also occurr in case the events are independen
 but the true event probabilty $$p$$ differs significantly from our assumptions.
 This can easily be tested as described above.
 
+### Meixner dependency score
+
+In order to arrive at a single number (a score) that quantifies the degree of serial dependence 
+in the sense developed above, we can define the *Meixner dependency score (MDS)* as a mean
+of expectation estimates for the first $$k$$ Meixner polynomials evalualted at a sample of 
+waiting times $$x = (x_1,..,x_m)$$: 
+
+$$D^k_{\text{meixner}}(x) = \frac{1}{k} \sum_{i=1}^{k} |\bar{M}_i(x)|.$$ 
+
+The MC experiment with the i.i.d. Bernoulli model yields an MDS of $$0.08$$, whereas 
+the our second model with a simple dependence structure has an MDS of $$0.17$$.
+
+Remark that the histograms often overlap, which makes the results unconclusive. 
+
 ## Monte-Carlo study
 
 To test whether the procedure divesed above has a change to work in practive, 
@@ -169,7 +183,7 @@ as a sanity check and to test whether our implementation of the procedure is cor
 For the following experiment we set $$p_0 = 0.05$$ and simulate 5000 samples from
 $$X = (X_1,.., X_1000). 
 
-{{< figure src="/binary_sequences/j_cc_hist_1.0.png" >}}
+{{< figure src="/binary_sequences/j_cc_hist_0.05.png" >}}
 
 Let's introduce a model with a simple form of serial dependence. 
 For that we select probabilities $$0 < p_0 < p_1 < 1$$ and set the distributions
@@ -192,30 +206,22 @@ $$p_1 < p_0 < p_2$$.
 We dedicate a special section at the end of this blog post to the derivation of the
 probabilities $$p_1$$ and $$p_2$$ given $$p_0$$.
 
-Let's set $$p_1 = 0.0419$$ and $$p_2 = 5 p_1$$. An MC evaluation of the Meixner 
-polynomials leads to the folling histogram for the expectations: 
+Let's test the dependency scoring algorithm for the following values $$p_1$$ and $$p_2$$.
+An MC evaluation of the Meixner polynomials leads to the following Meixner dependency scores: 
 
+| p1  | p2   | MDS |
+| --- | ---- | --- |
+| 0.5 | 0.5  | 0.083 |
+| 0.4 | 0.24 | 0.194 |
+| 0.3 | 0.43 | 0.382 |
+| 0.2 | 0.62 | 0.583 |
 
 Again, 5000 simulations of sample with length 1000 yield the following histograms for 
 the expectations. 
 
-{{< figure src="/binary_sequences/j_cc_hist_5.0.png" >}}
+{{< figure src="/binary_sequences/j_cc_hist_0.02.png" >}}
 
-As we can see the histograms shift slightly to the left. 
-
-### Meixner dependency score
-
-In order to arrive at a single number (a score) that quantifies the degree of serial dependence 
-in the sense developed above, we can define the *Meixner dependency score (MDS)* as a mean
-of expectation estimates for the first $$k$$ Meixner polynomials evalualted at a sample of 
-waiting times $$x = (x_1,..,x_m)$$: 
-
-$$D^k_{\text{meixner}}(x) = \frac{1}{k} \sum_{i=1}^{k} |\bar{M}_i(x)|.$$ 
-
-The MC experiment with the i.i.d. Bernoulli model yields an MDS of $$0.08$$, whereas 
-the our second model with a simple dependence structure has an MDS of $$0.17$$.
-
-Remark that the histograms often overlap, which makes the results unconclusive. 
+As we can see the histograms are shifted slightly to the left. 
 
 ### Closing remarks
 
@@ -223,8 +229,32 @@ The method cannot pick up very subtle dependence patterns, especially if the sam
 
 What have we learned from this?
 
-### Derivation of $$p_1$$ and $$p_2$$ using Markov processes
+### Derivation of $$p_1$$ and $$p_2$$ using Markov chains
 
+For a given $$0 < p_1 < p_0 < 1$$, we are looking for $$p_2\in (0, 1)$$, such
+that the random binary sequence defined above satisfies $$P(X_i = 1) = p_1$$.
+This problem doesn't have a solution is we require that $$P(X_i = 1) = p_1$$
+holds for all $$i>0$$. Instead, let's require that this equation is satisfied
+approximately for all moderately large $$i$$, say $$i>20$$a (This requirement
+could be replaced with a exact requirement on the asymptotic distribution, i.e.
+$$\lim_{i\to\infty} P(X_i = 1) = p_1$$.
+
+State space with four states: $$(0,0), (0,1), (1,0), (1,1)$$.
+
+Transition probability matrix:
+$$
+\left(\begin{matrix}
+  1-p_1 & p_1 & 0 & 0 \\
+  0 & 0 & 1-p_2 & p_2 \\
+  1-p_1 & p_1 & 0 & 0 \\
+  0 & 0 & 1-p_2 & p_2 
+\end{matrix}\right)
+$$
+
+Initial distribution is $$\lambda = (1-p1, p1, 0, 0)$$.
+
+An engineers solution: Given $$p_0$$ and $$p_1$$ we calculate $$p_2$$ using an
+optimization algorithm.
 
 
 ## Examples and use cases
