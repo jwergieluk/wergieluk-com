@@ -5,10 +5,9 @@ plt.style.use('ggplot')
 
 def geom_pmf_plot():
     p = 0.1
-    pmf = p * numpy.power(1.0 - p, numpy.arange(0.0, 21, 1.0))
-    plt.bar(range(len(pmf)), pmf)
+    pmf = p * numpy.power(1.0 - p, numpy.arange(1.0, 75.0, 1.0))
+    plt.bar(range(1, len(pmf) + 1), pmf)
     plt.savefig('geom_pmf.png', dpi=150)
-
 
 if __name__ == '__main__':
     geom_pmf_plot()
