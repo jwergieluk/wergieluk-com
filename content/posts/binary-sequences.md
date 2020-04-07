@@ -120,19 +120,61 @@ $$ M_{j+1}(x) = \frac{ (1-p)(2j+1) + p(j-x+1)}{(j+1)\sqrt{1-p}} M_j(x) - \frac{j
 with $$M_1(x) = 1$$ and $$M_{-1}(x) = 0$$. This relation is used to calculate 
 the sequence $$M$$.
 
+In the companion python source code [^1], the function `meixner_poly_eval` is used
+to evaluate Meixner polynomials up to a given degree on a given set of points.
+I used this function to plot the graphs of these polynomials up to degree 50.
+
 {{< figure src="/binary_sequences/meixner_polynomials.png" >}}
 
 As mentioned above, every polynomial $$M_k(x)$$ in $$M$$ satisfies the equation
-$$\mathbb E M_k(Y) = 0$$ for a geometric random variable $$Y$$. This relation can
+
+$$\mathbb E M_k(Y) = 0$$ 
+
+for a geometric random variable $$Y$$. This relation can
 be used to test whether a given sample of waiting times belongs to a geometric
-distribution.  We are going to calculate the empirical expectation and use that
+distribution.  We are going to estimate the expectation and use that
 as a score: Values close to zero can be interpreted as evidence speaking for
-geometric distribution.  If the values are far from zero, this is a sign that
+geometric distribution. If the values are far from zero, this is a sign that
 we need to revisit our assumptions and possibly discard the i.i.d. hypothesis
-about the original event flag sequence.
+about the original event flag sequence. Note that significant deviations from 
+zero of the above expectations can also occurr in case the events are independend
+but the true event probabilty $$p$$ differs significantly from our assumptions.
+This can easily be tested as described above.
+
+## Monte-Carlo study
+
+To test whether the procedure divesed above has a change to work in practive, 
+I am going to test it using synthetically generated data. This type of testing
+procedure is commonly known as Monte-Carlo (MC) study. Obviously it doesn't 
+replace tests with real-world data, but can help evaluate a procedure under
+controlled conditions. 
+
+I am going to perform the following experiment:
+
+1. Generate a binary sequence using a model with known serial dependence structure
+2. Estimate the expectations $$\mathbb E M_k(X)$$ for $$k=1,...,10$$.
+3. Repeat the points 1 and 2 over a large number of independent trials and
+   visualize the aggregated results. 
+
+Let's start with a simple case of simulating an i.i.d. sequence of Bernoulli
+random variables. This can be used as a sanity check and to test whether our
+implementation of the procedure is correct.
+
+{{< figure src="/binary_sequences/j_cc_hist_1.0.png" >}}
+
+Let's introduce a model with a simple form of serial dependence. 
+For that we select probabilities $$0 < p_0 < p_1 < 1$$ and set the distributions
+of random variables in the sequence $$X = (X_0, X_1, X_2, ...)$$ as follows.
+Let $$X_0$$ be Bernoulli with success probablity $$p_0$$. The distributions
+of $$X_i$$ for $$i>0$$ are conditional on $$X_{i-1}$$:
+
+$$\mathbb P(X_i = 1 | X_{i-1} = 0) = p_0, \text{ and }, \mathbb P(X_i = 1 | X_{i-1} = 1) = p_1.$$
 
 
-## Examples
+
+
+
+## Examples and use cases
 
 * VaR violations. 
 * Random number generators usually produce binary sequences that are
@@ -141,14 +183,9 @@ about the original event flag sequence.
   Example: Die hard test suite.
 * Kaggle competitions or data sets?
 
-## Use cases
-
-* Value at Risk testing. 
-
 ## Ideas
 
 * Train a Markov process and look at it's transition probability matrix.
-
 
 ## References
 
@@ -163,5 +200,7 @@ about the original event flag sequence.
   eds. NIST handbook of mathematical functions hardback and CD-ROM. Cambridge
   university press, 2010.
 
+
+[^1]: meixner.py
 
 <!-- vim: set syntax=markdown: set spelllang=en: set spell: -->
