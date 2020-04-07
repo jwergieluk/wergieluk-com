@@ -27,6 +27,8 @@ TODO: Describe a simple example and work with in through the article.
 * Is a given sequence a random noise or is there some underlying pattern. 
 * In particular, I am interested in testing whether there is a dependence
   between the events. Do these events tend to occur in clusters? 
+* List required knowledge
+* What are we going to learn here?
 
 ## Probabilistic formulation of the problem.
 
@@ -72,12 +74,16 @@ the sequence
 
 yields the following sequence of waiting times
 
-    [0, 2].
+    [1, 3].
 
 Note that the waiting time calculation discards the initial and trailing zeros
 of the event sequence. For an i.i.d. sequence of Bernoulli random variables, the
 sequene of waiting times consists of i.i.d. rv with geometric distribution
-with parameter $$p$$. The probability mass function of the geometric
+with parameter $$p$$. 
+
+## The Geometric distribution
+
+The probability mass function of the geometric
 distribution is given by 
 
 $$w(k) = \mathbb P(Z = k) = (1-p)^{k-1} p,\ k=1,2,...$$
@@ -157,8 +163,11 @@ I am going to perform the following experiment:
    visualize the aggregated results. 
 
 Let's start with a simple case of simulating an i.i.d. sequence of Bernoulli
-random variables. This can be used as a sanity check and to test whether our
-implementation of the procedure is correct.
+random variables with success probability $$p_0$$. This can be used 
+as a sanity check and to test whether our implementation of the procedure is correct.
+
+For the following experiment we set $$p_0 = 0.05$$ and simulate 5000 samples from
+$$X = (X_1,.., X_1000). 
 
 {{< figure src="/binary_sequences/j_cc_hist_1.0.png" >}}
 
@@ -168,9 +177,53 @@ of random variables in the sequence $$X = (X_0, X_1, X_2, ...)$$ as follows.
 Let $$X_0$$ be Bernoulli with success probablity $$p_0$$. The distributions
 of $$X_i$$ for $$i>0$$ are conditional on $$X_{i-1}$$:
 
-$$\mathbb P(X_i = 1 | X_{i-1} = 0) = p_0, \text{ and }, \mathbb P(X_i = 1 | X_{i-1} = 1) = p_1.$$
+$$
+\begin{aligned}
+\mathbb P(X_i = 1 | X_{i-1} = 0) &= p_1, \\ 
+\mathbb P(X_i = 1 | X_{i-1} = 1) &= p_2. 
+\end{aligned}
+$$
+
+In order to compare this model with an i.i.d. Bernoulli model with the success
+probability $$p_0$$, we need to set $$p_1$$ and $$p_2$$ such that the unconditional 
+distributions are $$X_i\sim\text{Ber}(p_0)$$. Obviously, we will have
+$$p_1 < p_0 < p_2$$.
+
+We dedicate a special section at the end of this blog post to the derivation of the
+probabilities $$p_1$$ and $$p_2$$ given $$p_0$$.
+
+Let's set $$p_1 = 0.0419$$ and $$p_2 = 5 p_1$$. An MC evaluation of the Meixner 
+polynomials leads to the folling histogram for the expectations: 
 
 
+Again, 5000 simulations of sample with length 1000 yield the following histograms for 
+the expectations. 
+
+{{< figure src="/binary_sequences/j_cc_hist_5.0.png" >}}
+
+As we can see the histograms shift slightly to the left. 
+
+### Meixner dependency score
+
+In order to arrive at a single number (a score) that quantifies the degree of serial dependence 
+in the sense developed above, we can define the *Meixner dependency score (MDS)* as a mean
+of expectation estimates for the first $$k$$ Meixner polynomials evalualted at a sample of 
+waiting times $$x = (x_1,..,x_m)$$: 
+
+$$D^k_{\text{meixner}}(x) = \frac{1}{k} \sum_{i=1}^{k} |\bar{M}_i(x)|.$$ 
+
+The MC experiment with the i.i.d. Bernoulli model yields an MDS of $$0.08$$, whereas 
+the our second model with a simple dependence structure has an MDS of $$0.17$$.
+
+Remark that the histograms often overlap, which makes the results unconclusive. 
+
+### Closing remarks
+
+The method cannot pick up very subtle dependence patterns, especially if the sample size is small. 
+
+What have we learned from this?
+
+### Derivation of $$p_1$$ and $$p_2$$ using Markov processes
 
 
 
