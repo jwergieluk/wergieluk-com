@@ -186,7 +186,7 @@ random variables with success probability $$p_0$$. This can be used
 as a sanity check and to test whether our implementation of the procedure is correct.
 
 For the following experiment we set $$p_0 = 0.05$$ and simulate 5000 samples from
-$$X = (X_1,.., X_1000)$$. 
+$$X = (X_1,.., X_{1000})$$. 
 
 {{< figure src="/binary_sequences/j_cc_hist_0.05.png" >}}
 
