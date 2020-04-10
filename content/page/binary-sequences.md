@@ -38,7 +38,7 @@ in the set $$\{0, 1\}$$ and a probability $$p\in(0,1)$$, I would like to investi
 the serial dependencies between the elements of $$X$$. This investigation should be
 based on a sample $$x$$ drawn from $$X$$, i.e. a finite sequence of zeros and ones 
 $$(x_0, x_1,.., x_n)$$. This is a very difficult and deep problem, and in this
-blog post I am going to focus on collecting evidence to support or reiect the following
+blog post I am going to focus on collecting evidence to support or reject the following
 two basic hypotheses:
 
 1. The random variables $$X_i$$ have the distribution $$\text{Ber}(p)$$
@@ -188,7 +188,7 @@ as a sanity check and to test whether our implementation of the procedure is cor
 For the following experiment we set $$p_0 = 0.05$$ and simulate $$5000$$ samples from
 $$X = (X_1,.., X_{1000})$$. 
 
-{{< figure src="/binary_sequences/i_cc_hist_0.05.png" >}}
+{{< figure src="/binary_sequences/j_cc_hist_0.05.png" >}}
 
 For a model with a simple form of serial dependence, we select the probabilities 
 $$0 < p_1 < p_0 < p_2 < 1$$ and set the distributions
@@ -223,7 +223,7 @@ An MC evaluation of the Meixner polynomials leads to the following Meixner depen
 Again, 5000 simulations of samples of length 1000 yield the following histograms for 
 the expectation estimates. 
 
-{{< figure src="/binary_sequences/i_cc_hist_0.02.png" >}}
+{{< figure src="/binary-sequences/j_cc_hist_0.02.png" >}}
 
 As we can see, the histograms are shifted slightly to the left. 
 
@@ -235,7 +235,7 @@ on Meixner orthogonal polynomials and tested it's performance using a simple
 Markov chain model.
 
 All the results and plots presented in this blog post have been generated
-using the following Python script: [meixner.py](/binary_sequences/meixner.py)
+using the following Python script: [meixner.py](/binary-sequences/meixner.py)
 
 ### Derivation of $$p_1$$ and $$p_2$$
 
@@ -272,7 +272,7 @@ and $$p_0 = 0.05$$.
   university press, 2010.
 * Norris, James R. Markov chains. Cambridge university press, 1998.
 
-[^1]: [meixner.py](/binary_sequences/meixner.py)
+[^1]: [meixner.py](/binary-sequences/meixner.py)
 [^2]: The family of Meixner polynomials $$M$$ defined in this blog post is spanned by a geometric distribution $$\text{Geom}(p)$$, and, consequently, depends on the parameter $$p$$. The equation $$\mathbb E M_k(Y) = 0$$ holds iff $$Y\in \text{Geom}(p)$$ and $$k>0$$.
 
 <!-- vim: set syntax=markdown: set spelllang=en_us: set spell: -->
