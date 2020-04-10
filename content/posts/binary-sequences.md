@@ -29,6 +29,10 @@ TODO: Describe a simple example and work with in through the article.
   between the events. Do these events tend to occur in clusters? 
 * List required knowledge
 * What are we going to learn here?
+* Random number generators usually produce binary sequences that are
+  transformed deterministically into some "more interesting" random numbers.
+  There are test suites that test how random is a sequence produced by a rng.
+  Example: Die hard test suite.
 
 ## Probabilistic formulation of the problem.
 
@@ -232,41 +236,45 @@ What have we learned from this?
 
 For a given $$0 < p_1 < p_0 < 1$$, we are looking for $$p_2\in (0, 1)$$, such
 that the random binary sequence defined above satisfies $$P(X_i = 1) = p_1$$.
-This problem doesn't have a solution is we require that $$P(X_i = 1) = p_1$$
+This problem doesn't have a solution if we require that $$P(X_i = 1) = p_1$$
 holds for all $$i>0$$. Instead, let's require that this equation is satisfied
 approximately for all moderately large $$i$$, say $$i>20$$. (This requirement
 could be replaced with a exact requirement on the asymptotic distribution, i.e.
 $$\lim_{i\to\infty} P(X_i = 1) = p_1$$.)
 
-State space with four states: $$(0,0), (0,1), (1,0), (1,1)$$.
+This binary sequence can be represented as a simple Markov chain with the state
+space $$\{0, 1\}$$, the transition probability matrix $$P$$ given by
 
-Transition probability matrix:
 $$
 \left(\begin{matrix}
-  1-p_1 & p_1 & 0 & 0 \\
-  0 & 0 & 1-p_2 & p_2 \\
-  1-p_1 & p_1 & 0 & 0 \\
-  0 & 0 & 1-p_2 & p_2 
-\end{matrix}\right)
+  1-p_1 & p_1 \\
+  1-p_2 & p_2
+\end{matrix}\right),
 $$
 
-Initial distribution is $$\lambda = (1-p1, p1, 0, 0)$$.
+and the initial distribution $$\lambda = (1-p1, p1)$$. The marginal
+distribution of $$X_i$$ is given by $$\lambda P^i$$. This basic result can be
+found in any book about Markov Chains (see e.g. the References section). The
+task of finding a $$p_2$$ such that $$\mathbb P (X_{20} = 1)$$ is as close
+to $$p_0$$ as possible, can be easily solved with an off-the-shelf optimization
+algotithm such as BFGS.
 
-An engineers solution: Given $$p_0$$ and $$p_1$$ we calculate $$p_2$$ using an
-optimization algorithm.
+For example, this procedure quickly yields $$p_2 = 0.62$$ for $$p_1 = 0.02$$.
+The unconditional PMFs of $$X_1,..,X_{10}$$ parametrized with those values are:
 
-## Examples and use cases
+    [0.96799951] [0.03200049]
+    [0.96079893] [0.03920107]
+    [0.9564784 ]  [0.0435216]
+    [0.95388598] [0.04611402]
+    [0.95233046] [0.04766954]
+    [0.95139711] [0.04860289]
+    [0.95083708] [0.04916292]
+    [0.95050105] [0.04949895]
+    [0.95029942] [0.04970058]
+    [0.95017844] [0.04982156]
 
-* VaR violations. 
-* Random number generators usually produce binary sequences that are
-  transformed deterministically into some "more interesting" random numbers.
-  There are test suites that test how random is a sequence produced by a rng.
-  Example: Die hard test suite.
-* Kaggle competitions or data sets?
-
-## Ideas
-
-* Train a Markov process and look at it's transition probability matrix.
+In other words, the unconditional distribution of $$X_i$$ very quickly statibilizes
+at $$(1-p_0, p_0) = (0.95, 0.05)$$.
 
 ## References
 
@@ -274,13 +282,10 @@ optimization algorithm.
   Backtesting Value-at-Risk: A GMM Duration-Based Test, Journal of Financial
   Econometrics, Volume 9, Issue 2, Spring 2011, Pages 314–343,
   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.404.3188&rep=rep1&type=pdf
-* Christoffersen, Peter and Pelletier, Denis, Backtesting Value-at-Risk: A
-  Duration-Based Approach (January 31, 2003). Available at SSRN:
-  https://ssrn.com/abstract=418762 or http://dx.doi.org/10.2139/ssrn.418762 
 * Olver, Frank WJ, Daniel W. Lozier, Ronald F. Boisvert, and Charles W. Clark,
   eds. NIST handbook of mathematical functions hardback and CD-ROM. Cambridge
   university press, 2010.
-
+* Norris, James R. Markov chains. Cambridge university press, 1998.
 
 [^1]: meixner.py
 
