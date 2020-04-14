@@ -21,7 +21,6 @@ def main():
     plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)) , marker='*',
                 alpha=0.35, s=matplotlib.rcParams['lines.markersize']*20)
     ax = plt.gca()
-    ax.add_patch(matplotlib.patches.Rectangle((10, 0), 10.0, 1.0))
     ax.get_yaxis().set_ticks([])
     plt.tight_layout()
     plt.savefig(to_abs('x-axis.png'), dpi=150)

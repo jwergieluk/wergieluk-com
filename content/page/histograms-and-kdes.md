@@ -53,5 +53,6 @@ interval `[10, 20)` the stacked rectangles have the height of approx.
 
 {{< figure src="/histograms-and-kdes/histogram-construction-1.png" >}}
 
+Repeat for all the remaining points:
 {{< figure src="/histograms-and-kdes/histogram-construction-2.png" >}}
 
