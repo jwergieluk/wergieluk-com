@@ -1,6 +1,7 @@
 import numpy
 import pandas
 import matplotlib.pyplot as plt
+import matplotlib
 import os
 import pathlib
 
@@ -15,9 +16,13 @@ def to_abs(file_name: str):
 def main():
     df = pandas.read_csv(to_abs('meditation.csv'), header=0)
 
-    plt.figure(figsize=(6, 2))
-    plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)) , marker='*', alpha=0.35)
-    plt.savefig(to_abs('scatter.png'), dpi=150)
+    plt.figure(figsize=(6, 1.5))
+    plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)) , marker='*',
+                     alpha=0.35, s=matplotlib.rcParams['lines.markersize']*20)
+    ax = plt.gca()
+    ax.get_yaxis().set_ticks([])
+    plt.tight_layout()
+    plt.savefig(to_abs('x-axis.png'), dpi=150)
     plt.close('all')
 
 

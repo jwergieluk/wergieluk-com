@@ -27,7 +27,17 @@ that it should end, so the session duration is a fairly random quantity.
 The [meditation.csv](/histograms-and-kdes/meditation.csv) data set contains 
 session duration in minutes.
 
+I would like to know, how likely is it, for a randomly chosen session to last
+between 25 and 35 minutes. And, how likely is it that a session lasts for 
+50 minutes or more.
 
+For that I can just sort the data points and plot the values.
+
+{{< figure src="/histograms-and-kdes/x-axis.png" >}}
+
+The problem with this visualization is that many values, like 30, are repeated and
+plotted on top of each other: There is no way to tell how many 30 minutes sessions
+do I have in the data set. 
 
 
 
