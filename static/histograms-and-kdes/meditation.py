@@ -35,7 +35,7 @@ def main():
     ax.add_patch(matplotlib.patches.Rectangle((10.0, 0.0), 10.0, range_count/1290.0, alpha=0.4))
     # ax.get_yaxis().set_ticks([])
     plt.tight_layout()
-    plt.savefig(to_abs('histogram-construction-1.png'), dpi=150)
+    plt.savefig(to_abs('histogram-construction-a.png'), dpi=150)
     plt.close('all')
 
     histogram_data = {i: len(list(x for x in df.iloc[:, 0] if i <= x < i + 10.0))
@@ -49,7 +49,7 @@ def main():
     for x0, h in histogram_data.items():
         ax.add_patch(matplotlib.patches.Rectangle((x0, 0.0), 10.0, h / 1290.0, alpha=0.4))
     plt.tight_layout()
-    plt.savefig(to_abs('histogram-construction-2.png'), dpi=150)
+    plt.savefig(to_abs('histogram-construction-b.png'), dpi=150)
     plt.close('all')
 
 
