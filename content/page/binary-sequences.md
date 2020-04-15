@@ -8,6 +8,21 @@ slug: binary-sequences
 modified: 2020-04-10
 ---
 
+Merge Statistical formulation and serial dep
+Flow... Hold the hand of the reader
+
+The Geometric Dist
+Meixner dependency score is the main thing!
+
+Closing remarks: extend.
+Examples, real world. Machine failures. How would you use this.
+
+Similar pieces on Medium. What are the tags?
+More on Value-at-Risk modelling. (Closing remarks).
+Cross link.
+
+### Introduction
+
 In this blog post I am going to investigate the serial (aka temporal) dependence
 phenomenon in random binary sequences.
 
@@ -23,13 +38,18 @@ a production system should not make the system more incident prone. For that we
 need take a close look at the dependence structure of the binary sequence under
 consideration.
 
-#### Summary
+* Mention: Value-at-Risk modeling.
+
+#### Outline
 
 In this blog post, I am going to formulate and investigate the question of
 serial dependence in random binary sequences. We will learn about
 a statistical approach to this problem and about a dependence score based
 on the geometric distribution and its orthogonal polynomials. We will test the
 developed scoring method using Monte Carlo samples from a Markov chain.
+
+TODO: Add list of steps. Highlight that developing the Meixner Dependency Score is
+the main point of the article.
 
 ## Statistical formulation of the problem
 
@@ -126,7 +146,7 @@ recursive relation:
 $$ M_{i+1}(x) = \frac{(1-p)(2i+1) + p(i-x+1)}{(i+1)\sqrt{1-p}} M_i(x) - \frac{i}{i+1} M_{i-1}(x), $$
 
 with $$M_1(x) = 1$$ and $$M_{-1}(x) = 0$$. This relation is used to calculate 
-the sequence $$M$$.
+the sequence $$M$$. Also, note that $$M_k$$ depends on the value of the parameter $$p$$.
 
 In the companion python source code [^1], the function `meixner_poly_eval` is used
 to evaluate Meixner polynomials up to a given degree on a given set of points.
@@ -134,11 +154,13 @@ I used this function to plot the graphs of these polynomials up to degree 50.
 
 {{< figure src="/binary-sequences/meixner_polynomials.png" >}}
 
-As mentioned above, every polynomial $$M_k(x)$$ in $$M$$ satisfies the equation
+As mentioned above, for every polynomial $$M_k(x)$$ in $$M$$ the equation 
 
 $$\mathbb E M_k(Y) = 0$$ 
 
-for a geometric random variable $$Y$$[^2]. This relation can be used to test
+holds, if and only if $$Y\in \text{Geom}(p)$$ and $$k>0$$.
+
+This relation can be used to test
 whether a given sample of waiting times belongs to the geometric distribution
 with parameter $$p$$. We are going to estimate the expectations $$\mathbb E
 M_k(Y)$$ and use the estimates as scores: Values close to zero can be
@@ -207,8 +229,29 @@ In order to compare this model with an i.i.d. Bernoulli model with the success
 probability $$p_0$$, we need to set $$p_1$$ and $$p_2$$ such that the unconditional 
 distributions of $$X_i$$ are $$\text{Ber}(p_0)$$.
 
-We dedicate a special section at the end of this blog post to the derivation of the
-probabilities $$p_1$$ and $$p_2$$ given $$p_0$$.
+In other words, for a given $$0 < p_1 < p_0 < 1$$, we are looking for a $$p_2\in (0, 1)$$, such
+that the random binary sequence defined above satisfies $$P(X_i = 1) = p_0$$.
+This binary sequence can be represented as a simple Markov chain with the state
+space $$\{0, 1\}$$, the transition probability matrix $$P$$ given by
+
+$$
+\left(\begin{matrix}
+  1-p_1 & p_1 \\
+  1-p_2 & p_2
+\end{matrix}\right),
+$$
+
+and the initial distribution $$\lambda = (1-p_0, p_0)$$. The marginal
+distribution of $$X_i$$ is given by $$\lambda P^i$$. This basic result can be
+found in any book about Markov Chains (see the References section below). The
+task of finding a $$p_2$$ such that $$\mathbb P (X_{i} = 1)$$ is as close
+to $$p_0$$ as possible, can be easily solved with an off-the-shelf optimization
+algorithm such as [BFGS](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html).
+
+For example, the above procedure quickly yields $$p_2 = 0.62$$ for $$p_1 = 0.02$$
+and $$p_0 = 0.05$$.
+
+#### Monte-Carlo study results
 
 Let's test the dependency scoring algorithm for the following values $$p_1$$ and $$p_2$$.
 An MC evaluation of the Meixner polynomials leads to the following Meixner dependency scores: 
@@ -237,29 +280,7 @@ Markov chain model.
 All the results and plots presented in this blog post have been generated
 using the following Python script: [meixner.py](/binary-sequences/meixner.py)
 
-### Derivation of $$p_1$$ and $$p_2$$
-
-For a given $$0 < p_1 < p_0 < 1$$, we are looking for a $$p_2\in (0, 1)$$, such
-that the random binary sequence defined above satisfies $$P(X_i = 1) = p_0$$.
-This binary sequence can be represented as a simple Markov chain with the state
-space $$\{0, 1\}$$, the transition probability matrix $$P$$ given by
-
-$$
-\left(\begin{matrix}
-  1-p_1 & p_1 \\
-  1-p_2 & p_2
-\end{matrix}\right),
-$$
-
-and the initial distribution $$\lambda = (1-p_0, p_0)$$. The marginal
-distribution of $$X_i$$ is given by $$\lambda P^i$$. This basic result can be
-found in any book about Markov Chains (see the References section below). The
-task of finding a $$p_2$$ such that $$\mathbb P (X_{i} = 1)$$ is as close
-to $$p_0$$ as possible, can be easily solved with an off-the-shelf optimization
-algorithm such as [BFGS](https://docs.scipy.org/doc/scipy/reference/optimize.minimize-bfgs.html).
-
-For example, the above procedure quickly yields $$p_2 = 0.62$$ for $$p_1 = 0.02$$
-and $$p_0 = 0.05$$.
+* Value-at-Risk modeling usecase.
 
 ## References
 
@@ -269,10 +290,14 @@ and $$p_0 = 0.05$$.
   http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.404.3188&rep=rep1&type=pdf
 * Olver, Frank WJ, Daniel W. Lozier, Ronald F. Boisvert, and Charles W. Clark,
   eds. NIST handbook of mathematical functions hardback and CD-ROM. Cambridge
-  university press, 2010.
-* Norris, James R. Markov chains. Cambridge university press, 1998.
+  university press, 2010. 
+  https://www.nist.gov/publications/nist-handbook-mathematical-functions
+* Norris, James R. Markov chains. Cambridge university press, 1998. 
+  https://doi.org/10.1017/CBO9780511810633
+* McNeil, Alexander J., Rüdiger Frey, and Paul Embrechts. 
+  Quantitative risk management. Princeton university press, 2015. 
+  https://press.princeton.edu/books/hardcover/9780691166278/quantitative-risk-management
 
 [^1]: [meixner.py](/binary-sequences/meixner.py)
-[^2]: The family of Meixner polynomials $$M$$ defined in this blog post is spanned by a geometric distribution $$\text{Geom}(p)$$, and, consequently, depends on the parameter $$p$$. The equation $$\mathbb E M_k(Y) = 0$$ holds iff $$Y\in \text{Geom}(p)$$ and $$k>0$$.
 
 <!-- vim: set syntax=markdown: set spelllang=en_us: set spell: -->
