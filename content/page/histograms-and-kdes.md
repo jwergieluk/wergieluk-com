@@ -51,8 +51,8 @@ It's like stacking Jenga bricks. Since we have 13 data point in the
 interval `[10, 20)` the stacked rectangles have the height of approx.
 `0.01`:
 
-{{< figure src="/histograms-and-kdes/histogram-construction-1.png" >}}
+{{< figure src="/histograms-and-kdes/histogram-construction-a.png" >}}
 
 Repeat for all the remaining points:
-{{< figure src="/histograms-and-kdes/histogram-construction-2.png" >}}
 
+{{< figure src="/histograms-and-kdes/histogram-construction-b.png" >}}
