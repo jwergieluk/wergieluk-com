@@ -1,11 +1,14 @@
 ---
-title: "Serial dependence in random binary sequences"
+title: "Serial dependence in binary sequences"
 date: 2020-04-05
 draft: false
 katex: true
 markup: "mmark"
 slug: binary-sequences
-modified: 2020-04-16
+modified: 2020-04-17
+tags:
+    - machine-learning
+    - time-series
 ---
 
 In this blog post, I am going to investigate the serial (aka temporal) dependence
@@ -27,7 +30,7 @@ consideration.
 #### Outline
 
 In this blog post, I am going to develop and test a scoring method for quantifying the dependence strength in random binary sequences. The Meixner Dependency Score is easy
-to implement and is based on the Meixner orthogonal polynomials associated with 
+to implement and is based on the orthogonal polynomials associated with 
 Geometric distribution.
 
 After reading through this blog post, you will know:
@@ -80,7 +83,15 @@ yields the following sequence of waiting times
     [1, 3].
 
 Note that the waiting time calculation discards the initial and trailing zeros
-in the event sequence $$x$$. For an i.i.d. sequence of Bernoulli random
+in the event sequence $$x$$. 
+
+To formally define the waiting time sequence $$y=(y_1,\ldots,y_m)$$ based on
+$$x$$, consider the sequence of indices $$I=(i_1,\ldots,i_{m+1})$$, such that
+for each $$i\in I$$ we have $$x_i=1$$. We set
+
+$$ y_j = i_{j+1} - i_{j},\text{ for } j = 1,\ldots,m.$$
+
+For an i.i.d. sequence of Bernoulli random
 variables, the sequence of waiting times consists of i.i.d. random variables
 with the geometric distribution. Let's have a closer look at its properties.
 
