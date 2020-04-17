@@ -4,6 +4,9 @@ date: 2019-11-01
 draft: false
 katex: true
 markup: "mmark"
+tags:
+    - machine-learning
+    - time-series
 ---
 
 In this post I introduce a class of discrete stochastic volatility models using a nice notation and go over some special cases including GARCH and ARCH models. I show how to simulate these processes and how parameter estimation performs. The Python code I wrote for these experiments is referenced at the end of the post.
