@@ -9,17 +9,17 @@ modified: 2020-04-13
 ---
 
 In this short blog post we are going to look at basic properties of 
-histograms and kernel density estimators (KDEs) and how they can be
+histograms and kernel density estimators (KDEs) and show how they can be
 useful to draw insights from the data. 
 
-To illustrate the concepts, I will use small data set I collected over 
+To illustrate the concepts, I will use a small data set I collected over 
 last few months. Almost two yeast ago I started meditating regularly, and
 at some point I added the daily meditation session duration to the list
 of data I collect.   
 
 {{< figure src="/histograms-and-kdes/meditation.png" >}}
 
-As you can see, I usually meditate for half an hour a day with some weekend 
+As you can see, I usually meditate half an hour a day with some weekend 
 outlier sessions that last for around an hour. But sometimes I am very tired
 and I meditate for just 15 to 20 minutes. I end a session when I get a feeling
 that it should end, so the session duration is a fairly random quantity.
@@ -53,6 +53,16 @@ interval `[10, 20)` the stacked rectangles have the height of approx.
 
 {{< figure src="/histograms-and-kdes/histogram-construction-a.png" >}}
 
-Repeat for all the remaining points:
+Let's repeate this for all the remaining intervals. 
 
 {{< figure src="/histograms-and-kdes/histogram-construction-b.png" >}}
+
+Since the total area of all the rectangles is one (we have `129` data points)
+the upper boundary the stacked rectanges is a probability density function.
+Densities are handy because they can be used to calculate probabilities. 
+For example, the probability that a randomly chosen session will last between
+25 and 35 minutes is, according to our histogram, the area between the
+density and the x-axis in the interval `[25, 35]`
+
+
+

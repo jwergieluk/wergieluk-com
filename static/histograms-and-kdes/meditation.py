@@ -11,11 +11,16 @@ plt.style.use('ggplot')
 
 def to_abs(file_name: str):
     script_dir = pathlib.Path(__file__).parent.absolute()
-    return os.path.join(script_dir, file_name)
+    abs_path = os.path.join(script_dir, file_name)
+    print(abs_path)
+    return abs_path
 
 
 def main():
     df = pandas.read_csv(to_abs('meditation.csv'), header=0)
+
+    df.plot.area(figsize=(6, 3))
+    plt.savefig(to_abs('meditation.png'))
 
     plt.figure(figsize=(6, 1.5))
     plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)) , marker='*',
@@ -24,7 +29,6 @@ def main():
     ax.get_yaxis().set_ticks([])
     plt.tight_layout()
     plt.savefig(to_abs('x-axis.png'), dpi=150)
-    plt.close('all')
 
     plt.figure(figsize=(6, 1.5))
     plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)) , marker='*',
@@ -36,7 +40,6 @@ def main():
     # ax.get_yaxis().set_ticks([])
     plt.tight_layout()
     plt.savefig(to_abs('histogram-construction-a.png'), dpi=150)
-    plt.close('all')
 
     histogram_data = {i: len(list(x for x in df.iloc[:, 0] if i <= x < i + 10.0))
                       for i in range(10, 80, 10)}
@@ -50,6 +53,7 @@ def main():
         ax.add_patch(matplotlib.patches.Rectangle((x0, 0.0), 10.0, h / 1290.0, alpha=0.4))
     plt.tight_layout()
     plt.savefig(to_abs('histogram-construction-b.png'), dpi=150)
+
     plt.close('all')
 
 
