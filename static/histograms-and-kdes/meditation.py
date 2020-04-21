@@ -84,35 +84,62 @@ def histograms(df: pandas.DataFrame):
 
 
 def epanechnikov_kernel(x, h: float = 1.0):
-    return numpy.maximum(0.0, 0.75*(1.0 - numpy.square(x)/h)/h)
+    return numpy.maximum(0.0, 0.75*(1.0 - numpy.square(x/h))/h)
 
+
+def box_kernel(x, h: float = 1.0):
+    return numpy.maximum(0.0, numpy.sign(0.5 - numpy.abs(x/h))/h)
+
+
+def kde(x: numpy.ndarray, data, h: float = 1.0, kernel_func = epanechnikov_kernel):
+    n = len(data)
+    y = numpy.zeros(x.shape)
+    for x0 in data:
+        y += kernel_func(x - x0, h)
+    return y/n
 
 def kdes(df: pandas.DataFrame):
     data = df.values.reshape((-1, )).tolist()
+    bandwidth = 1.06*df.std().values[0]/numpy.power(len(df), 1.0/5.0)
+    fs = (6, 2)
 
     x = numpy.arange(-1.5, 1.5, 0.01)
-    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
-    ax.fill_between(x, 0.0, epanechnikov_kernel(x), alpha=0.5, facecolor='r')
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x), alpha=0.4, facecolor='r')
     plt.savefig(to_abs('epanechnikov_kernel_a.png'))
 
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, box_kernel(x), alpha=0.4, facecolor='r')
+    plt.savefig(to_abs('box_kernel.png'))
+
     x = numpy.arange(-0.5, 5.0, 0.01)
-    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
-    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 1.0), alpha=0.5, facecolor='r')
-    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 2.0, 2.0), alpha=0.5, facecolor='r')
-    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 3.0, 3.0), alpha=0.5, facecolor='r')
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 1.0), alpha=0.4, facecolor='r')
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 2.0), alpha=0.4, facecolor='r')
     plt.savefig(to_abs('epanechnikov_kernel_b.png'))
 
-    return
+    x = numpy.arange(-3.5, 3.5, 0.01)
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x), alpha=0.4, facecolor='r')
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x, 2.0), alpha=0.4, facecolor='r')
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x, 3.0), alpha=0.4, facecolor='r')
+    plt.savefig(to_abs('epanechnikov_kernel_c.png'))
 
-    plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)), marker='*',
-                alpha=0.35, s=matplotlib.rcParams['lines.markersize'] * 20)
-    plt.ylim((-0.01, 0.06))
-    ax = plt.gca()
-    for x0, h in histogram_data.items():
-        ax.add_patch(matplotlib.patches.Rectangle((x0, 0.0), interval_len, h, alpha=0.4))
-    plt.tight_layout()
-    plt.savefig(to_abs('histogram-construction-b.png'), dpi=150)
+    x0 = 50.389
+    x = numpy.arange(48.0, 53.0, 0.01)
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x - x0), alpha=0.5, facecolor='r')
+    plt.savefig(to_abs('kde_a.png'))
 
+    x = numpy.arange(0.0, 80.0, 0.01)
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, kde(x, data, bandwidth), alpha=0.5, facecolor='r')
+    plt.savefig(to_abs('kde_b.png'))
+
+    x = numpy.arange(0.0, 80.0, 0.01)
+    fig, ax = plt.subplots(1, 1, figsize=fs)
+    ax.fill_between(x, 0.0, kde(x, data, bandwidth, box_kernel), alpha=0.5, facecolor='r')
+    plt.savefig(to_abs('kde_c.png'))
 
 if __name__ == '__main__':
     df = pandas.read_csv(to_abs('meditation.csv'), header=0)

@@ -102,11 +102,80 @@ point to a rectangle with a fixed area and places that rectangle "near" that
 data point. What if instead using rectangles, we could put a "pile of sand"
 on each data point and calculate how this sand stacks.
 
-For example, the first observation in the data set equals `50.389`.
+For example, the first observation in the data set equals `50.389`. Let's put
+a nice pile of sand on it:
 
-$$K(x) = \frac{3}{4}(1 - x^2),\text{ for } |x| < 1,$$
+{{< figure src="/histograms-and-kdes/kde_a.png" >}}
 
-{{< figure src="/histograms-and-kdes/epanechnikov_kernel_a.png" >}}
+Our model for a "pile of sand" is the following function which is called
+the Epanechnikov kernel.
+
+$$K(x) = \frac{3}{4}(1 - x^2),\text{ for } |x| < 1$$
+
+The Epanechnikov kernel is a probability density function, which means, it is
+positive or equal zero and the area under it's graph is equal to one. The function $$K$$ is
+centered at zero but we can move it around by subtracting a constant from it's
+argument $$x$$. 
 
 {{< figure src="/histograms-and-kdes/epanechnikov_kernel_b.png" >}}
+
+The above plot shows the graphs of 
+
+$$x \mapsto K(x - 1) \text{ and } x\mapsto K(x - 2).$$
+
+We can also tune the "stickiness" of the sand used. This can be done by scaling both
+the argument and the value of the kernel function $$K$$ with a positive parameter $$h$$:
+
+$$x \mapsto K_h(x) = \frac{1}{h}K\left(\frac{x}{h}\right).$$
+
+The parameter $$h$$ is often called the _bandwidth_.
+
+{{< figure src="/histograms-and-kdes/epanechnikov_kernel_c.png" >}}
+
+The above plot shows the graphs of $$K_1$$, $$K_2$$, and $$K_3.$$ The function
+$$K_h$$, for any $$h>0$$, is still a probability density -- we could show this
+using some calculus. 
+
+Let's generalize the histogram algorithm using the kernel function $$K_h$$. For
+every data point $$x$$ in our data set containing `129` observations, we put a pile
+of sand centered at that point $$x$$. In other words, given observations
+
+$$x_1,...,x_{129},$$
+
+we construct the function
+
+$$f: x\mapsto \frac{1}{nh}K\left(\frac{x - x_1}{h}\right) +..+ \frac{1}{nh}K\left(\frac{x - x_{129}}{h}\right).$$
+
+Note that each sand pile 
+
+$$\frac{1}{nh}K\left(\frac{x - x_i}{h}\right),$$
+
+has the mass of `1/129` -- just like the Jenga bricks used for the construction
+of the histogram.  It follows that, the function $$f$$ is a probability
+density function (the area under it's graph equals one). Let's have a look at it:
+
+{{< figure src="/histograms-and-kdes/kde_b.png" >}}
+
+Note that this graph looks similar to the histogram plots constructed earlier.
+
+The function $$f$$ is called the *Kernel Density Estimator* (KDE). Estimator is
+just a fancy word for a guess: We are trying guess density function $$f$$ that
+describes well the randomness of the data.
+
+The Epanechnikov kernel is just one possible choice of a sand pile model.
+Another popular choice is the Gaussian bell curve (the density of the Standard
+Normal distribution). In fact, every probability density function can be play
+the role of a kernel to construct a kernel density estimator. The makes KDEs
+very flexible. Let's use the following "box kernel",
+
+{{< figure src="/histograms-and-kdes/box_kernel.png" >}}
+
+to construct another KDEs for the meditation data.
+
+{{< figure src="/histograms-and-kdes/kde_c.png" >}}
+
+## Closing remarks
+
+Recap the thing.
+
 
