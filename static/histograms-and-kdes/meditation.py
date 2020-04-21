@@ -83,10 +83,27 @@ def histograms(df: pandas.DataFrame):
     plt.close('all')
 
 
+def epanechnikov_kernel(x, h: float = 1.0):
+    return numpy.maximum(0.0, 0.75*(1.0 - numpy.square(x)/h)/h)
+
+
 def kdes(df: pandas.DataFrame):
     data = df.values.reshape((-1, )).tolist()
 
-    plt.figure(figsize=(6, 2.5))
+    x = numpy.arange(-1.5, 1.5, 0.01)
+    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x), alpha=0.5, facecolor='r')
+    plt.savefig(to_abs('epanechnikov_kernel_a.png'))
+
+    x = numpy.arange(-0.5, 5.0, 0.01)
+    fig, ax = plt.subplots(1, 1, figsize=(6, 3))
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 1.0), alpha=0.5, facecolor='r')
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 2.0, 2.0), alpha=0.5, facecolor='r')
+    ax.fill_between(x, 0.0, epanechnikov_kernel(x - 3.0, 3.0), alpha=0.5, facecolor='r')
+    plt.savefig(to_abs('epanechnikov_kernel_b.png'))
+
+    return
+
     plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)), marker='*',
                 alpha=0.35, s=matplotlib.rcParams['lines.markersize'] * 20)
     plt.ylim((-0.01, 0.06))
@@ -95,11 +112,10 @@ def kdes(df: pandas.DataFrame):
         ax.add_patch(matplotlib.patches.Rectangle((x0, 0.0), interval_len, h, alpha=0.4))
     plt.tight_layout()
     plt.savefig(to_abs('histogram-construction-b.png'), dpi=150)
-    pass
 
 
 if __name__ == '__main__':
     df = pandas.read_csv(to_abs('meditation.csv'), header=0)
-    histograms(df)
+    # histograms(df)
     kdes(df)
 

@@ -37,7 +37,7 @@ For that I can just sort the data points and plot the values.
 
 {{< figure src="/histograms-and-kdes/x-axis.png" >}}
 
-The problem with this visualization is that many values are repeated and
+The problem with this visualization is that many values are very close and
 plotted on top of each other: There is no way to tell how many 30 minute sessions
 do I have in the data set. An idea, that leads to the construction of 
 a histogram, is to use the vertical dimension of the plot distiguish between
@@ -104,8 +104,9 @@ on each data point and calculate how this sand stacks.
 
 For example, the first observation in the data set equals `50.389`.
 
+$$K(x) = \frac{3}{4}(1 - x^2),\text{ for } |x| < 1,$$
 
+{{< figure src="/histograms-and-kdes/epanechnikov_kernel_a.png" >}}
 
-
-
+{{< figure src="/histograms-and-kdes/epanechnikov_kernel_b.png" >}}
 
