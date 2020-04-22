@@ -24,8 +24,9 @@ def get_histogram_data(data: Sequence, interval_len: int):
 
 def histograms(df: pandas.DataFrame):
     data = df.values.reshape((-1, )).tolist()
+    fs = (6, 2.5)
 
-    df.plot.area(figsize=(6, 3))
+    df.plot.area(figsize=fs, alpha=0.7)
     plt.savefig(to_abs('meditation.png'))
 
     plt.figure(figsize=(6, 1.5))
@@ -50,7 +51,7 @@ def histograms(df: pandas.DataFrame):
     interval_len = 10.0
     histogram_data = get_histogram_data(data, interval_len)
 
-    plt.figure(figsize=(6, 2.5))
+    plt.figure(figsize=fs)
     plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)), marker='*',
                 alpha=0.35, s=matplotlib.rcParams['lines.markersize'] * 20)
     plt.ylim((-0.01, 0.06))
@@ -70,7 +71,7 @@ def histograms(df: pandas.DataFrame):
     interval_len = 1.0
     histogram_data = get_histogram_data(data, interval_len)
 
-    plt.figure(figsize=(6, 2.5))
+    plt.figure(figsize=fs)
     plt.scatter(x=df.iloc[:, 0], y=numpy.repeat(0.0, len(df)), marker='*',
                 alpha=0.35, s=matplotlib.rcParams['lines.markersize'] * 5)
     plt.ylim((-0.01, 0.2))
@@ -143,6 +144,6 @@ def kdes(df: pandas.DataFrame):
 
 if __name__ == '__main__':
     df = pandas.read_csv(to_abs('meditation.csv'), header=0)
-    # histograms(df)
+    histograms(df)
     kdes(df)
 
