@@ -7,24 +7,41 @@ markup: "mmark"
 slug: histograms-and-kdes
 modified: 2020-04-13
 ---
-#### Histograms and Kernel Density Estimators explained with Jenga bricks and sandpiles
+#### Histograms and Kernel Density Estimators explained with bricks and sandpiles
 
-In this blog post, we are going to look at the basic properties of 
-histograms and kernel density estimators (KDEs) and show how they can be
-useful to draw insights from the data. 
+In this blog post, we are going to look at the basic properties of histograms
+and kernel density estimators (KDEs) and show how they can be useful to draw
+insights from the data. 
 
-To illustrate the concepts, I will use a small data set I collected over the last few months. Almost two yeast ago I started meditating regularly, and,
-at some point, I added the daily meditation session duration to the list
-of observations I collect.   
+Histograms are well known in the Data Science community and often used for
+exploratory data analysis. We are going to construct a histogram from scratch
+and look at its basic properties. 
+
+Kernel Density Estimators (KDEs) are less popular, and, at first sight, more
+complicated than histograms. But the methods for generating histograms and KDEs
+are very similar and it's worth giving KDEs a second look because of their
+flexibility. Building upon our histogram example, I will demistify the KDE
+construction and, hopefully, convince you to add KDEs to your Data Science
+toolbox.
+
+## Data
+
+To illustrate the concepts, I will use a small data set I collected over the
+last few months. Almost two yeast ago I started meditating regularly, and, at
+some point, I added the daily meditation session duration to the list of
+observations I collect.   
 
 {{< figure src="/histograms-and-kdes/meditation.png" >}}
 
-As you can see, I usually meditate half an hour a day with some weekend outlier sessions that last for around an hour. But sometimes I am very tired
-and I meditate for just 15 to 20 minutes. I end a session when I feel
-that it should end, so the session duration is a fairly random quantity.
+As you can see, I usually meditate half an hour a day with some weekend outlier
+sessions that last for around an hour. But sometimes I am very tired and I
+meditate for just 15 to 20 minutes. I end a session when I feel that it should
+end, so the session duration is a fairly random quantity.
 
 The [meditation.csv](/histograms-and-kdes/meditation.csv) data set contains 
 the session durations in minutes.
+
+## Histograms
 
 I would like to know more about the distribution of this data. For example, how
 likely is it, for a randomly chosen session to last between 25 and 35 minutes?
@@ -43,10 +60,10 @@ Let's divide the data range into intervals:
 
     [10, 20), [20, 30), [30, 40), [40, 50), [50, 60), [60, 70)
 
-For each data point in the first interval `[10, 20)` we put a rectangle
-with area `1/129` (approx. `0.007`) and width 10 on the interval `[10, 20)`. 
-It's like stacking Jenga bricks. Since we have 13 data points in the interval `[10, 20)` the 13 stacked rectangles have the height of approx.
-`0.01`:
+For each data point in the first interval `[10, 20)` we put a rectangle with
+area `1/129` (approx. `0.007`) and width 10 on the interval `[10, 20)`.  It's
+like stacking bricks. Since we have 13 data points in the interval `[10, 20)`
+the 13 stacked rectangles have the height of approx. `0.01`:
 
 {{< figure src="/histograms-and-kdes/histogram-construction-a.png" >}}
 
@@ -75,12 +92,12 @@ For example, from the histogram plot we can infer that `[50, 60)` and
 of a session duration between 50 and 70 minutes equals approximately
 `20*0.005 = 0.1`. The exact calculation yields the probability of `0.1085`.
 
-#### Choice of the interval lengths
-
 The choice of the intervals (aka "bins") is arbitrary. We could also partition
 the data range into intervals with length 1, or, use intervals with varying
-length (this is not so common). Using a small interval length makes the histogram
-look more wiggly.
+length (this is not so common). Using a small interval length makes the
+histogram look more wiggly, but also allows the spots with high observation
+density to be pinpointed more precisely. For example, sessions with durations
+between 30 and 31 minutes occurred with the highest frequency:
 
 {{< figure src="/histograms-and-kdes/histogram-construction-d.png" >}}
 
@@ -90,29 +107,31 @@ eye by optimizing some score.
 
 #### Kernel Density Estimators
 
-However we choose the interval length, a histogram will always look
-more or less wiggly, because it is a stack of rectangles (think Jenga bricks).
+A density estimate or density estimator is just a fancy word for a guess: We
+are trying to guess the density function $$f$$ that describes well the
+randomness of the data.
 
-Sometimes, we are interested in calculating a smooth estimate of the density. For
-that, we can modify our method slightly. The histogram algorithm maps each data
-point to a rectangle with a fixed area and places that rectangle "near" that
-data point. What if, instead of using rectangles, we could put a "pile of sand"
-on each data point and see how this sand stacks.
+However we choose the interval length, a histogram will always look more or
+less wiggly, because it is a stack of rectangles (think bricks). Sometimes, we
+are interested in calculating a smoother estimate. For that, we can modify our
+method slightly. The histogram algorithm maps each data point to a rectangle
+with a fixed area and places that rectangle "near" that data point. What if,
+instead of using rectangles, we could put a "pile of sand" on each data point
+and see how this sand stacks.
 
 For example, the first observation in the data set is `50.389`. Let's put
 a nice pile of sand on it:
 
 {{< figure src="/histograms-and-kdes/kde_a.png" >}}
 
-Our model for a pile of sand is the following function, which is called
-the Epanechnikov kernel.
+Our model for a pile of sand is the Epanechnikov kernel function:
 
 $$K(x) = \frac{3}{4}(1 - x^2),\text{ for } |x| < 1$$
 
 The Epanechnikov kernel is a _probability density function_, which means that
 it is positive or equal zero and the area under its graph is equal to one. The
 function $$K$$ is centered at zero, but we can move it around by subtracting a
-constant from its argument $$x$$. 
+constant from its argument $$x.$$ 
 
 {{< figure src="/histograms-and-kdes/epanechnikov_kernel_b.png" >}}
 
@@ -135,9 +154,9 @@ so $$h$$ corresponds to the interval width parameter in the histogram
 algorithm. The function $$K_h$$, for any $$h>0$$, is again a probability
 density -- this is a consequence of the substitution rule of Calculus.
 
-Let's generalize the histogram algorithm using the kernel function $$K_h$$. For
+Let's generalize the histogram algorithm using the kernel function $$K_h.$$ For
 every data point $$x$$ in our data set containing `129` observations, we put a pile
-of sand centered at $$x$$. In other words, given the observations
+of sand centered at $$x.$$ In other words, given the observations
 
 $$x_1,...,x_{129},$$
 
@@ -149,7 +168,7 @@ Note that each sandpile
 
 $$\frac{1}{nh}K\left(\frac{x - x_i}{h}\right),$$
 
-has the area of `1/129` -- just like the Jenga bricks used for the construction
+has the area of `1/129` -- just like the bricks used for the construction
 of the histogram.  It follows that the function $$f$$ is a probability
 density function (the area under its graph equals one). Let's have a look at it:
 
@@ -157,9 +176,7 @@ density function (the area under its graph equals one). Let's have a look at it:
 
 Note that this graph looks like a smooth version of the histogram plots constructed earlier.
 
-The function $$f$$ is called the *Kernel Density Estimator* (KDE). Estimator is
-just a fancy word for a guess: We are trying to guess the density function $$f$$ that
-describes well the randomness of the data.
+The function $$f$$ is called the *Kernel Density Estimator* (KDE). 
 
 The Epanechnikov kernel is just one possible choice of a sandpile model.
 Another popular choice is the [Gaussian bell
@@ -175,13 +192,28 @@ A KDE for the meditation data using this box kernel is depicted in the following
 
 {{< figure src="/histograms-and-kdes/kde_c.png" >}}
 
+## Pandas
+
+Most popular Data Science libraries have implementations for both histograms and
+KDEs. For example, in _pandas_, for a given DataFrame `df`, we can plot a
+histogram of the data with `df.hist()`. Similarly, `df.plot.density()` gives us
+a KDE plot. 
+
+The following code loads the meditation data and saves both plots as PNG files.
+
+    df = pandas.read_csv('meditation.csv', header=0)
+    df.plot.density()
+    plt.savefig('pandas_kde.png')
+    df.hist()
+    plt.savefig('pandas_hist.png')
+
 ## Closing remarks
 
 In this blog post, we learned about histograms and kernel density estimators. Both
 give us estimates of an unknown density function based on observation data.
 
 The algorithms for calculation of histograms and KDEs are very similar. KDEs
-offer much greater flexibility because we can not only vary the bandwidth but
+offer much greater flexibility because we can not only vary the bandwidth, but
 also, use kernels of different shapes and sizes.
 
 The python source code used to generate all the plots in this blog post is available here: 

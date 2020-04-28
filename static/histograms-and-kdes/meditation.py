@@ -141,9 +141,20 @@ def kdes(df: pandas.DataFrame):
     fig, ax = plt.subplots(1, 1, figsize=FIGURE_SIZE)
     ax.fill_between(x, 0.0, kde(x, data, bandwidth, box_kernel), alpha=0.5, facecolor='r')
     plt.savefig(to_abs('kde_c.png'), dpi=DPI)
+    plt.close('all')
+
+def histograms_and_kdes_with_pandas(df: pandas.DataFrame):
+    df.plot.density(figsize=FIGURE_SIZE, alpha=0.7)
+    plt.savefig(to_abs('pandas_kde.png'), dpi=DPI)
+
+    df.hist(figsize=FIGURE_SIZE, alpha=0.7)
+    plt.savefig(to_abs('pandas_hist.png'), dpi=DPI)
+    plt.close('all')
+
 
 if __name__ == '__main__':
     df = pandas.read_csv(to_abs('meditation.csv'), header=0)
     histograms(df)
     kdes(df)
+    histograms_and_kdes_with_pandas(df)
 
