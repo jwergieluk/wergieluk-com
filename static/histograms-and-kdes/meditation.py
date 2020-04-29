@@ -8,7 +8,7 @@ import os
 import pathlib
 
 plt.style.use('ggplot')
-DPI = 120
+DPI = 250 
 FIGURE_SIZE = (6.0, 2.5)
 
 
@@ -111,7 +111,7 @@ def kdes(df: pandas.DataFrame):
 
     fig, ax = plt.subplots(1, 1, figsize=FIGURE_SIZE)
     ax.fill_between(x, 0.0, box_kernel(x), alpha=0.4, facecolor='r')
-    plt.savefig(to_abs('box_kernel.png'))
+    plt.savefig(to_abs('box_kernel.png'), dpi=DPI)
 
     x = numpy.arange(-0.5, 5.0, 0.01)
     fig, ax = plt.subplots(1, 1, figsize=FIGURE_SIZE)
