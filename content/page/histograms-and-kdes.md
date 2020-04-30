@@ -8,7 +8,9 @@ slug: histograms-and-kdes
 modified: 2020-04-13
 ---
 
-## A Brick or a Sandpile: Histograms vs. KDEs Explained
+# Histograms vs. KDEs Explained
+
+## Histograms and Kernel Density Estimators explained with bricks and sandpiles
 
 In this blog post, we are going to explore the basic properties of histograms
 and kernel density estimators (KDEs) and show how they can be used to draw
@@ -18,10 +20,10 @@ Histograms are well known in the data science community and often a part of
 exploratory data analysis. However, we are going to construct a histogram from scratch
 to understand its basic properties. 
 
-Kernel Density Estimators (KDEs) are less popular, and, at first sight, seem more
+Kernel Density Estimators (KDEs) are less popular, and, at first, may seem more
 complicated than histograms. But the methods for generating histograms and KDEs
 are actually very similar. KDEs are worth a second look due to their
-flexibility. Building upon the histogram example, I will explain how to construct a  KDE
+flexibility. Building upon the histogram example, I will explain how to construct a KDE
 and why you should add KDEs to your data science
 toolbox.
 
@@ -52,7 +54,7 @@ For starters, we may try just sorting the data points and plotting the values.
 
 The problem with this visualization is that many values are too close to separate and
 plotted on top of each other: There is no way to tell how many 30 minute sessions
-do we have in the data set. Instead, we need to use the vertical dimension of the plot to distinguish between
+we have in the data set. Instead, we need to use the vertical dimension of the plot to distinguish between
 regions with different data density. This idea leads us to the histogram. 
 
 Let's divide the data range into intervals: 
