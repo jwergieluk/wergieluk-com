@@ -1,15 +1,17 @@
 ---
 title: "Serial dependence in binary sequences"
-date: 2020-04-05
+date: 2020-04-17
 draft: false
 katex: true
 markup: "mmark"
 slug: binary-sequences
-modified: 2020-04-17
+modified: 2020-05-25
 tags:
     - machine-learning
     - time-series
 ---
+
+_This blog post was originally published as a Towards Data Science article [here](https://towardsdatascience.com/serial-dependence-in-binary-sequences-409c5e8f54d0)._
 
 In this blog post, I am going to investigate the serial (aka temporal) dependence
 phenomenon in random binary sequences.
@@ -286,6 +288,8 @@ must not only occur with the expected frequency but must also be independent of
 each other. Proper calibration of the market risk model that brings the dependency of the exceedance events to a low level is typically much more difficult than simple
 calibration of the exceedance frequency. But this is especially important in the times of financial distress, because underestimating the risk leads inevitably to underhedging,
 and, possibly, to more severe losses.
+
+_Many thanks to Sarah Khatry for reading drafts of this blog post and contributing countless improvement ideas and corrections._
 
 ## References
 
