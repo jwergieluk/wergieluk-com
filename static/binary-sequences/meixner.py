@@ -144,16 +144,16 @@ def plot_geometric_pmf():
 
 def plot_some_meixner_polynomials():
     p = 0.1
-    x = numpy.arange(1.0, 10.0, 0.05)
+    x = numpy.arange(1.0, 100.0, 0.05)
     m = meixner_poly_eval(x, 55, p)
     plt.plot(x, m)
-    plt.savefig('meixner_polynomials.png', dpi=150)
+    plt.savefig('meixner_polynomials2.png', dpi=150)
     plt.close('all')
 
 
 if __name__ == '__main__':
     # self_exciting_bernoulli_experiment()
-    calc_unconditional_dist()
+    # calc_unconditional_dist()
     # plot_geometric_pmf()
-    # plot_some_meixner_polynomials()
+    plot_some_meixner_polynomials()
     # markov_chain_experiment()
