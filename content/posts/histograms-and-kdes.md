@@ -1,14 +1,14 @@
 ---
-title: "A Meditation on Histograms and KDEs"
-date: 2020-04-11
+title: "Histograms vs. KDEs Explained"
+date: 2020-04-30
 draft: false
 katex: true
 markup: "mmark"
 slug: histograms-and-kdes
-modified: 2020-04-13
+modified: 2020-05-25
 ---
 
-## A Brick or a Sandpile: Histograms vs. KDEs Explained
+_This blog post was originally published as a Towards Data Science article [here](https://towardsdatascience.com/histograms-vs-kdes-explained-ed62e7753f12)._
 
 In this blog post, we are going to explore the basic properties of histograms
 and kernel density estimators (KDEs) and show how they can be used to draw
@@ -221,3 +221,4 @@ also use kernels of different shapes and sizes.
 The python source code used to generate all the plots in this blog post is available here: 
 [meditation.py](/histograms-and-kdes/meditation.py)
 
+_Many thanks to Sarah Khatry for reading drafts of this blog post and contributing countless improvement ideas and corrections._
