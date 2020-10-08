@@ -6,6 +6,8 @@ katex: true
 markup: "mmark"
 slug: histograms-and-kdes
 modified: 2020-05-25
+tags:
+    - machine-learning
 ---
 
 _This blog post was originally published as a Towards Data Science article [here](https://towardsdatascience.com/histograms-vs-kdes-explained-ed62e7753f12)._
