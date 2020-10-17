@@ -8,6 +8,9 @@ tags:
     - linux
 ---
 
+* https://opensource.com/article/20/4/systemd
+* Systemd user services: https://www.unixsysadmin.com/systemd-user-services/
+
 [Signal](https://signal.org/en/) is an open-source messenger supporting common mobile platforms and 
 sporting a strong cryptography support. Although, the functionality is on par with Whatsapp, not many people seem 
 to be using Signal.  
