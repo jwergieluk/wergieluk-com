@@ -10,6 +10,7 @@ tags:
 
 * https://opensource.com/article/20/4/systemd
 * Systemd user services: https://www.unixsysadmin.com/systemd-user-services/
+* Send an email on service failure: https://northernlightlabs.se/2014-07-05/systemd-status-mail-on-unit-failure.html
 
 [Signal](https://signal.org/en/) is an open-source messenger supporting common mobile platforms and 
 sporting a strong cryptography support. Although, the functionality is on par with Whatsapp, not many people seem 
