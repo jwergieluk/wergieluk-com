@@ -1,7 +1,7 @@
 ---
-title: "Studying the multivariate t-distribution"
+title: "Studying the Multivariate t-distribution"
 date: 2020-10-08
-modified: 2020-10-17
+modified: 2020-10-19
 draft: true
 markup: "markdown"
 katex: true
@@ -9,10 +9,6 @@ tags:
     - machine-learning
     - probability-theory
 ---
-
-
-
-
 
 # Definitions
 
@@ -58,6 +54,8 @@ A univariate \\(\chi^2\\) distribution with \\(n\\) degrees of freedom is \\( \t
 
 # Parameter Estimation
 
+* The case when nu is known.
+
 ## Estimation via the EM Algorithm
 
 * Derive the log-likelihood function using the density above.
@@ -74,11 +72,19 @@ A univariate \\(\chi^2\\) distribution with \\(n\\) degrees of freedom is \\( \t
 
 # References
 
-* Nadarajah, Saralees, and Samuel Kotz. "Estimation methods for the multivariate t distribution." Acta Applicandae Mathematicae 102, no. 1 (2008): 99-118. (pdf)[http://www-users.math.umn.edu/~bemis/MFM/workshop/2011/estimating_multivariate_t.pdf]
-* Michael Roth. On the Multivariate t Distribution. https://www.diva-portal.org/smash/get/diva2:618567/FULLTEXT02
-** Contains a summary of standard results.
-* A Python Implementation of the Multivariate t-distribution. https://gregorygundersen.com/blog/2020/01/20/multivariate-t/
+Liu, Chuanhai, and Donald B. Rubin. "ML estimation of the t distribution using EM and its extensions, ECM and ECME." Statistica Sinica (1995): 19-39. http://www3.stat.sinica.edu.tw/statistica/oldpdf/A5n12.pdf 
 
-https://arxiv.org/pdf/1707.01130.pdf
+
+* David Barber. Bayesian Reasoning and Machine Learning. http://www.cs.ucl.ac.uk/staff/d.barber/brml/
+
+* Martin Haugh. "The EM Algorithm." 2015. http://www.columbia.edu/~mh2078/MachineLearningORFE/EM_Algorithm.pdf
+* Nadarajah, Saralees, and Samuel Kotz. "Estimation methods for the multivariate t distribution." 
+  Acta Applicandae Mathematicae 102, no. 1 (2008): 99-118.
+  http://www-users.math.umn.edu/~bemis/MFM/workshop/2011/estimating_multivariate_t.pdf
+* Michael Roth. On the Multivariate t Distribution. https://www.diva-portal.org/smash/get/diva2:618567/FULLTEXT02
+* Gregory Grundsen. A Python Implementation of the Multivariate t-distribution. 
+  https://gregorygundersen.com/blog/2020/01/20/multivariate-t/
+* Dempster, A. P., N. M. Laird, and D. B. Rubin. "Maximum Likelihood from Incomplete Data via the EM Algorithm." Journal of the Royal Statistical Society. Series B (Methodological) 39, no. 1 (1977): 1-38. http://www.jstor.org/stable/2984875 https://www.ece.iastate.edu/~namrata/EE527_Spring08/Dempster77.pdf
+* https://arxiv.org/pdf/1707.01130.pdf
 
 <!-- vim: set syntax=markdown: set spelllang=en_us: set spell: -->
