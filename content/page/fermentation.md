@@ -1,7 +1,7 @@
 ---
-title: "Fermentation diary"
+title: "Fermentation diary (draft)"
 date: 2020-01-19
-draft: false
+draft: true
 ---
 
 # 1/19/2020

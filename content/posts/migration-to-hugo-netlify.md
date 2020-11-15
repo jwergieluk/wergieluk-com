@@ -1,5 +1,5 @@
 ---
-title: Notes on migrating this blog to Netlify and Hugo
+title: "Notes on migrating this blog to Netlify and Hugo"
 date: 2018-10-03 16:33:56 +0000
 lastmod: 2018-10-20
 ---

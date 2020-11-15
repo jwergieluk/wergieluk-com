@@ -32,7 +32,9 @@ I work on this blog because it's fun.
 
 ## I am not tracking you
 
-For reasons outlined above, currently, I am not using any tracking software or scripts (like Google Analytics). I am not using any cookies. This is a static website hosted on Netlify which uses their generous free plan. This plan doesn't include traffic analytics. I once watched a lecture in which someone from LinkedIn said that users spend a significant amount of time accessing their own profile pages without performing any modifications. It's as if they were watching themselves in a mirror. I think a similar conclusion applies to website analytics. 
+For reasons outlined above, currently, I am not using any tracking software or scripts (like Google Analytics). I am not using any cookies. This is a static website hosted on Netlify which uses their generous free plan. This plan doesn't include traffic analytics. 
+
+I once watched a lecture in which someone from LinkedIn said that users spend a significant amount of time accessing their own profile pages without performing any modifications. It's as if they were watching themselves in a mirror. In the past, I found myself doing something similar when browsing Google Analytics statistics.
 
 Also, I don't have any amount of traffic on this website, that I could brag about.
 

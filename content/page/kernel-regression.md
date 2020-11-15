@@ -1,7 +1,7 @@
 ---
-title: "Kernel regression"
+title: "Kernel regression (draft)"
 date: 2020-05-25
-draft: false
+draft: true
 katex: true
 markup: "mmark"
 slug: kernel-regression
@@ -9,19 +9,11 @@ tags:
     - machine-learning    
 ---
 
-
-
-
 ## Definition of the problem
-
-
-
 
 ## Simple one dimensional example
 
 We are calculating the regression function
-
-
 
 ## Synthetic data
 

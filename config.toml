@@ -137,6 +137,12 @@ weight = -10
 identifier = "home"
 url = "https://www.wergieluk.com"
 
+[[menu.main]]
+name = "Pages"
+weight = -9
+identifier = "pages"
+url = "https://www.wergieluk.com/page/"
+
 [blackfriday]
 hrefTargetBlank = true
 
