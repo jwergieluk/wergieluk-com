@@ -1,5 +1,5 @@
 ---
-title: "Studying the Multivariate t-distribution"
+title: "Studying the multivariate t-distribution (draft)"
 date: 2020-10-08
 modified: 2020-10-19
 draft: true

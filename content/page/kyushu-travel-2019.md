@@ -1,8 +1,10 @@
 ---
-title: "Japan travel notes"
+title: "Kyushu travel notes (Summer 2019)"
 date: 2019-07-07
 draft: false
 ---
+
+Travel notes I used to plan a trip around Kyushu in 2019.
 
 * Kagoshima Trip -- some nice drone movies: http://kagoshima-trip.jp
 * Hyperdia -- Train timetables -- http://www.hyperdia.com/
@@ -105,6 +107,3 @@ http://www.hyuga.or.jp/sightseeing?hl=en
 
 * Iki (50 min with a ferry from Fukuoka): https://www.ana.co.jp/en/jp/tastesofjapan/kyushu/0019.html
 * Beaches in Kyushu: http://www.japan-tour.jp/en/leisure-information/18139
-
-
-

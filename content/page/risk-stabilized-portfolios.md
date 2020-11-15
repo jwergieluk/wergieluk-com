@@ -1,7 +1,7 @@
 ---
-title: "Risk stabilized portfolios"
+title: "Risk stabilized portfolios (draft)"
 date: 2020-04-14
-draft: false
+draft: true
 katex: true
 markup: "mmark"
 ---
