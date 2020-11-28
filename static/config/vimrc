@@ -1,0 +1,72 @@
+" .vimrc  2012-2016 (c) Julian Wergieluk 
+
+set encoding=utf-8
+set nocompatible              " required
+filetype off                  " required
+
+" X Windows GUI options
+set guioptions-=T          " Remove the toolbar
+set guifont=Monospace\ 10
+set background=light
+"colorscheme solarized
+colorscheme zenburn
+
+" disables error notificaions (bell, flashing)
+" http://stackoverflow.com/questions/5933568/disable-blinking-at-the-first-last-line-of-the-file 
+autocmd VimEnter * set vb t_vb=
+
+" xterm mouse support
+set mouse=a
+
+filetype plugin on
+syntax enable
+syntax spell toplevel
+syntax sync minlines=100
+
+" status line
+set laststatus=2
+set statusline=%<%f\ %h%m%r\ %y%=%{v:register}\ %-14.(%l,%c%V%)\ %P  
+
+" swap/tmp file creation
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Indentation
+" http://stackoverflow.com/questions/234564/tab-key-4-spaces-and-auto-indent-after-curly-braces-in-vim
+set smartindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+filetype indent on
+
+" Searching
+set hlsearch
+set incsearch
+
+" Line wrap
+set wrap
+set linebreak  " Don't break in the middle of a word
+
+" If more than one window and previous buffer was NERDTree, go back to it.
+autocmd BufEnter * if bufname('#') =~# "^NERD_tree_" && winnr('$') > 1 | b# | endif
+
+" Vim Latex Suite options
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+let Tex_FoldedSections=""
+let Tex_FoldedEnvironments=""
+let Tex_FoldedMisc=""
+
+autocmd FileType tex :source ~/repos/latex-common/tex.vim
+
