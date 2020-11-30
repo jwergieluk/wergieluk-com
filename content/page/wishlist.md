@@ -22,3 +22,8 @@ something from the following list.
 [book website](https://www.math.uci.edu/~rvershyn/papers/HDP-book/HDP-book.html#)
 
 * Brian Ward. 2021. How Linux Works, 3rd Edition. [amazon.de](https://www.amazon.de/How-Linux-Works-Brian-Ward-dp-1718500408/dp/1718500408/ref=dp_ob_title_bk)
+
+* Julia Evans. Wizard zines. https://wizardzines.com/
+	* Bite Size Networking!
+	* Oh shit, git!
+	* Become a SELECT star!
