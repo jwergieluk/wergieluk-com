@@ -9,7 +9,7 @@ set guioptions-=T          " Remove the toolbar
 set guifont=Monospace\ 10
 set background=light
 "colorscheme solarized
-colorscheme zenburn
+"colorscheme zenburn
 
 " disables error notificaions (bell, flashing)
 " http://stackoverflow.com/questions/5933568/disable-blinking-at-the-first-last-line-of-the-file 

@@ -39,3 +39,8 @@ I once watched a lecture in which someone from LinkedIn said that users spend a 
 Also, I don't have any amount of traffic on this website, that I could brag about.
 
 I am sure, some of the readers would like to comment the last sentence with "this!", or similar. They might have a point, but, unfortunately, I don't support commenting either.
+
+## Misc
+
+Gnupg key [0xDBCF703C.asc](/0xDBCF703C.asc)
+
