@@ -11,7 +11,7 @@ setting up an Arch Linux system on it.
 
 # Hardware information
 
-Tech specs for Honor MagicBook 14 16GB 512GB SDD:
+Tech specs for the Honor MagicBook 14 with 16GB RAM and a 512GB SDD:
 https://www.hihonor.com/germany/product/honor-magicbook-14#18149188113454
 
 * CPU: AMD Ryzen ™ 5 3500U Prozessor
@@ -40,14 +40,14 @@ careful to specify the right device).
 Other methods are described here: 
 https://wiki.archlinux.org/index.php/USB_flash_installation_medium#Using_basic_command_line_utilities
 
-The USB drive can be restored with
+After we are done, the USB drive can be restored with
 
     wipefs --all /dev/sdX
     fdisk /dev/sdX 
     # create a primary partition with code 'b'
     mkfs.vfat /dev/sdX1 
 
-Enter BIOS by pressing `F1`, `F2`, or `Del` (I pressed all of them, don't know
+Enter the BIOS by pressing `F1`, `F2`, or `Del` (I pressed all these keys, don't know
 which one worked). Change settings to booting from USB device. Disable secure
 boot. Restart.
 
@@ -70,7 +70,7 @@ Connect by follwing this: https://wiki.archlinux.org/index.php/Iwd#Connect_to_a_
 
 {{< figure src="/magicbook/original-partitioning.jpg" title="Original partition table" >}}
 
-Get rid of every partition except EFI one.
+Get rid of every partition except the EFI one.
 
     fdisk -l
 
@@ -95,7 +95,7 @@ Other layouts are listed here:
 
 Install `grub` and `efibootmgr` packages. Follow https://wiki.archlinux.org/index.php/GRUB for UEFI systems. 
 
-# Post-installation
+# Configuration
 
 https://wiki.archlinux.org/index.php/General_recommendations
 
@@ -122,14 +122,14 @@ Finally:
 
 Graphic card driver package: `amdgpu` https://wiki.archlinux.org/index.php/AMDGPU 
 
-Display manager: None -- just use `.xinitrc`
+Display manager: None -- just use `.xinitrc` and `startx`
 
 Window manager package: `i3-wm`
 
 ### Setting the right DPI
 
-According to tech spec, the DPI of the display is 157. Xorg doesn't detect this automatically
-as can be seen from the `xpdyinfo` ouput
+According to the tech spec, the DPI of the display is 157. Xorg doesn't detect
+this automatically as can be seen from the `xpdyinfo` output
 
     screen #0:
       dimensions:    1920x1080 pixels (508x285 millimeters)
@@ -147,10 +147,6 @@ backlight hotkeys. See the "Power management" section.
 
 `dmenu` had a weird-looking fonts setting (huge distances between letters).
 Following solution posted at https://www.reddit.com/r/i3wm/comments/fxz4hj/help_the_letter_spacing_in_my_dmenu_bar_is_weird/
-
-* Use Windows keys as meta.
-* Nicer i3status line.
-* Setup hotkeys.
 
 ## Terminal emulator
 
@@ -236,7 +232,7 @@ With these permissions in place, the backlight intensity can be set using
 or a specialized utility listed on
 https://wiki.archlinux.org/index.php/backlight#Backlight_utilities 
 
-I endet up using `brightnessctl` which is written in C and has no dependencies.
+I ended up using `brightnessctl` which is written in C and has no dependencies.
 Wiring the `brightnessctl` invocations to keysyms listed above can be done in
 the i3 config file (note the `5%-` notation).
 
@@ -259,10 +255,10 @@ Sound works out-of-the-box after installing `pulseaudio` and `pulseaudio-alsa`.
 
 # Conclusion
 
-Setting Arch Linux with a non-standard window manager like i3 clearly requirest
+Setting Arch Linux with a non-standard window manager like i3 clearly requires
 some effort and knowledge. I didn't hit any major roadblocks like missing
-hardward drivers. Most of this stuff is clearly described on the Arch wiki. I
-learned some interesting details abouth Xorg while working on this
+hardware drivers. Most of necessary steps are clearly described on the Arch
+wiki. I learned some interesting details about Xorg while working on this
 installation.
 
 <!-- vim: set syntax=markdown: set spelllang=en_us: set spell: -->
