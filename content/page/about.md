@@ -6,7 +6,7 @@ menu: main
 
 My name is Julian Wergieluk. This is my blog and homepage.
 
-I am an engineer and mathematician with a broad range of interests. Currently, I work as a machine learning engineer at DataRobot. Opinions expressed on the website are of my own.
+I am an engineer and mathematician with a broad range of interests. Currently, I work as a machine learning engineer at [DataRobot](https://www.datarobot.com). Opinions expressed on the website are of my own.
 
 # Current interests
 
@@ -44,3 +44,4 @@ I am sure, some of the readers would like to comment the last sentence with "thi
 
 Gnupg key [0xDBCF703C.asc](/0xDBCF703C.asc)
 
+<!-- vim: set syntax=markdown: set spelllang=en_us: set spell: -->
