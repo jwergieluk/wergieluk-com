@@ -7,7 +7,7 @@ filetype off                  " required
 " X Windows GUI options
 set guioptions-=T          " Remove the toolbar
 set guifont=Monospace\ 10
-set background=light
+"set background=light
 "colorscheme solarized
 "colorscheme zenburn
 
