@@ -42,6 +42,8 @@ I am sure, some of the readers would like to comment the last sentence with "thi
 
 ## Misc
 
-Gnupg key [0xDBCF703C.asc](/0xDBCF703C.asc)
+My gnupg key: [0xDBCF703C.asc](/0xDBCF703C.asc)
+
+Except where otherwise noted, this website is licensed under a [Creative Commons Attribution Share Alike 4.0 Internationala License](https://github.com/jwergieluk/wergieluk-com/blob/master/LICENSE).
 
 <!-- vim: set syntax=markdown: set spelllang=en_us: set spell: -->
