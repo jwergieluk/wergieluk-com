@@ -7,9 +7,6 @@ draft: false
 If you want to buy me something, and you don't know what, just pick 
 something from the following list. 
 
-* Fungi of Temperate Europe. Thomas Laessoe and Jens H. Petersen. 
-[amazon.de](https://www.amazon.de/dp/0691180377/?coliid=I61KK49EMN4LP&colid=2UPU4CVKSN94G&psc=1&ref_=lv_ov_lig_dp_it)
-
 * Moore, D., Robson, G., & Trinci, A. 2000. 21st Century Guidebook to Fungi. Cambridge University Press. 
 [amazon.de](https://www.amazon.de/Century-Guidebook-Fungi-David-Moore/dp/1108745687/ref=tmm_pap_title_0?_encoding=UTF8&qid=1606564014&sr=8-2)
 
@@ -33,3 +30,8 @@ Concepts, Tools, and Techniques to build intelligent systems". (2017).
 	* Bite Size Networking!
 	* Oh shit, git!
 	* Become a SELECT star!
+
+### Archived
+
+* Fungi of Temperate Europe. Thomas Laessoe and Jens H. Petersen. 
+[amazon.de](https://www.amazon.de/dp/0691180377/?coliid=I61KK49EMN4LP&colid=2UPU4CVKSN94G&psc=1&ref_=lv_ov_lig_dp_it)
