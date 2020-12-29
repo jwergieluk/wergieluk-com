@@ -18,6 +18,7 @@ def to_abs(file_name: str):
     print(abs_path)
     return abs_path
 
+
 def get_histogram_data(data: Sequence, interval_len: int):
     histogram_data = {i: len(list(x for x in data if i <= x < i + interval_len))/ (len(data)*interval_len)
                       for i in range(10, 70, int(interval_len))}
