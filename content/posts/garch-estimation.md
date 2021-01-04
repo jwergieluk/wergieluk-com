@@ -97,7 +97,7 @@ Note that the $$\sigma$$ process for $$t>0$$ cannot go below the level of $$\sqr
 
 # Maximum-likelihood estimation
 
-Maximum-likelihood (ML) paramter estimation is the method of choice for all the discussed models since the transition density, i.e. the density of $$X_t$$ given the past information $$\mathcal F_{t-1}$$ is known explicitly. Log-likelihood function of the process sample path $$x$$ is thus given by
+Maximum-likelihood (ML) parameter estimation is the method of choice for all the discussed models since the transition density, i.e. the density of $$X_t$$ given the past information $$\mathcal F_{t-1}$$ is known explicitly. Log-likelihood function of the process sample path $$x$$ is thus given by
 
 $$
 \ln L(\theta; x) = \sum_{s=1}^t \ln \eta_Z \left( \frac{x_t - \mu_t(\theta)}{\sigma_t(\theta)} \right) - \ln \sigma_t(\theta),
