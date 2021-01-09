@@ -16,7 +16,7 @@ $$
 \frac{1}{\sqrt{(2\pi)^n |\Sigma|}} \exp \Big( -\frac{1}{2} x^\top \Sigma^{-1} x \Big),
 $$
 
-where $$\Sigma$$ is a (positive-semidefinite) covariance matrix.
+where $$\Sigma$$ is a (positive-semidefinite) $$n\times n$$ covariance matrix.
 
 For comparison, the density of the multivariate student t distribution with zero mean is
 
@@ -45,11 +45,12 @@ $$
 $$
 
 This is because the univariate $$\chi^2$$ distribution with $$\nu$$ degrees of freedom is really 
-a $$\text{Gamma}(\frac{\nu}{2}, \frac{1}{2})$$ distribution. The gamma densities are
+a $$\text{Gamma}(\frac{\nu}{2}, \frac{1}{2})$$ distribution. This can be seen by comparing a $$\chi^2$$ density
+with the $$\text{Gamma}(\alpha, \beta)$$ density
 
-$$ p_{\alpha,\beta}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x} 1_{[0, \infty)}(x), $$
+$$ p_{\alpha,\beta}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x} 1_{[0, \infty)}(x).$$
 
-with parameters $$\alpha>0$$ and $$\beta>0$$. Moreover, $$1/Y$$ is inverse-gamma distributed and thus 
+The parameters $$\alpha$$ and $$\beta$$ are both positive. Moreover, $$1/Y$$ is inverse-gamma distributed and thus 
 $$\mathbb E \frac{1}{Y} = \frac{1}{\nu -2}.$$
 
 
@@ -58,7 +59,8 @@ $$\mathbb E \frac{1}{Y} = \frac{1}{\nu -2}.$$
 
 * Michael Roth. On the Multivariate t Distribution. [pdf](https://www.diva-portal.org/smash/get/diva2:618567/FULLTEXT02)
 * Gregory Grundsen. [A Python Implementation of the Multivariate t-distribution.](https://gregorygundersen.com/blog/2020/01/20/multivariate-t/) (This code is now a part of sklearn)
-* [Inverse-gamma distribution.](https://en.wikipedia.org/wiki/Inverse-gamma_distribution)
+* Wikipedia contributors, ["Inverse-gamma distribution,"](https://en.wikipedia.org/w/index.php?title=Inverse-gamma_distribution&oldid=996362763) Wikipedia, The Free Encyclopedia (accessed January 9, 2021). 
+* [Wikipedia entry about the Inverse-gamma distribution](https://en.wikipedia.org/wiki/Inverse-gamma_distribution)
 * Liu, Chuanhai, and Donald B. Rubin. "ML estimation of the t distribution using EM and its extensions, ECM and ECME." Statistica Sinica (1995): 19-39. [pdf](http://www3.stat.sinica.edu.tw/statistica/oldpdf/A5n12.pdf)
 * Nadarajah, Saralees, and Samuel Kotz. "Estimation methods for the multivariate t distribution." Acta Applicandae Mathematicae 102, no. 1 (2008): 99-118. [pdf](http://www-users.math.umn.edu/~bemis/MFM/workshop/2011/estimating_multivariate_t.pdf)
 * Martin Haugh. "The EM Algorithm." 2015. [pdf](http://www.columbia.edu/~mh2078/MachineLearningORFE/EM_Algorithm.pdf)
