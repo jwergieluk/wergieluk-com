@@ -1,5 +1,5 @@
 ---
-title: "Basics of multivariate student t distribution"
+title: "Basics of Multivariate Student's t distribution"
 date: 2021-01-09
 modified: 2021-01-09
 draft: false
@@ -10,7 +10,13 @@ tags:
     - probability-theory
 ---
 
-The density of a (non-degenerate) multivariate normal distribution with zero mean is given by
+I am a fan of the Student's t distribution -- it is almost as easy to handle as
+the normal distribution but has an additional flexibility with respect to the
+heaviness of the tails. In fact, the normal distribution is a special case and
+so is the Cauchy distribution.
+
+The density of a (non-degenerate) multivariate normal distribution with zero
+mean is given by
 
 $$
 \frac{1}{\sqrt{(2\pi)^n |\Sigma|}} \exp \Big( -\frac{1}{2} x^\top \Sigma^{-1} x \Big),
@@ -18,7 +24,8 @@ $$
 
 where $$\Sigma$$ is a (positive-semidefinite) $$n\times n$$ covariance matrix.
 
-For comparison, the density of the multivariate student t distribution with zero mean is
+For comparison, the density of the multivariate student t distribution with
+zero mean is
 
 $$
 \frac{\Gamma[(\nu + n)/2]}{\Gamma(\nu/2) \sqrt{v^{n} \pi^{n} |\Sigma|}} 
@@ -31,29 +38,30 @@ $$ \frac{\Gamma{(\nu +1)/2}}{\Gamma(\nu/2)\sqrt{\nu\pi}} \Big[ 1 + \frac{x^2}{2}
 
 In both cases, $$\nu>2$$ is the degrees of freedom parameter.
 
-A standard way to construct a random variable $$Z$$ with t-distribution is to use
-a normal random variable $$X$$ and an independent chi-square random variable $$Y$$ and set
+A standard way to construct a random variable $$Z$$ with t-distribution is to
+use a normal random variable $$X$$ and an independent chi-square random
+variable $$Y$$ and set
 
 $$ Z = \frac{X}{\sqrt{Y/\nu}}.$$
 
 This formula works for both the univariate and the multivariate case and can be
-used to draw samples from the t distribution using independent samples of $$X$$ and
-$$Y$$. Also, we get 
+used to draw samples from the t distribution using independent samples of $$X$$
+and $$Y$$. Also, we get 
 
 $$
 \text{Cov} Z = \frac{\nu}{\nu-2} \text{Cov} X.
 $$
 
-This is because the univariate $$\chi^2$$ distribution with $$\nu$$ degrees of freedom is really 
-a $$\text{Gamma}(\frac{\nu}{2}, \frac{1}{2})$$ distribution. This can be seen by comparing a $$\chi^2$$ density
-with the $$\text{Gamma}(\alpha, \beta)$$ density
+This is because the univariate $$\chi^2$$ distribution with $$\nu$$ degrees of
+freedom is really a $$\text{Gamma}(\frac{\nu}{2}, \frac{1}{2})$$ distribution.
+This can be seen by comparing a $$\chi^2$$ density with the
+$$\text{Gamma}(\alpha, \beta)$$ density
 
 $$ p_{\alpha,\beta}(x) = \frac{\beta^\alpha}{\Gamma(\alpha)}x^{\alpha-1}e^{-\beta x} 1_{[0, \infty)}(x).$$
 
-The parameters $$\alpha$$ and $$\beta$$ are both positive. Moreover, $$1/Y$$ is inverse-gamma distributed and thus 
+The parameters $$\alpha$$ and $$\beta$$ are both positive. Moreover, $$1/Y$$ is
+inverse-gamma distributed and thus 
 $$\mathbb E \frac{1}{Y} = \frac{1}{\nu -2}.$$
-
-
 
 ### References
 
