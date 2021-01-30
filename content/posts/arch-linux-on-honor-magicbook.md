@@ -76,6 +76,11 @@ Get rid of every partition except the EFI one.
 
 Repartition and create new file systems.
 
+    Device            Start        End   Sectors   Size Type
+    /dev/nvme0n1p1     2048     206847    204800   100M EFI System
+    /dev/nvme0n1p2   206848   33761279  33554432    16G Linux swap
+    /dev/nvme0n1p3 33761280 1000215182 966453903 460.8G Linux root (x86-64)
+
 Mount root and swap, and `pacstrap` with some additional packages from 
 https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/configs/releng/packages.x86_64
 
