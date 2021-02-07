@@ -1,5 +1,5 @@
 ---
-title: "Arch Linux on Honor Magicbook"
+title: "Installing Arch Linux on Honor Magicbook"
 slug: magicbook
 date: 2020-12-02T21:11:32+01:00
 modified: 2020-12-05
@@ -7,7 +7,7 @@ draft: false
 ---
 
 Last week I bought a Honor MagicBook 14 laptop. This blog post documents
-setting up an Arch Linux system on it. 
+setting up an Arch Linux system on this machine. 
 
 # Hardware information
 
