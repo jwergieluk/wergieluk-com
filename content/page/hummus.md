@@ -1,6 +1,6 @@
 ---
-title: "Humus recipe (no ads, no tracking, no bs)"
-slug: humus
+title: "Hummus recipe (no ads, no tracking, no bs)"
+slug: hummus
 date: 2021-03-24T08:29:30+01:00
 ---
 
