@@ -19,7 +19,7 @@ date: 2021-03-24T08:29:30+01:00
 2. Mix all the ingredients in the food processor.
 
 
-{{< figure src="/food/humus1.jpg" >}}
+{{< figure src="/food/hummus1.jpg" >}}
 
-{{< figure src="/food/humus2.jpg" >}}
+{{< figure src="/food/hummus2.jpg" >}}
 
