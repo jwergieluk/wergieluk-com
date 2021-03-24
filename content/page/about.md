@@ -24,7 +24,7 @@ As of Nov 2020, this a selection of topics I am interested in.
 
 I work on this blog because it's fun. 
 
-* I am not trying to reach any particular goal other than enjoying working on this blog.
+* I am not trying to reach any particular goal other than to enjoying working on this blog.
 * In particular, the intended audience of this blog is just one person: "me". Nevertheless, you are more than welcome to read this stuff and I hope you can find something interesting here.
 * It's not about self-promotion. I am not trying to impress anybody or present myself as more clever than I really am. On contrary, I would like to encourage myself to write about simple concepts that proved difficult for me to grasp. 
 * So far, most of the articles here are about mathematics, machine learning and, software engineering. This is just because I have been interested in these topics for some time.
