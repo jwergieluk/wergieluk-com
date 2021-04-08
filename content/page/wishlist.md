@@ -34,7 +34,10 @@ Concepts, Tools, and Techniques to build intelligent systems". (2017).
 	* Oh shit, git!
 	* Become a SELECT star!
 
+* Another wishlist on [amazon.de](https://www.amazon.de/hz/wishlist/ls/2UPU4CVKSN94G?ref_=wl_share)
+
 ### Archived
 
 * Fungi of Temperate Europe. Thomas Laessoe and Jens H. Petersen. 
 [amazon.de](https://www.amazon.de/dp/0691180377/?coliid=I61KK49EMN4LP&colid=2UPU4CVKSN94G&psc=1&ref_=lv_ov_lig_dp_it)
+

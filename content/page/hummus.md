@@ -7,10 +7,10 @@ date: 2021-03-24T08:29:30+01:00
 ### Ingredients
 
 * 2 cans of chickpeas (2x400g)
-* 30g sezame seeds
-* 70-100g cold water
-* 2-3 Tbsp aceto balsamico, lime or lemon juice
-* 3 Tbsp olive oil
+* 35g sezame seeds
+* 80g cold water
+* 3 Tbsp aceto balsamico, lime or lemon juice
+* 4 Tbsp olive oil
 * 1 tsp salt
 
 ### Method
