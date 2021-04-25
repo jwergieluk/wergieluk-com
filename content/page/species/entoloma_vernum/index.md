@@ -6,7 +6,6 @@ tags:
     - fungus
 ---
 
-## 4/24/2021
 
 Collected on 4/24/2021 near Kirchsee, Bavaria, Germany.
 
@@ -19,6 +18,14 @@ Photos taken few hours after collection.
 {{< figure src="20210424_195955_entoloma_vernum.jpg" >}}
 {{< figure src="20210424_200021_entoloma_vernum.jpg" >}}
 {{< figure src="20210424_200046_entoloma_vernum.jpg" >}}
+
+Spore print.
+
+{{< figure src="20210425_111812_entoloma_vernum_spore_print.jpg">}}
+
+Section of the cap used to produce the above spore print.
+
+{{< figure src="20210425_112500_entoloma_vernum.jpg" >}}
 
 # References
 
