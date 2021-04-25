@@ -1,7 +1,7 @@
 ---
 title: "Entoloma Vernum"
 date: 2021-04-24T20:36:40+02:00
-draft: true
+draft: false
 tags:
     - fungus
 ---
