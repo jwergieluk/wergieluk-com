@@ -18,6 +18,7 @@ Photos taken few hours after collection.
 {{< figure src="20210424_195955_entoloma_vernum.jpg" >}}
 {{< figure src="20210424_200021_entoloma_vernum.jpg" >}}
 {{< figure src="20210424_200046_entoloma_vernum.jpg" >}}
+{{< figure src="20210501_entoloma_vernum_cap_section.jpg" >}}
 
 Spore print.
 
