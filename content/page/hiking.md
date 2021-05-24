@@ -22,6 +22,8 @@ https://opentopomap.org
 * from Lenggries: https://www.outdooractive.com/de/route/wanderung/toelzer-land/lenggries-zum-fockenstein-rundweg/110893550/
     * Navi: Hohenburgstraße 9, 83661 Lenggries
 
+## Ochsenkamp 1594 (Lenggries)
+
 ## Schönberg 1621 (Lenggries)
 
 * https://www.bergtour-online.de/bergtouren/bergwanderungen/mittel/schoenberg/
