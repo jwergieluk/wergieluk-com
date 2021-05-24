@@ -8,5 +8,5 @@ draft: false
 
 Paste output from two subshells:
 
-    paste <(head -1 data.csv | tr ',' '\n' ) <(cat data.csv | grep pattern | tr ',' '\n') | bat -p --color never
+    paste <(head -1 data.csv | tr ',' '\n' ) <(cat data.csv | grep pattern | tr ',' '\n') | bat 
 
