@@ -6,6 +6,17 @@ draft: false
 
 https://opentopomap.org
 
+## Heißenplatte 1593 (Hammer, Fischbachau)
+
+* https://www.gamssteig.de/touren/heissenplatte-aiplspitz-kleinmiesing (Direct trail in a forest)
+* https://www.outdooractive.com/de/route/bergtour/tegernsee-schliersee/ueberschreitung-der-heissenplatte/107495429/
+* https://www.tourentipp.com/de/touren/Heissenplatte-Bergwanderung-Bayerische-Voralpen_1637.html#anchor_a41d18df_Accordion-Bilder-zur-Tour
+
+## Seebergkopf 1538 (Bayrischzell)
+
+* https://www.auf-den-berg.de/wandern/bayern/wanderung-auf-den-seebergkopf/
+* https://www.bergtour-online.de/bergtouren/bergwanderungen/mittel/seebergkopf-bayrischzell/
+
 ## Hochalm 1427 (Sylvensteinsee)
 
 * https://www.bergtour-online.de/bergtouren/bergwanderungen/leicht/hochalm/

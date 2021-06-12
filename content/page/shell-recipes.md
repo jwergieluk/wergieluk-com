@@ -10,3 +10,7 @@ Paste output from two subshells:
 
     paste <(head -1 data.csv | tr ',' '\n' ) <(cat data.csv | grep pattern | tr ',' '\n') | bat 
 
+# Referecens
+
+* https://www.datascienceatthecommandline.com
+
