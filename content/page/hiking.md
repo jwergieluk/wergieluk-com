@@ -11,6 +11,8 @@ https://opentopomap.org
 https://www.bergfex.at/sommer/tirol/touren/wanderung/781334,wanderung-ehrwalder-alm--seebensee--drachensee/
 https://www.almbahn.at/de/betriebszeiten/
 
+## Großer Traithen 1852, Kleiner Traithen 1723 (Bayrischzell)
+
 ## Heißenplatte 1593 (Hammer, Fischbachau)
 
 * https://www.gamssteig.de/touren/heissenplatte-aiplspitz-kleinmiesing (Direct trail in a forest)
